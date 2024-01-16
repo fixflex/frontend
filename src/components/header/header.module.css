@@ -1,0 +1,78 @@
+.headerContainer {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(27, 37, 46, 1) 35%,
+    rgba(64, 163, 209, 1) 100%
+  );
+  padding: 10em 16em;
+}
+
+.headerTextContainer {
+  display: flex;
+  flex-direction: column !important;
+  justify-content: center;
+}
+
+.headerTitle {
+  font-weight: bold;
+  margin-bottom: 1em;
+  color: white;
+  line-height: 1.6em !important;
+}
+
+.headerSubtitle {
+  color: white;
+  line-height: 2em !important;
+}
+
+.headerImagesContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.headerImage {
+  width: 100%;
+  height: auto;
+  border-radius: 25px;
+}
+
+.statsContainer {
+  text-align: center;
+  padding: 60px 20px;
+  margin-left: -75px;
+}
+
+.statsItem {
+  display: flex;
+  flex-direction: column !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.statsNumber {
+  font-weight: bold;
+  color: #efc634;
+  margin-bottom: 8px;
+}
+
+.statsText {
+  color: white;
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animateText {
+  display: inline;
+  animation: fadeInOut 2s ease-in-out infinite;
+  color: #efc734;
+}

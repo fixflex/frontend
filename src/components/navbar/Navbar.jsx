@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Box, Avatar, List, ListItem, Button } from '@mui/material';
 import styles from './navbar.module.css';
-import logo from '../../images/logo.jpg';
+import logo from '../../images/logo.png';
 
 const Navbar = () => {
   return (
@@ -11,7 +11,7 @@ const Navbar = () => {
           <Avatar
             src={logo}
             variant='rounded'
-            sx={{ width: 260, height: 70 }} // Adjust the width and height as needed
+            sx={{ width: 260, height: 70 }}
           />
         </Grid>
         <Grid item>

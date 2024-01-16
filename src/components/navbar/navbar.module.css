@@ -25,28 +25,28 @@
 }
 
 .navButton {
-  font-family: Rubik;
-  color: white;
-  font-size: 1em;
-  font-weight: 700;
-  opacity: 0.9;
+  font-family: Rubik !important;
+  color: white !important;
+  font-size: 1em !important;
+  font-weight: 700 !important;
+  opacity: 0.9 !important;
 }
 
 .rightNavButtons {
-  background-color: #070826;
-  font-weight: 600;
-  width: 8vw;
-  height: 5vh;
-  padding: 1.3em;
-  margin: 1em;
-  border-radius: 15px;
+  background-color: #070826 !important;
+  font-weight: 600 !important;
+  width: 8vw !important;
+  height: 5vh !important;
+  padding: 1.3em !important;
+  margin: 1em !important;
+  border-radius: 15px !important;
 }
 
 .rightNavButtons:hover {
-  color: black;
-  background-color: #efc734;
+  color: black !important;
+  background-color: #efc734 !important;
 }
 
 .navButton:hover {
-  color: #efc734;
+  color: #efc734 !important;
 }
