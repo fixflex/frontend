@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+.navContainer {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(27, 37, 46, 1) 35%,
+    rgba(64, 163, 209, 1) 100%
+  );
+  padding: 2em 18em;
+  display: flex;
+  justify-content: space-evenly !important;
+}
+
+.navList {
+  display: flex;
+}
+
+.leftNav {
+  display: flex;
+  flex-direction: row !important;
+}
+.rightNav {
+  display: flex;
+}
+
+.navButton {
+  font-family: Rubik;
+  color: white;
+  font-size: 1em;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.rightNavButtons {
+  background-color: #070826;
+  font-weight: 600;
+  width: 8vw;
+  height: 5vh;
+  padding: 1.3em;
+  margin: 1em;
+  border-radius: 15px;
+}
+
+.rightNavButtons:hover {
+  color: black;
+  background-color: #efc734;
+}
+
+.navButton:hover {
+  color: #efc734;
+}
