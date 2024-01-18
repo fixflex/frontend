@@ -11,7 +11,7 @@ const Navbar = () => {
           <Avatar
             src={logo}
             variant='rounded'
-            sx={{ width: 260, height: 70 }}
+            sx={{ width: 180, height: 70 }}
           />
         </Grid>
         <Grid item>

@@ -7,7 +7,7 @@
     rgba(27, 37, 46, 1) 35%,
     rgba(64, 163, 209, 1) 100%
   );
-  padding: 2em 18em;
+  padding: 2em 12em;
   display: flex;
   justify-content: space-evenly !important;
 }
@@ -27,24 +27,26 @@
 .navButton {
   font-family: Rubik !important;
   color: white !important;
-  font-size: 1em !important;
-  font-weight: 700 !important;
-  opacity: 0.9 !important;
+  font-size: 0.9em;
+  font-weight: 700;
+  opacity: 0.9;
 }
 
 .rightNavButtons {
   background-color: #070826 !important;
-  font-weight: 600 !important;
-  width: 8vw !important;
-  height: 5vh !important;
-  padding: 1.3em !important;
-  margin: 1em !important;
-  border-radius: 15px !important;
+  font-weight: 600;
+  width: 8vw;
+  height: 5vh;
+  padding: 1.3em;
+  margin: 1em;
+  border-radius: 15px;
+  font-size: 0.8em;
 }
 
 .rightNavButtons:hover {
-  color: black !important;
+  color: #040425;
   background-color: #efc734 !important;
+  scale: 1.1;
 }
 
 .navButton:hover {

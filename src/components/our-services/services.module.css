@@ -1,0 +1,25 @@
+.servicesContainer {
+  background-color: #ffffff;
+  padding: 6em 12em !important;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.taskIcon {
+  font-size: 3rem !important;
+  color: #3e9cc8;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
