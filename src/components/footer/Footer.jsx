@@ -1,38 +1,39 @@
+// Footer.js
 import React from 'react';
-import { Box, Container, Typography, Grid } from '@mui/material';
-import styles from './footer.module.css'; // Importing the CSS module
+import { Box, Grid, Typography, TextField, Button } from '@mui/material';
+import styles from './footer.module.css';
 
 const Footer = () => {
   return (
     <Box className={styles.footerContainer}>
-      {/* Pre-Footer */}
       <Box className={styles.preFooter}>
-        <Container maxWidth='lg'>
-          <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} md={3}>
-              <Typography variant='h6' color='textPrimary' gutterBottom>
-                Section 1
-              </Typography>
-              {/* Add content for this section */}
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <Typography variant='h6' color='textPrimary' gutterBottom>
-                Section 2
-              </Typography>
-              {/* Add content for this section */}
-            </Grid>
-            {/* Repeat for more sections if needed */}
-          </Grid>
-        </Container>
+        {/* Pre Footer Content */}
+        <Typography variant='h6' className={styles.preFooterHeading}>
+          Join our Fix Flex community.
+        </Typography>
+        <Typography variant='body2' className={styles.preFooterText}>
+          Stay updated on the latest news and special offers.
+        </Typography>
+        <form className={styles.subscribeForm}>
+          <TextField
+            variant='outlined'
+            placeholder='Your email address'
+            className={styles.subscribeInput}
+          />
+          <Button variant='contained' className={styles.subscribeButton}>
+            Subscribe
+          </Button>
+        </form>
       </Box>
-
-      {/* Footer */}
-      <Box className={styles.footer}>
-        <Container maxWidth='lg'>
-          <Typography variant='subtitle1' color='textSecondary' align='center'>
-            © {new Date().getFullYear()} Your Brand. All rights reserved.
-          </Typography>
-        </Container>
+      <Grid container className={styles.footer}>
+        {/* Footer Links and Information */}
+        {/* ... insert your footer links and information here similar to the provided image ... */}
+      </Grid>
+      <Box className={styles.bottomBar}>
+        <Typography variant='body2' className={styles.copyRightText}>
+          © Fix Flex 2024. All rights reserved.
+        </Typography>
+        {/* ... other bottom bar content like language selector ... */}
       </Box>
     </Box>
   );

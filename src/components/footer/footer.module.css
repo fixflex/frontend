@@ -1,18 +1,54 @@
+/* footer.module.css */
 .footerContainer {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  color: #fff;
+  background-color: #333;
+  font-family: 'Arial', sans-serif;
 }
 
 .preFooter {
-  flex-grow: 1;
-  background-color: #f5f5f5; /* Light gray background */
-  padding: 20px 0;
+  text-align: center;
+  padding: 2rem 0;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.preFooterHeading {
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.preFooterText {
+  margin-bottom: 2rem;
+}
+
+.subscribeForm {
+  display: flex;
+  justify-content: center;
+}
+
+.subscribeInput {
+  margin-right: 0.5rem;
+}
+
+.subscribeButton {
+  background-color: #0066ff;
+  color: #fff;
 }
 
 .footer {
-  background-color: #1976d2; /* MUI primary color */
-  color: white;
-  padding: 10px 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.bottomBar {
+  background-color: #222;
+  padding: 1rem 0;
   text-align: center;
 }
+
+.copyRightText {
+  opacity: 0.7;
+}
+
+/* Add more styles as needed for layout and typography */

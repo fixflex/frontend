@@ -1,19 +1,14 @@
-import Assurance from './components/assurance/Assurance';
-import Flexers from './components/flexers/Flexers';
-import Footer from './components/footer/Footer';
-import Header from './components/header/Header';
-import Navbar from './components/navbar/Navbar';
-import OurServices from './components/our-services/OurServices';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import LandingPage from './features/LandingPage';
 
 function App() {
   return (
-    <div className='App'>
-      <Navbar />
-      <Header />
-      <OurServices />
-      <Flexers />
-      <Assurance />
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+      </Routes>
+    </Router>
   );
 }
 
