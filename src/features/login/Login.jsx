@@ -1,17 +1,22 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import styles from './login.module.css';
+import React, { useState } from 'react';
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  ThemeProvider,
+  createTheme,
+} from '@mui/material';
 import { Google, KeyboardArrowRight } from '@mui/icons-material';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase/FirebaseConfig';
+import styles from './login.module.css';
 
 const defaultTheme = createTheme({
   palette: {
@@ -25,13 +30,30 @@ const defaultTheme = createTheme({
 });
 
 const Login = () => {
+  const [loginError, setLoginError] = useState('');
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const email = data.get('email');
+    const password = data.get('password');
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // User logged in
+        // Redirect or manage user session
+        console.log('User logged in', userCredential);
+      })
+      .catch((error) => {
+        if (
+          error.code === 'auth/wrong-password' ||
+          error.code === 'auth/user-not-found'
+        ) {
+          setLoginError('Incorrect email or password');
+        } else {
+          setLoginError('An error occurred, please try again');
+        }
+      });
   };
 
   return (
@@ -98,6 +120,11 @@ const Login = () => {
                 </Link>
               </Grid>
             </Grid>
+            {loginError && (
+              <Typography color='error' align='center'>
+                {loginError}
+              </Typography>
+            )}
             <Button
               type='submit'
               fullWidth

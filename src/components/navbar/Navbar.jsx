@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Grid,
   Box,
@@ -32,11 +32,13 @@ const Navbar = () => {
     <Box className={styles.navContainer}>
       <Grid container alignItems='center'>
         <Grid item>
-          <Avatar
-            src={logo}
-            variant='rounded'
-            sx={{ width: 180, height: 70 }}
-          />
+          <Link to='/'>
+            <Avatar
+              src={logo}
+              variant='rounded'
+              sx={{ width: 180, height: 70, cursor: 'pointer' }}
+            />
+          </Link>
         </Grid>
         <Grid item>
           <List className={styles.navList}>
@@ -68,7 +70,9 @@ const Navbar = () => {
 
   const renderOtherPagesNavbar = () => (
     <Box className={styles.otherPageNavbar}>
-      <Avatar src={logo} variant='rounded' className={styles.logoSmall} />
+      <Link to='/'>
+        <Avatar src={logo} variant='rounded' className={styles.logoSmall} />
+      </Link>
       <IconButton
         onClick={toggleDrawer(true)}
         edge='end'
