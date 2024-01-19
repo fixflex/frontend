@@ -58,10 +58,18 @@ const Navbar = () => {
         </Grid>
       </Grid>
       <Grid item className={styles.rightNav}>
-        <Button variant='contained' className={styles.rightNavButtons}>
+        <Button
+          variant='contained'
+          className={styles.rightNavButtons}
+          href='/signup'
+        >
           Join
         </Button>
-        <Button variant='contained' className={styles.rightNavButtons}>
+        <Button
+          variant='contained'
+          className={styles.rightNavButtons}
+          href='/login'
+        >
           Login
         </Button>
       </Grid>

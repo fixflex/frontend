@@ -58,11 +58,11 @@ const Flexers = () => {
                 justifyContent: 'space-around',
                 width: '100%',
               }}
+              key={index}
             >
               {feature.icon}
               <Grid
                 item
-                key={index}
                 xs={10}
                 sx={{ width: '100%' }}
                 className={styles.flexersFeatureItem}

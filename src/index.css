@@ -2,6 +2,7 @@
 
 * {
   font-family: Rubik !important;
+  scroll-behavior: smooth;
 }
 
 body {

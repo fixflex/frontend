@@ -15,11 +15,12 @@ import {
   InputLabel,
   FormControl,
 } from '@mui/material';
-import { Google, KeyboardArrowRight } from '@mui/icons-material';
+import { KeyboardArrowRight } from '@mui/icons-material';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/FirebaseConfig';
 import styles from './signup.module.css';
 import { useNavigate } from 'react-router-dom';
+import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 
 const defaultTheme = createTheme({
   palette: {
@@ -175,14 +176,7 @@ const Signup = () => {
               container
               style={{ display: 'flex', justifyContent: 'center' }}
             >
-              <Button
-                variant='contained'
-                fullWidth
-                style={{ backgroundColor: '#4285F4', color: 'white' }}
-                className={styles.googleSignupButton}
-              >
-                Signup with Google <Google />
-              </Button>
+              <GoogleAuth />
             </Grid>
           </Box>
         </Box>

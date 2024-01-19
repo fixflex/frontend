@@ -17,6 +17,7 @@ import { Google, KeyboardArrowRight } from '@mui/icons-material';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/FirebaseConfig';
 import styles from './login.module.css';
+import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 
 const defaultTheme = createTheme({
   palette: {
@@ -157,14 +158,7 @@ const Login = () => {
               container
               style={{ display: 'flex', justifyContent: 'center' }}
             >
-              <Button
-                variant='contained'
-                startIcon={<Google />}
-                fullWidth
-                style={{ backgroundColor: '#4285F4', color: 'white' }}
-              >
-                Google
-              </Button>
+              <GoogleAuth />
             </Grid>
           </Box>
         </Box>
