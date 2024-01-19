@@ -1,0 +1,46 @@
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.title {
+  /* Add title styles here */
+}
+
+.subtitle {
+  /* Add subtitle styles here */
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.navButton:first-of-type {
+  left: 0;
+}
+
+.navButton:last-of-type {
+  right: 0;
+}
+
+.gridContainer {
+  overflow: hidden;
+  flex-wrap: nowrap;
+  transition: margin-left 0.5s;
+}
+
+.gridItem {
+  width: 25%; /* Each item takes 25% of the container width to show 4 items */
+  transition: transform 0.5s;
+}
+
+.card {
+  /* Add card styles here */
+}
+
+.cardMedia {
+  height: 140px; /* Adjust as needed */
+}

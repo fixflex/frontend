@@ -1,0 +1,45 @@
+.container {
+  padding: 4em 12em !important;
+  background-color: #3e9ecb19;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.icon {
+  font-size: 2rem !important;
+  color: #3e9cc8;
+}
+
+.innerBox {
+  background-color: transparent !important;
+  transition: transform 1s ease-in-out;
+}
+
+.innerBox:hover {
+  transform: scale(1.01);
+}
+
+@keyframes floatIcons {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.icon {
+  display: inline-block;
+  animation: floatIcons 3s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

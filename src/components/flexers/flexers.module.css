@@ -1,0 +1,133 @@
+.flexersContainer {
+  padding: 4em 12em !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(27, 37, 46, 1) 35%,
+    rgba(64, 163, 209, 1) 100%
+  );
+}
+
+.flexersTitle {
+  text-align: center;
+  margin-bottom: 0.5em;
+  color: white;
+}
+
+.flexersSubtitle {
+  text-align: center;
+  margin-bottom: 1em !important;
+  font-size: 1em;
+  color: white;
+}
+
+.flexersFeatures {
+  display: flex;
+  margin-bottom: 2em;
+}
+
+.flexersFeatureItem {
+  display: flex;
+  flex-direction: column !important;
+  align-items: baseline;
+}
+
+.flexersFeatureTitle {
+  font-size: 1.2em;
+}
+
+.avatarGridContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+  justify-content: center;
+  align-content: center;
+}
+
+.avatarTile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  margin: 0.5rem;
+  overflow: hidden;
+  border-radius: 25%;
+}
+
+.avatar {
+  background-color: #fff;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.icon {
+  font-size: 1.5em;
+  color: #efc634;
+}
+
+.listSubtitle {
+  font-size: 0.8rem !important ;
+  text-align: left;
+  color: white;
+}
+
+.listTitle {
+  color: white;
+  font-size: 1.1rem !important;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.flexersFeatureItem {
+  animation: fadeInUp 0.5s ease-in-out;
+  animation-fill-mode: both;
+}
+
+.flexersFeatureItem:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.flexersFeatureItem:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.flexersFeatureItem:nth-child(3) {
+  animation-delay: 0.6s;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.avatarTile {
+  animation: pulse 2s infinite ease-in-out;
+}
