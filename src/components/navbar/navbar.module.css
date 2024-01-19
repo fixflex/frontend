@@ -54,7 +54,7 @@
 }
 
 .otherPageNavbar {
-  background-color: #060626ea;
+  background-color: #1b252e;
   padding: 1rem 12rem;
   display: flex;
   justify-content: space-between !important;
@@ -70,6 +70,6 @@
 }
 
 .logoSmall {
-  width: 200px !important;
-  height: 60px !important;
+  width: 190px !important;
+  height: 50px !important;
 }

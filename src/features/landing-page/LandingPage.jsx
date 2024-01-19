@@ -13,7 +13,6 @@ const LandingPage = () => {
       <Ratings />
       <Flexers />
       <Assurance />
-      <Footer />
     </>
   );
 };

@@ -1,30 +1,27 @@
-/* login.module.css */
 .container {
-  background-color: #fff; /* Adjust the background color as needed */
-  border-radius: 10px; /* Rounded corners for the container */
-  box-shadow: 0 3px 10px rgb(0 0 0 / 20%); /* Shadow for the container */
-  padding: 20px;
-}
-
-.avatar {
-  background-color: #4caf50; /* Adjust the color to match your theme */
-}
-
-.submitButton {
-  background-color: #4caf50; /* Adjust the button color to match your theme */
-  color: #fff;
-}
-
-.submitButton:hover {
-  background-color: #388e3c; /* Darker shade for hover state */
-}
-
-.link {
-  color: #4caf50; /* Adjust the link color to match your theme */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
+  padding: 2rem 8rem 0.2rem 2rem;
+  max-width: 30% !important;
+  margin: 7rem 0;
 }
 
 .checkboxLabel {
-  color: #757575; /* Adjust the label color as needed */
+  color: black;
 }
 
-/* You may need to add more custom styles here based on the exact look you are going for */
+.submitButton {
+  background-color: #1b252e !important;
+  color: white !important;
+  margin: 1rem 0 !important;
+}
+
+button:hover {
+  background-color: #efc734 !important;
+  scale: 1.01;
+}
+
+.link {
+  color: black !important;
+}
