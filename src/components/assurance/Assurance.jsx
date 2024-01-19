@@ -37,8 +37,8 @@ const Assurance = () => {
   return (
     <Box className={styles.container} sx={{ flexGrow: 1 }}>
       <Typography
-        variant='h4'
-        component='h2'
+        variant='h5'
+        component='h5'
         gutterBottom
         style={{ textAlign: 'left' }}
       >
@@ -47,7 +47,12 @@ const Assurance = () => {
       <Typography
         variant='h6'
         gutterBottom
-        style={{ textAlign: 'left', color: 'gray', marginBottom: '2rem' }}
+        style={{
+          textAlign: 'left',
+          color: 'gray',
+          marginBottom: '2rem',
+          fontSize: '1rem',
+        }}
       >
         Most viewed and all-time top-selling services
       </Typography>

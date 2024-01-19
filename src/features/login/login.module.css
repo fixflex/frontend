@@ -1,0 +1,54 @@
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+  padding: 32px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.loginHeader {
+  margin-bottom: 16px;
+}
+
+.loginSubHeader {
+  margin-bottom: 24px;
+}
+
+.textField {
+  margin-bottom: 16px;
+}
+
+.rememberMe {
+  margin-bottom: 16px;
+}
+
+.loginButton {
+  margin-bottom: 16px;
+  background-color: #4caf50; /* Example color */
+}
+
+.orText {
+  margin: 16px 0;
+}
+
+.socialButton {
+  margin: 8px 0;
+}
+
+.forgotPassword {
+  margin: 8px 0;
+  text-align: center;
+  display: block;
+}
+
+.signUpText {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.signUpLink {
+  color: #1976d2; /* Example color */
+}
