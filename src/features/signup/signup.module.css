@@ -1,0 +1,58 @@
+.container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
+  padding: 2rem 8rem 0.2rem 2rem;
+  max-width: 30% !important;
+  margin: 7rem 0;
+}
+
+.textField {
+  margin: 1rem 0 !important;
+}
+
+.submitButton {
+  background-color: #1b252e !important;
+  color: white !important;
+  margin: 1rem 0 !important;
+}
+
+button:hover {
+  background-color: #efc734 !important;
+  scale: 1.01;
+}
+
+.link {
+  color: black !important;
+}
+
+.checkboxLabel {
+  color: black;
+}
+
+.selectField {
+  margin: 1rem 0 !important;
+}
+
+.line {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin: 0 20px;
+}
+
+.googleSignupButton {
+  margin-top: 20px;
+  background-color: #4285f4 !important;
+  color: white !important;
+}
+
+.googleSignupButton:hover {
+  background-color: #357ae8 !important;
+}
+
+.link,
+.checkboxLabel,
+.textField {
+  color: black !important;
+}
