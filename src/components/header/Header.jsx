@@ -1,6 +1,8 @@
 import React from 'react';
 import { Grid, Typography, Box } from '@mui/material';
 import styles from './header.module.css';
+import headerImage1 from '../../images/header1.png';
+import headerImage2 from '../../images/header2.png';
 
 function Header() {
   return (
@@ -75,7 +77,7 @@ function Header() {
         >
           <Grid item xs={6} className={styles.headerImageWrapper}>
             <img
-              src='https://images.unsplash.com/photo-1562259929-b4e1fd3aef09'
+              src={headerImage2}
               alt='First'
               className={styles.headerImage}
               style={{
@@ -87,7 +89,7 @@ function Header() {
           </Grid>
           <Grid item xs={6} className={styles.headerImageWrapper}>
             <img
-              src='https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8'
+              src={headerImage1}
               alt='Second'
               className={styles.headerImage}
               style={{

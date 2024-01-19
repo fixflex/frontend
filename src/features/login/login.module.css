@@ -1,54 +1,30 @@
-.loginContainer {
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-  margin: auto;
-  padding: 32px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  background-color: #fff;
+/* login.module.css */
+.container {
+  background-color: #fff; /* Adjust the background color as needed */
+  border-radius: 10px; /* Rounded corners for the container */
+  box-shadow: 0 3px 10px rgb(0 0 0 / 20%); /* Shadow for the container */
+  padding: 20px;
 }
 
-.loginHeader {
-  margin-bottom: 16px;
+.avatar {
+  background-color: #4caf50; /* Adjust the color to match your theme */
 }
 
-.loginSubHeader {
-  margin-bottom: 24px;
+.submitButton {
+  background-color: #4caf50; /* Adjust the button color to match your theme */
+  color: #fff;
 }
 
-.textField {
-  margin-bottom: 16px;
+.submitButton:hover {
+  background-color: #388e3c; /* Darker shade for hover state */
 }
 
-.rememberMe {
-  margin-bottom: 16px;
+.link {
+  color: #4caf50; /* Adjust the link color to match your theme */
 }
 
-.loginButton {
-  margin-bottom: 16px;
-  background-color: #4caf50; /* Example color */
+.checkboxLabel {
+  color: #757575; /* Adjust the label color as needed */
 }
 
-.orText {
-  margin: 16px 0;
-}
-
-.socialButton {
-  margin: 8px 0;
-}
-
-.forgotPassword {
-  margin: 8px 0;
-  text-align: center;
-  display: block;
-}
-
-.signUpText {
-  text-align: center;
-  margin-top: 16px;
-}
-
-.signUpLink {
-  color: #1976d2; /* Example color */
-}
+/* You may need to add more custom styles here based on the exact look you are going for */

@@ -52,3 +52,24 @@
 .navButton:hover {
   color: #efc734 !important;
 }
+
+.otherPageNavbar {
+  background-color: #060626ea;
+  padding: 1rem 12rem;
+  display: flex;
+  justify-content: space-between !important;
+  align-items: center;
+}
+
+.drawerButton {
+  color: rgba(255, 255, 255, 0.682) !important;
+}
+
+.drawerList {
+  width: 250px;
+}
+
+.logoSmall {
+  width: 200px !important;
+  height: 60px !important;
+}
