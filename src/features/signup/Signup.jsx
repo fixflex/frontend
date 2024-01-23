@@ -50,14 +50,13 @@ const Signup = () => {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Prepare user data
         const userData = {
           uid: userCredential.user.uid,
           name,
           email,
           userType,
         };
-        // Dispatch the userLoggedIn action with the user data
+
         dispatch(userLoggedIn(userData));
         navigate('/dashboard');
       })

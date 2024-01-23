@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Button,
   CssBaseline,
@@ -13,11 +14,13 @@ import {
   ThemeProvider,
   createTheme,
 } from '@mui/material';
-import { Google, KeyboardArrowRight } from '@mui/icons-material';
+import { KeyboardArrowRight } from '@mui/icons-material';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/FirebaseConfig';
+import { userLoggedIn } from '../../features/signup/authSlice';
 import styles from './login.module.css';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme({
   palette: {
@@ -25,13 +28,16 @@ const defaultTheme = createTheme({
       default: '#dab63227',
     },
     primary: {
-      main: '#4caf50',
+      main: '#D9B433',
     },
   },
 });
 
 const Login = () => {
   const [loginError, setLoginError] = useState('');
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,9 +47,14 @@ const Login = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // User logged in
-        // Redirect or manage user session
+        const userData = {
+          uid: userCredential.user.uid,
+          email: userCredential.user.email,
+        };
+
+        dispatch(userLoggedIn(userData));
         console.log('User logged in', userCredential);
+        navigate('/dashboard');
       })
       .catch((error) => {
         if (
