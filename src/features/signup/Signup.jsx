@@ -28,7 +28,7 @@ const defaultTheme = createTheme({
       default: '#dab63227',
     },
     primary: {
-      main: '#4caf50',
+      main: '#D9B433',
     },
   },
 });
@@ -128,8 +128,8 @@ const Signup = () => {
                 onChange={handlePurposeChange}
                 className={styles.textField}
               >
-                <MenuItem value={'hire'}>look for a handyman</MenuItem>
-                <MenuItem value={'work'}>find work as a handyman</MenuItem>
+                <MenuItem value={'user'}>look for a handyman</MenuItem>
+                <MenuItem value={'flexer'}>find work as a handyman</MenuItem>
               </Select>
             </FormControl>
             {signupError && (
