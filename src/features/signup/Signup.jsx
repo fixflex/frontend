@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Button,
   CssBaseline,
@@ -21,6 +22,7 @@ import { auth } from '../../firebase/FirebaseConfig';
 import styles from './signup.module.css';
 import { useNavigate } from 'react-router-dom';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
+import { userLoggedIn } from '../../features/signup/authSlice';
 
 const defaultTheme = createTheme({
   palette: {
@@ -35,20 +37,28 @@ const defaultTheme = createTheme({
 
 const Signup = () => {
   const [signupError, setSignupError] = useState('');
-  const [purpose, setPurpose] = useState('');
+  const [userType, setUserType] = useState('');
   const navigate = useNavigate('');
+  const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
     const name = data.get('name');
     const email = data.get('email');
     const password = data.get('password');
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // User created
-        console.log('User signed up', userCredential);
+        // Prepare user data
+        const userData = {
+          uid: userCredential.user.uid,
+          name,
+          email,
+          userType,
+        };
+        // Dispatch the userLoggedIn action with the user data
+        dispatch(userLoggedIn(userData));
         navigate('/dashboard');
       })
       .catch((error) => {
@@ -57,7 +67,7 @@ const Signup = () => {
   };
 
   const handlePurposeChange = (event) => {
-    setPurpose(event.target.value);
+    setUserType(event.target.value);
   };
 
   return (
@@ -123,7 +133,7 @@ const Signup = () => {
               <Select
                 labelId='purpose-label'
                 id='purpose'
-                value={purpose}
+                value={userType}
                 label="I'm here to"
                 onChange={handlePurposeChange}
                 className={styles.textField}
