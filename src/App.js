@@ -6,6 +6,7 @@ import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
 import Signup from './features/signup/Signup';
 import Discover from './features/discover/Discover';
+import Browse from './features/browse/Browse';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/discover' element={<Discover />} />
+        <Route path='/browse' element={<Browse />} />
       </Routes>
       <Footer />
     </Router>

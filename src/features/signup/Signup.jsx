@@ -27,7 +27,7 @@ import { userLoggedIn } from '../../features/signup/authSlice';
 const defaultTheme = createTheme({
   palette: {
     background: {
-      default: '#dab63227',
+      default: '#ECF6FA',
     },
     primary: {
       main: '#D9B433',
