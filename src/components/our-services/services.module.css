@@ -1,7 +1,7 @@
 .servicesContainer {
   background-color: #ffffff;
   padding: 6em 12em 2em !important;
-  animation: fadeIn 1s ease-out forwards;
+  animation: fadeIn 1s ease-out forwards !important;
 }
 
 .taskIcon {
