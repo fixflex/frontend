@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&family=Sen&display=swap');
+
+.appBar {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(27, 37, 46, 1) 35%,
+    rgba(64, 163, 209, 1) 100%
+  );
+  padding: 6em 12em !important;
+  box-shadow: none !important;
+}
+
+.toolbar {
+  padding: 1.5rem 6rem;
+}
+
+.greeting {
+  font-weight: 400;
+  margin: 0.8rem 0;
+  text-align: left;
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f3f3f3;
+  border-radius: 25px !important;
+  margin: 0 auto;
+  padding: 1rem !important;
+  width: 80%;
+}
+
+.inputBase {
+  color: inherit;
+  width: 80%;
+}
+
+.button {
+  background-color: #1b252e !important;
+  color: white;
+  text-transform: none;
+  border-radius: 20px !important;
+}
+
+.slogan {
+  font-family: Rubik Doodle shadow !important;
+}

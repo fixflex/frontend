@@ -54,11 +54,17 @@
 }
 
 .otherPageNavbar {
-  background-color: #1b252e;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(27, 37, 46, 1) 35%,
+    rgba(64, 163, 209, 1) 100%
+  );
   padding: 1rem 12rem;
   display: flex;
   justify-content: space-between !important;
   align-items: center;
+  box-shadow: none;
 }
 
 .drawerButton {

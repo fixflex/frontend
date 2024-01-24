@@ -5,7 +5,7 @@ import Login from './features/login/Login';
 import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
 import Signup from './features/signup/Signup';
-import Dashboard from './features/dashboard/Dashboard';
+import Discover from './features/discover/Discover';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/discover' element={<Discover />} />
       </Routes>
       <Footer />
     </Router>

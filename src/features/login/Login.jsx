@@ -88,7 +88,7 @@ const Login = () => {
             sx={{ fontSize: '0.9rem', margin: '1rem 0' }}
           >
             Don't have an account?{' '}
-            <Link href='#' className={styles.link}>
+            <Link href='/signup' className={styles.link}>
               Sign Up!
             </Link>
           </Typography>

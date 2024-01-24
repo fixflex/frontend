@@ -14,8 +14,7 @@
 }
 
 .subscribeButton {
-  background-color: #efc734;
-  color: #1b252e;
+  background-color: #efc734 !important;
   border-radius: 10px;
 }
 
