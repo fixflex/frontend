@@ -79,3 +79,15 @@
   width: 190px !important;
   height: 50px !important;
 }
+
+/*tablet screens*/
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+}
+
+/* Mobile screens */
+@media screen and (max-width: 768px) {
+  .otherPageNavbar {
+    padding: 1rem !important;
+  }
+}

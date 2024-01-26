@@ -91,3 +91,29 @@
     transform: translateY(0);
   }
 }
+
+/*tablet screens*/
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+}
+
+/* Mobile screens */
+@media screen and (max-width: 768px) {
+  .headerContainer {
+    padding: 1em 2em;
+  }
+
+  .headerTitle {
+    font-size: 2rem !important;
+  }
+
+  .headerImagesContainer {
+    display: none !important;
+  }
+  .statsText {
+    font-size: 0.6rem !important;
+  }
+  .statsContainer {
+    margin: 0;
+  }
+}

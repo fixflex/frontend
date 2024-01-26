@@ -28,7 +28,7 @@ function Header() {
           </Typography>
           <Box className={styles.statsContainer} sx={{ flexGrow: 1 }}>
             <Grid container spacing={3}>
-              <Grid item xs={12} sm={4} className={styles.statsItem}>
+              <Grid item xs={4} sm={4} className={styles.statsItem}>
                 <Typography
                   variant='h5'
                   component='h2'
@@ -40,7 +40,7 @@ function Header() {
                   Total Freelancer
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={4} className={styles.statsItem}>
+              <Grid item xs={4} sm={4} className={styles.statsItem}>
                 <Typography
                   variant='h5'
                   component='h2'
@@ -52,7 +52,7 @@ function Header() {
                   Positive Review
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={4} className={styles.statsItem}>
+              <Grid item xs={4} sm={4} className={styles.statsItem}>
                 <Typography
                   variant='h5'
                   component='h2'
