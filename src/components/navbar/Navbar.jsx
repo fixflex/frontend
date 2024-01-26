@@ -9,6 +9,8 @@ import {
   Button,
   Drawer,
   IconButton,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from './navbar.module.css';
@@ -17,6 +19,9 @@ import logo from '../../images/logo.png';
 const Navbar = () => {
   const location = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const theme = useTheme();
+  const isMediumOrSmaller = useMediaQuery(theme.breakpoints.down('md'));
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -101,7 +106,7 @@ const Navbar = () => {
     </Box>
   );
 
-  return location.pathname === '/'
+  return location.pathname === '/' && !isMediumOrSmaller
     ? renderLandingPageNavbar()
     : renderOtherPagesNavbar();
 };
