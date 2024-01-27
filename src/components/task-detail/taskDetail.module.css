@@ -1,0 +1,40 @@
+.taskDetailContainer {
+  border-left: 1px solid #e0e0e0;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.taskDetailCard {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.taskDetailTitle {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.taskDetailUser,
+.taskDetailLocation,
+.taskDetailDetails {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.taskDetailBudget {
+  font-size: 1.25rem;
+  color: #333;
+  font-weight: bold;
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .taskDetailContainer {
+    border-left: none;
+    padding: 20px 10px;
+  }
+}

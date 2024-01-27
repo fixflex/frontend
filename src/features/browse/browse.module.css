@@ -1,0 +1,14 @@
+.browseContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem 9rem;
+  max-height: 100vh; /* Set the maximum height to be that of the viewport */
+  overflow: hidden; /* Hide the overflow */
+}
+
+/* Add responsive styles if necessary */
+@media (max-width: 768px) {
+  .browseContainer {
+    flex-direction: column;
+  }
+}
