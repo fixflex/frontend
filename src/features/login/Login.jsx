@@ -15,8 +15,6 @@ import {
   createTheme,
 } from '@mui/material';
 import { KeyboardArrowRight } from '@mui/icons-material';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase/FirebaseConfig';
 import { userLoggedIn } from '../../features/signup/authSlice';
 import styles from './login.module.css';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
@@ -44,28 +42,6 @@ const Login = () => {
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const userData = {
-          uid: userCredential.user.uid,
-          email: userCredential.user.email,
-        };
-
-        dispatch(userLoggedIn(userData));
-        console.log('User logged in', userCredential);
-        navigate('/dashboard');
-      })
-      .catch((error) => {
-        if (
-          error.code === 'auth/wrong-password' ||
-          error.code === 'auth/user-not-found'
-        ) {
-          setLoginError('Incorrect email or password');
-        } else {
-          setLoginError('An error occurred, please try again');
-        }
-      });
   };
 
   return (

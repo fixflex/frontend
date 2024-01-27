@@ -17,8 +17,6 @@ import {
   FormControl,
 } from '@mui/material';
 import { KeyboardArrowRight } from '@mui/icons-material';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase/FirebaseConfig';
 import styles from './signup.module.css';
 import { useNavigate } from 'react-router-dom';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
@@ -47,22 +45,6 @@ const Signup = () => {
     const name = data.get('name');
     const email = data.get('email');
     const password = data.get('password');
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const userData = {
-          uid: userCredential.user.uid,
-          name,
-          email,
-          userType,
-        };
-
-        dispatch(userLoggedIn(userData));
-        navigate('/dashboard');
-      })
-      .catch((error) => {
-        setSignupError(error.message);
-      });
   };
 
   const handlePurposeChange = (event) => {
