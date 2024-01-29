@@ -17,12 +17,11 @@ import {
   FormControl,
 } from '@mui/material';
 import { KeyboardArrowRight } from '@mui/icons-material';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase/FirebaseConfig';
 import styles from './signup.module.css';
 import { useNavigate } from 'react-router-dom';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { userLoggedIn } from '../../features/signup/authSlice';
+import axios from 'axios';
 
 const defaultTheme = createTheme({
   palette: {
@@ -41,28 +40,39 @@ const Signup = () => {
   const navigate = useNavigate('');
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const name = data.get('name');
-    const email = data.get('email');
-    const password = data.get('password');
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const userData = {
-          uid: userCredential.user.uid,
-          name,
-          email,
-          userType,
-        };
+    const userData = {
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      email: data.get('email'),
+      password: data.get('password'),
+      phone: data.get('phone'),
+      address: data.get('address'),
+    };
 
-        dispatch(userLoggedIn(userData));
-        navigate('/dashboard');
-      })
-      .catch((error) => {
-        setSignupError(error.message);
-      });
+    try {
+      const response = await axios.post(
+        'https://fixflex.onrender.com/api/v1/auth/signup',
+        userData
+      );
+
+      dispatch(userLoggedIn(response.data.data));
+
+      navigate('/discover');
+    } catch (err) {
+      if (err.response) {
+        console.log(err.response.data.errors[0].msg);
+        setSignupError(
+          err.response.data.errors[0].msg || 'An error occurred during signup.'
+        );
+      } else {
+        console.log('Error', err.message);
+        setSignupError(err.message || 'An error occurred during signup.');
+      }
+    }
   };
 
   const handlePurposeChange = (event) => {
@@ -97,11 +107,42 @@ const Signup = () => {
               margin='normal'
               required
               fullWidth
-              id='name'
-              label='Name'
-              name='name'
-              autoComplete='name'
+              id='firstName'
+              label='First Name'
+              name='firstName'
+              autoComplete='given-name'
               autoFocus
+              className={styles.textField}
+            />
+            <TextField
+              margin='normal'
+              required
+              fullWidth
+              id='lastName'
+              label='Last Name'
+              name='lastName'
+              autoComplete='family-name'
+              className={styles.textField}
+            />
+            <TextField
+              margin='normal'
+              required
+              fullWidth
+              id='address'
+              label='Address'
+              name='address'
+              autoComplete='address-line1'
+              className={styles.textField}
+            />
+            <TextField
+              margin='normal'
+              required
+              fullWidth
+              id='phone'
+              label='Phone Number'
+              name='phone'
+              type='tel'
+              autoComplete='tel'
               className={styles.textField}
             />
             <TextField

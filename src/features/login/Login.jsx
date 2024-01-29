@@ -15,12 +15,11 @@ import {
   createTheme,
 } from '@mui/material';
 import { KeyboardArrowRight } from '@mui/icons-material';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase/FirebaseConfig';
 import { userLoggedIn } from '../../features/signup/authSlice';
 import styles from './login.module.css';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const defaultTheme = createTheme({
   palette: {
@@ -39,33 +38,33 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const userData = {
-          uid: userCredential.user.uid,
-          email: userCredential.user.email,
-        };
-
-        dispatch(userLoggedIn(userData));
-        console.log('User logged in', userCredential);
-        navigate('/dashboard');
-      })
-      .catch((error) => {
-        if (
-          error.code === 'auth/wrong-password' ||
-          error.code === 'auth/user-not-found'
-        ) {
-          setLoginError('Incorrect email or password');
-        } else {
-          setLoginError('An error occurred, please try again');
+    try {
+      const response = await axios.post(
+        'https://fixflex.onrender.com/api/v1/auth/login',
+        {
+          email,
+          password,
         }
-      });
+      );
+
+      dispatch(userLoggedIn(response.data.data));
+
+      navigate('/browse');
+    } catch (error) {
+      if (error.response) {
+        setLoginError(
+          error.response.data.message || 'Login failed. Please try again.'
+        );
+      } else {
+        setLoginError('An unexpected error occurred. Please try again.');
+      }
+    }
   };
 
   return (
