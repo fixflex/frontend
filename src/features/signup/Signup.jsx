@@ -59,6 +59,8 @@ const Signup = () => {
         userData
       );
 
+      localStorage.setItem('user', JSON.stringify(response.data.data));
+
       dispatch(userLoggedIn(response.data.data));
 
       navigate('/discover');

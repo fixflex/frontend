@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Grid,
   Box,
@@ -15,9 +15,9 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from './navbar.module.css';
 import logo from '../../images/logo.png';
+import Logout from '../logout/Logout';
 
 const Navbar = ({ isLoggedIn }) => {
-  // Assuming isLoggedIn is a prop that indicates user login status
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const theme = useTheme();
@@ -40,7 +40,7 @@ const Navbar = ({ isLoggedIn }) => {
         alignItems='center'
         sx={{
           display: 'flex',
-          justifyContent: isLoggedIn ? 'space-evenly' : 'space-between',
+          justifyContent: 'space-between',
         }}
       >
         <Grid item>
@@ -68,7 +68,9 @@ const Navbar = ({ isLoggedIn }) => {
             </ListItem>
           </List>
         </Grid>
-        {!isLoggedIn && (
+        {isLoggedIn ? (
+          <Logout />
+        ) : (
           <Grid item className={styles.rightNav}>
             <Button
               variant='contained'

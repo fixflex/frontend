@@ -33,3 +33,21 @@ function App() {
 }
 
 export default App;
+
+// if (!isAuthenticated) {
+//   return;
+// } else {
+//   return (
+//     <Router>
+//       <Navbar isLoggedIn={isAuthenticated} />
+//       <Routes>
+//         <Route path='/' element={<LandingPage />} />
+//         <Route path='/login' element={<Login />} />
+//         <Route path='/signup' element={<Signup />} />
+//         <Route path='/discover' element={<Discover />} />
+//         <Route path='/browse' element={<Browse />} />
+//       </Routes>
+//       <Footer />
+//     </Router>
+//   );
+// }
