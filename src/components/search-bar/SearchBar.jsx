@@ -33,7 +33,7 @@ const SearchBar = () => {
             placeholder='In a few words, what do you need done?'
             inputProps={{ 'aria-label': 'What do you need done?' }}
           />
-          <Button variant='contained' className={styles.button}>
+          <Button variant='contained' href='/browse' className={styles.button}>
             Get Offers
           </Button>
         </Paper>

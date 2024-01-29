@@ -16,12 +16,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import styles from './navbar.module.css';
 import logo from '../../images/logo.png';
 
-const Navbar = () => {
-  const location = useLocation();
+const Navbar = ({ isLoggedIn }) => {
+  // Assuming isLoggedIn is a prop that indicates user login status
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const theme = useTheme();
-  const isMediumOrSmaller = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -33,9 +33,16 @@ const Navbar = () => {
     setDrawerOpen(open);
   };
 
-  const renderLandingPageNavbar = () => (
+  const renderRegularNavbar = () => (
     <Box className={styles.navContainer}>
-      <Grid container alignItems='center'>
+      <Grid
+        container
+        alignItems='center'
+        sx={{
+          display: 'flex',
+          justifyContent: isLoggedIn ? 'space-evenly' : 'space-between',
+        }}
+      >
         <Grid item>
           <Link to='/'>
             <Avatar
@@ -61,27 +68,29 @@ const Navbar = () => {
             </ListItem>
           </List>
         </Grid>
-      </Grid>
-      <Grid item className={styles.rightNav}>
-        <Button
-          variant='contained'
-          className={styles.rightNavButtons}
-          href='/signup'
-        >
-          Join
-        </Button>
-        <Button
-          variant='contained'
-          className={styles.rightNavButtons}
-          href='/login'
-        >
-          Login
-        </Button>
+        {!isLoggedIn && (
+          <Grid item className={styles.rightNav}>
+            <Button
+              variant='contained'
+              className={styles.rightNavButtons}
+              href='/signup'
+            >
+              Join
+            </Button>
+            <Button
+              variant='contained'
+              className={styles.rightNavButtons}
+              href='/login'
+            >
+              Login
+            </Button>
+          </Grid>
+        )}
       </Grid>
     </Box>
   );
 
-  const renderOtherPagesNavbar = () => (
+  const renderMobileNavbar = () => (
     <Box className={styles.otherPageNavbar}>
       <Link to='/'>
         <Avatar src={logo} variant='rounded' className={styles.logoSmall} />
@@ -106,9 +115,7 @@ const Navbar = () => {
     </Box>
   );
 
-  return location.pathname === '/' && !isMediumOrSmaller
-    ? renderLandingPageNavbar()
-    : renderOtherPagesNavbar();
+  return isMobile ? renderMobileNavbar() : renderRegularNavbar();
 };
 
 export default Navbar;

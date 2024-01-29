@@ -7,11 +7,19 @@ import Footer from './components/footer/Footer';
 import Signup from './features/signup/Signup';
 import Discover from './features/discover/Discover';
 import Browse from './features/browse/Browse';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    console.log(isAuthenticated);
+  }, [isAuthenticated]);
+
   return (
     <Router>
-      <Navbar />
+      <Navbar isLoggedIn={isAuthenticated} />
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
