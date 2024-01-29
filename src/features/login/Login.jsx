@@ -19,6 +19,7 @@ import { userLoggedIn } from '../../features/signup/authSlice';
 import styles from './login.module.css';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const defaultTheme = createTheme({
   palette: {
@@ -37,11 +38,33 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
+
+    try {
+      const response = await axios.post(
+        'https://fixflex.onrender.com/api/v1/auth/login',
+        {
+          email,
+          password,
+        }
+      );
+
+      dispatch(userLoggedIn(response.data.data));
+
+      navigate('/browse');
+    } catch (error) {
+      if (error.response) {
+        setLoginError(
+          error.response.data.message || 'Login failed. Please try again.'
+        );
+      } else {
+        setLoginError('An unexpected error occurred. Please try again.');
+      }
+    }
   };
 
   return (
