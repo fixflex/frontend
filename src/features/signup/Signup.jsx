@@ -22,6 +22,7 @@ import { useNavigate } from 'react-router-dom';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { userLoggedIn } from '../../features/signup/authSlice';
 import axios from 'axios';
+import baseURL from '../../API/baseURL';
 
 const defaultTheme = createTheme({
   palette: {
@@ -54,10 +55,7 @@ const Signup = () => {
     };
 
     try {
-      const response = await axios.post(
-        'https://fixflex.onrender.com/api/v1/auth/signup',
-        userData
-      );
+      const response = await baseURL.post('/auth/signup', userData);
 
       localStorage.setItem('user', JSON.stringify(response.data.data));
 

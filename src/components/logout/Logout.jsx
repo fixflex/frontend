@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { userLoggedOut } from '../../features/signup/authSlice';
 import styles from './logout.module.css';
 import axios from 'axios';
+import baseURL from '../../API/baseURL';
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -13,12 +14,15 @@ const Logout = () => {
 
   const handleLogout = async () => {
     dispatch(userLoggedOut());
-
     localStorage.removeItem('user');
 
-    await axios.post('https://fixflex.onrender.com/api/v1/auth/logout');
-
-    navigate('/');
+    try {
+      await baseURL.post('/auth/logout');
+      navigate('/');
+      window.location.reload(false);
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
   };
 
   return (
