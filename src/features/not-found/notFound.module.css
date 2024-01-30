@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&family=Sen&display=swap');
+
+.notFound {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(27, 37, 46, 1) 35%,
+    rgba(64, 163, 209, 1) 100%
+  );
+  color: white;
+}
+
+.notFoundText {
+  font-family: Rubik Doodle Shadow !important;
+  font-size: 4em;
+}
+
+.homeButton {
+  background-color: #070826 !important;
+  font-weight: 600;
+  width: 8vw;
+  height: 5vh;
+  padding: 1.3em;
+  margin: 1em !important;
+  border-radius: 15px !important;
+  font-size: 0.8em;
+}
+.homeButton:hover {
+  scale: 1.2;
+}

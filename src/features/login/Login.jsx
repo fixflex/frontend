@@ -19,7 +19,7 @@ import { userLoggedIn } from '../../features/signup/authSlice';
 import styles from './login.module.css';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import baseURL from '../../API/baseURL';
 
 const defaultTheme = createTheme({
   palette: {
@@ -45,16 +45,14 @@ const Login = () => {
     const password = data.get('password');
 
     try {
-      const response = await axios.post(
-        'https://fixflex.onrender.com/api/v1/auth/login',
-        {
-          email,
-          password,
-        }
-      );
+      const response = await baseURL.post('/auth/login', {
+        email,
+        password,
+      });
 
+      localStorage.setItem('user', JSON.stringify(response.data.data));
       dispatch(userLoggedIn(response.data.data));
-
+      console.log(response);
       navigate('/browse');
     } catch (error) {
       if (error.response) {

@@ -1,0 +1,12 @@
+.logoutButton {
+  font-family: Rubik !important;
+  color: white !important;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: #040325;
+  padding: 0.6em;
+  border-radius: 8px;
+}
+.logoutButton:hover {
+  color: black !important;
+}

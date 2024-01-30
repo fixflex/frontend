@@ -7,8 +7,8 @@
     rgba(27, 37, 46, 1) 35%,
     rgba(64, 163, 209, 1) 100%
   );
-  padding: 2em 12em;
-  display: flex;
+  padding: 2em 12em 1em;
+  display: flex !important;
   justify-content: space-evenly !important;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .navButton:hover {
-  color: #efc734 !important;
+  color: black !important;
 }
 
 .otherPageNavbar {
