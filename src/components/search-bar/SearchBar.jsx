@@ -7,7 +7,6 @@ import {
   Paper,
   InputBase,
   Button,
-  Chip,
   Box,
 } from '@mui/material';
 import styles from './searchBar.module.css';

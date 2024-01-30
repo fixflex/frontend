@@ -21,7 +21,6 @@ import styles from './signup.module.css';
 import { useNavigate } from 'react-router-dom';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { userLoggedIn } from '../../features/signup/authSlice';
-import axios from 'axios';
 import baseURL from '../../API/baseURL';
 
 const defaultTheme = createTheme({
