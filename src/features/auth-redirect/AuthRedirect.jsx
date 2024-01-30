@@ -6,14 +6,6 @@ import styles from './auth-redirect.module.css';
 const AuthRedirect = () => {
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    navigate('/login');
-  };
-
-  const handleSignup = () => {
-    navigate('/signup');
-  };
-
   return (
     <Box
       sx={{
