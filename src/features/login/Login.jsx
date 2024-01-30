@@ -55,7 +55,7 @@ const Login = () => {
 
       localStorage.setItem('user', JSON.stringify(response.data.data));
       dispatch(userLoggedIn(response.data.data));
-
+      console.log(response);
       navigate('/browse');
     } catch (error) {
       if (error.response) {

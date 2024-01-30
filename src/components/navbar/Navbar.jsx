@@ -112,6 +112,7 @@ const Navbar = ({ isLoggedIn }) => {
               <Button>{text}</Button>
             </ListItem>
           ))}
+          <Logout />
         </List>
       </Drawer>
     </Box>

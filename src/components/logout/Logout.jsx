@@ -5,15 +5,18 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { userLoggedOut } from '../../features/signup/authSlice';
 import styles from './logout.module.css';
+import axios from 'axios';
 
 const Logout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     dispatch(userLoggedOut());
 
     localStorage.removeItem('user');
+
+    await axios.post('https://fixflex.onrender.com/api/v1/auth/logout');
 
     navigate('/');
   };
