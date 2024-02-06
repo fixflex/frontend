@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&family=Sen&display=swap');
+.tabButton {
+  color: #080826;
+}
+.tabButton:hover {
+  background-color: #080826 !important;
+  color: white;
+  padding: 1rem;
+  border: 2px solid #3d98c3;
+  border-radius: 25px;
+  transition-duration: 0.5s;
+  scale: 0.8;
+}
+
+.topTitle {
+  font-size: 2rem;
+  margin-left: 1rem;
+  margin-bottom: 2rem;
+  font-family: Rubik Doodle Shadow !important;
+}
+.tabContainer {
+  margin: 7rem 7rem;
+  display: flex;
+  justify-content: center;
+}
+
+.tabTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.taskTitle {
+  margin: 1rem 0 2rem;
+}
+
+.flexButton {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(27, 37, 46, 1) 35%,
+    rgba(64, 163, 209, 1) 100%
+  );
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  color: white;
+}
+
+.flexButton:hover {
+  background: transparent !important;
+  scale: 1.1;
+  color: #080826;
+  transition-duration: 1s;
+}
