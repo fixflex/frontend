@@ -27,7 +27,7 @@
 }
 
 .tabTitle {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -37,24 +37,17 @@
 }
 
 .flexButton {
-  background: #080826 !important;
   border-radius: 25px !important;
   padding: 0.5rem 1rem !important;
-  color: white !important;
+  font-weight: bold;
 }
 
 .flexButton:hover {
   scale: 1.1;
-  transition-duration: 1s;
-  font-weight: bold;
   color: white !important;
-
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(27, 37, 46, 1) 35%,
-    rgba(64, 163, 209, 1) 100%
-  ) !important;
+  background-color: #e5bd31;
+  border-color: #e5bd31;
+  font-weight: bolder;
 }
 
 .optionCard {

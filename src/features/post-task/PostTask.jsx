@@ -43,11 +43,21 @@ function TabPanel(props) {
 
 export default function PostTask() {
   const [value, setValue] = useState(0);
+  const [taskTitle, setTaskTitle] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
+  const [isFlexibleDate, setIsFlexibleDate] = useState(false);
   const [locationType, setLocationType] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [taskDetails, setTaskDetails] = useState('');
+  const [budget, setBudget] = useState('');
 
   const handleLocationChange = (event) => {
     setLocationType(event.target.value);
+  };
+
+  const handleFlexibleDate = () => {
+    setIsFlexibleDate(!isFlexibleDate);
+    setSelectedDate(null);
   };
 
   const totalSteps = 4;
@@ -65,9 +75,23 @@ export default function PostTask() {
   };
 
   const isStepComplete = () => {
-    // Here, you should check for the validity of the current step before allowing to proceed.
-    // This function must be implemented based on your form validation logic.
-    return true; // Placeholder logic
+    switch (value) {
+      case 0: // Title & Date step
+        return (
+          taskTitle.trim() !== '' && (selectedDate !== null || isFlexibleDate)
+        );
+      case 1: // Location step
+        return (
+          locationType !== '' &&
+          (locationType !== 'in-person' || zipCode.trim() !== '')
+        );
+      case 2: // Details step
+        return taskDetails.trim() !== '';
+      case 3: // Budget step
+        return budget.trim() !== '' && !isNaN(budget) && parseFloat(budget) > 0;
+      default:
+        return false;
+    }
   };
 
   function a11yProps(index) {
@@ -120,6 +144,8 @@ export default function PostTask() {
             variant='outlined'
             margin='normal'
             className={styles.taskTitle}
+            value={taskTitle}
+            onChange={(e) => setTaskTitle(e.target.value)}
           />
 
           <Box>
@@ -156,9 +182,12 @@ export default function PostTask() {
               <Button
                 variant='outlined'
                 className={styles.flexButton}
-                onClick={() => {
-                  // Handle the 'I'm flexible' logic here
-                  console.log("User indicated they're flexible with the date");
+                onClick={handleFlexibleDate}
+                sx={{
+                  backgroundColor: isFlexibleDate ? '#E5BD31' : '#f0f0f0',
+                  borderColor: isFlexibleDate ? '#E5BD31' : '#f0f0f0',
+                  fontWeight: isFlexibleDate ? 'bold' : 'normal',
+                  color: isFlexibleDate ? 'white' : 'black',
                 }}
               >
                 I'm flexible
@@ -168,7 +197,9 @@ export default function PostTask() {
         </TabPanel>
 
         <TabPanel value={value} index={1} title='Where should it be done?'>
-          <Typography variant='h6'>Tell us where</Typography>
+          <Typography variant='h6' className={styles.tabTitle}>
+            Tell us where
+          </Typography>
           <FormControl component='fieldset' sx={{ margin: '1rem' }}>
             <RadioGroup
               row
@@ -223,6 +254,8 @@ export default function PostTask() {
                       </InputAdornment>
                     ),
                   }}
+                  value={zipCode}
+                  onChange={(e) => setZipCode(e.target.value)}
                 />
               </>
             ) : (
@@ -237,7 +270,9 @@ export default function PostTask() {
           title='Provide more details
 '
         >
-          <Typography variant='h6'>What are the details?</Typography>
+          <Typography variant='h6' className={styles.tabTitle}>
+            What are the details?
+          </Typography>
           <TextField
             fullWidth
             multiline
@@ -245,14 +280,20 @@ export default function PostTask() {
             label='Write a summary of the key details'
             variant='outlined'
             margin='normal'
+            value={taskDetails}
+            onChange={(e) => setTaskDetails(e.target.value)}
           />
         </TabPanel>
         <TabPanel value={value} index={3} title='Set your budget'>
-          <Typography variant='h6'>Suggest your budget</Typography>
+          <Typography variant='h6' className={styles.tabTitle}>
+            Suggest your budget
+          </Typography>
           <TextField
             fullWidth
             label='What is your budget?'
             variant='outlined'
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
             margin='normal'
             InputProps={{
               startAdornment: <Typography variant='h6'>$</Typography>,
@@ -278,7 +319,7 @@ export default function PostTask() {
           <Button
             variant='contained'
             onClick={handleNext}
-            disabled={value === totalSteps - 1 || !isStepComplete()}
+            disabled={!isStepComplete()}
             sx={{
               mr: 1,
               backgroundColor: '#080826',
