@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Tab,
@@ -56,8 +56,19 @@ export default function PostTask() {
   };
 
   const handleFlexibleDate = () => {
-    setIsFlexibleDate(!isFlexibleDate);
-    setSelectedDate(null);
+    const newFlexibility = !isFlexibleDate;
+    setIsFlexibleDate(newFlexibility);
+
+    if (newFlexibility) {
+      setSelectedDate(null);
+    }
+  };
+
+  const handleDateChange = (newValue) => {
+    if (newValue) {
+      setIsFlexibleDate(false);
+    }
+    setSelectedDate(newValue);
   };
 
   const totalSteps = 4;
@@ -165,9 +176,7 @@ export default function PostTask() {
                 <DatePicker
                   label='Select date'
                   value={selectedDate}
-                  onChange={(newValue) => {
-                    setSelectedDate(newValue);
-                  }}
+                  onChange={handleDateChange}
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
