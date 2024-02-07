@@ -3,9 +3,14 @@
   color: white !important;
   font-size: 1em;
   font-weight: 500;
-  background-color: #040325;
-  padding: 0.6em;
-  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(27, 37, 46, 1) 35%,
+    rgba(64, 163, 209, 1) 100%
+  );
+  padding: 0.5rem 1rem !important;
+  border-radius: 25px !important;
 }
 .logoutButton:hover {
   color: black !important;

@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&family=Sen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 .tabButton {
   color: #080826;
 }
@@ -13,15 +14,16 @@
 }
 
 .topTitle {
-  font-size: 2rem;
-  margin-left: 1rem;
+  font-size: 2.5rem !important;
+  margin-left: 1rem !important;
   margin-bottom: 2rem;
-  font-family: Rubik Doodle Shadow !important;
+  font-family: Anton !important;
+  color: #070826;
 }
 .tabContainer {
-  margin: 7rem 7rem;
+  margin: 4rem 7rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .tabTitle {
@@ -35,20 +37,58 @@
 }
 
 .flexButton {
+  background: #080826 !important;
+  border-radius: 25px !important;
+  padding: 0.5rem 1rem !important;
+  color: white !important;
+}
+
+.flexButton:hover {
+  scale: 1.1;
+  transition-duration: 1s;
+  font-weight: bold;
+  color: white !important;
+
   background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
     rgba(27, 37, 46, 1) 35%,
     rgba(64, 163, 209, 1) 100%
-  );
-  border-radius: 25px;
-  padding: 0.5rem 1rem;
-  color: white;
+  ) !important;
 }
 
-.flexButton:hover {
-  background: transparent !important;
-  scale: 1.1;
-  color: #080826;
-  transition-duration: 1s;
+.optionCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 2px solid #f0f0f0;
+  margin: 1rem;
+  transition: all 0.3s ease;
+}
+
+.optionCard.selected {
+  background-color: #070826;
+  color: white;
+  border-color: #070826;
+}
+
+.hiddenRadio {
+  display: none !important;
+}
+
+.formControlLabel {
+  margin-right: 0;
+}
+
+.formControlLabel .MuiFormControlLabel-label {
+  cursor: pointer;
+}
+
+.zipCodeInput {
+  margin: 1rem 0;
 }

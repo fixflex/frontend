@@ -11,14 +11,16 @@ import {
   FormControl,
   Radio,
   Divider,
+  InputAdornment,
 } from '@mui/material';
 import styles from './postTask.module.css';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Laptop, LocationOn, Place } from '@mui/icons-material';
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, title, index, ...other } = props;
   return (
     <div
       role='tabpanel'
@@ -28,7 +30,7 @@ function TabPanel(props) {
       {...other}
     >
       <Typography variant='h6' sx={{ mt: 1 }} className={styles.topTitle}>
-        Let's start with the basics!
+        {title}
       </Typography>
       {value === index && (
         <Box sx={{ p: 3 }}>
@@ -42,6 +44,11 @@ function TabPanel(props) {
 export default function PostTask() {
   const [value, setValue] = useState(0);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [locationType, setLocationType] = useState('');
+
+  const handleLocationChange = (event) => {
+    setLocationType(event.target.value);
+  };
 
   const totalSteps = 4;
 
@@ -98,7 +105,12 @@ export default function PostTask() {
         <Tab label='Budget' {...a11yProps(3)} className={styles.tabButton} />
       </Tabs>
       <Box sx={{ width: '60%' }}>
-        <TabPanel value={value} index={0} className={styles.titleTab}>
+        <TabPanel
+          value={value}
+          index={0}
+          className={styles.titleTab}
+          title="What's your task?"
+        >
           <Typography variant='h6' className={styles.tabTitle}>
             In a few words, what do you need done?{' '}
           </Typography>
@@ -155,8 +167,77 @@ export default function PostTask() {
           </Box>
         </TabPanel>
 
-        <TabPanel value={value} index={1}>
-          <Typography variant='h6'>Provide more details</Typography>
+        <TabPanel value={value} index={1} title='Where should it be done?'>
+          <Typography variant='h6'>Tell us where</Typography>
+          <FormControl component='fieldset' sx={{ margin: '1rem' }}>
+            <RadioGroup
+              row
+              value={locationType}
+              onChange={handleLocationChange}
+            >
+              <FormControlLabel
+                value='in-person'
+                label={
+                  <div
+                    className={`${styles.optionCard} ${
+                      locationType === 'in-person' ? styles.selected : ''
+                    }`}
+                  >
+                    <LocationOn />
+                    <Typography variant='body1'>In-person</Typography>
+                    <Typography>I need the Flexer physically there</Typography>
+                  </div>
+                }
+                control={<Radio className={styles.hiddenRadio} />}
+                className={styles.formControlLabel}
+              />
+              <FormControlLabel
+                value='online'
+                label={
+                  <div
+                    className={`${styles.optionCard} ${
+                      locationType === 'online' ? styles.selected : ''
+                    }`}
+                  >
+                    <Laptop />
+                    <Typography variant='body1'>Online</Typography>
+                    <Typography>The Flexer can do my task from home</Typography>
+                  </div>
+                }
+                control={<Radio className={styles.hiddenRadio} />}
+                className={styles.formControlLabel}
+              />
+            </RadioGroup>
+            {locationType === 'in-person' ? (
+              <>
+                {' '}
+                <TextField
+                  fullWidth
+                  placeholder='Enter your ZIP Code'
+                  variant='outlined'
+                  className={styles.zipCodeInput}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <Place />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </>
+            ) : (
+              ''
+            )}
+          </FormControl>
+        </TabPanel>
+
+        <TabPanel
+          value={value}
+          index={2}
+          title='Provide more details
+'
+        >
+          <Typography variant='h6'>What are the details?</Typography>
           <TextField
             fullWidth
             multiline
@@ -166,24 +247,7 @@ export default function PostTask() {
             margin='normal'
           />
         </TabPanel>
-        <TabPanel value={value} index={2}>
-          <Typography variant='h6'>Tell us where</Typography>
-          <FormControl component='fieldset'>
-            <RadioGroup row>
-              <FormControlLabel
-                value='in-person'
-                control={<Radio />}
-                label='In-person'
-              />
-              <FormControlLabel
-                value='online'
-                control={<Radio />}
-                label='Online'
-              />
-            </RadioGroup>
-          </FormControl>
-        </TabPanel>
-        <TabPanel value={value} index={3}>
+        <TabPanel value={value} index={3} title='Set your budget'>
           <Typography variant='h6'>Suggest your budget</Typography>
           <TextField
             fullWidth
@@ -200,7 +264,13 @@ export default function PostTask() {
             color='inherit'
             disabled={value === 0}
             onClick={handleBack}
-            sx={{ mr: 1 }}
+            sx={{
+              mr: 1,
+              backgroundColor: value ? '#3FA1CE' : '',
+              padding: '0.5rem 1rem',
+              borderRadius: '8px',
+              color: 'white',
+            }}
           >
             Back
           </Button>
@@ -209,6 +279,12 @@ export default function PostTask() {
             variant='contained'
             onClick={handleNext}
             disabled={value === totalSteps - 1 || !isStepComplete()}
+            sx={{
+              mr: 1,
+              backgroundColor: '#080826',
+              padding: '0.5rem 1rem',
+              borderRadius: '8px',
+            }}
           >
             {value === totalSteps - 1 ? 'Finish' : 'Next'}
           </Button>
