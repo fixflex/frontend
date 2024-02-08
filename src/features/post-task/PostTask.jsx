@@ -21,6 +21,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Laptop, LocationOn, Place } from '@mui/icons-material';
 import { egyptGovernorates } from '../../utils/gov';
+import baseURL from '../../API/baseURL';
 
 function TabPanel(props) {
   const { children, value, title, index, ...other } = props;
@@ -146,28 +147,48 @@ export default function PostTask() {
     }
   };
 
-  const handleSubmit = () => {
+  let dueDate;
+  if (isFlexibleDate) {
+    dueDate = {
+      flexible: isFlexibleDate,
+    };
+  } else {
+    dueDate = {
+      on: selectedDate.format('YYYY-MM-DD'),
+    };
+  }
+
+  let location;
+  if (locationType === 'online') {
+    location = {
+      online: true,
+    };
+  } else if (locationType === 'in-person') {
+    location = {
+      coordinates: [userLocation.lng, userLocation.lat],
+    };
+  } else {
+    location = {};
+  }
+
+  const handleSubmit = async () => {
     const userData = {
       title: taskTitle,
       category: '65aee72b4adc6b5e31e94044',
       details: taskDetails,
-      location: {
-        coordinates:
-          locationType === 'in-person'
-            ? [userLocation.lng, userLocation.lat]
-            : ['', ''],
-        online: locationType === 'online',
-      },
-      dueDate: {
-        on: selectedDate ? selectedDate.format('YYYY-MM-DD') : null,
-        before: null,
-        flexible: isFlexibleDate,
-      },
+      location,
+      dueDate,
 
       budget: parseInt(budget, 10),
       city: city,
     };
-    console.log('User Data:', userData);
+
+    try {
+      const response = await baseURL.post('/tasks', userData);
+      console.log('Task created successfully:', response.data);
+    } catch (error) {
+      console.error('Error posting task:', error);
+    }
   };
 
   return (
