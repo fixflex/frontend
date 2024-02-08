@@ -12,12 +12,15 @@ import {
   Radio,
   Divider,
   InputAdornment,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import styles from './postTask.module.css';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Laptop, LocationOn, Place } from '@mui/icons-material';
+import { egyptGovernorates } from '../../utils/gov';
 
 function TabPanel(props) {
   const { children, value, title, index, ...other } = props;
@@ -47,9 +50,16 @@ export default function PostTask() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [isFlexibleDate, setIsFlexibleDate] = useState(false);
   const [locationType, setLocationType] = useState('');
-  const [zipCode, setZipCode] = useState('');
+  const [city, setCity] = useState('');
   const [taskDetails, setTaskDetails] = useState('');
   const [budget, setBudget] = useState('');
+  const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
+
+  useEffect(() => {
+    if (locationType === 'in-person') {
+      getUserLocation();
+    }
+  }, [locationType]);
 
   const handleLocationChange = (event) => {
     setLocationType(event.target.value);
@@ -87,18 +97,18 @@ export default function PostTask() {
 
   const isStepComplete = () => {
     switch (value) {
-      case 0: // Title & Date step
+      case 0:
         return (
           taskTitle.trim() !== '' && (selectedDate !== null || isFlexibleDate)
         );
-      case 1: // Location step
+      case 1:
         return (
           locationType !== '' &&
-          (locationType !== 'in-person' || zipCode.trim() !== '')
+          (locationType !== 'in-person' || city.trim() !== '')
         );
-      case 2: // Details step
+      case 2:
         return taskDetails.trim() !== '';
-      case 3: // Budget step
+      case 3:
         return budget.trim() !== '' && !isNaN(budget) && parseFloat(budget) > 0;
       default:
         return false;
@@ -111,6 +121,54 @@ export default function PostTask() {
       'aria-controls': `vertical-tabpanel-${index}`,
     };
   }
+
+  const getUserLocation = () => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error('Error getting the location: ', error);
+          alert(
+            'Error getting the location. Please allow access to your location.'
+          );
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
+  };
+
+  const handleSubmit = () => {
+    const userData = {
+      title: taskTitle,
+      category: '65aee72b4adc6b5e31e94044',
+      details: taskDetails,
+      location: {
+        coordinates:
+          locationType === 'in-person'
+            ? [userLocation.lng, userLocation.lat]
+            : ['', ''],
+        online: locationType === 'online',
+      },
+      dueDate: {
+        on: selectedDate ? selectedDate.format('YYYY-MM-DD') : null,
+        before: null,
+        flexible: isFlexibleDate,
+      },
+
+      budget: parseInt(budget, 10),
+      city: city,
+    };
+    console.log('User Data:', userData);
+  };
 
   return (
     <Box
@@ -248,27 +306,31 @@ export default function PostTask() {
                 className={styles.formControlLabel}
               />
             </RadioGroup>
-            {locationType === 'in-person' ? (
-              <>
-                {' '}
-                <TextField
-                  fullWidth
-                  placeholder='Enter your ZIP Code'
+            {locationType === 'in-person' && (
+              <FormControl fullWidth>
+                <Select
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Without label' }}
                   variant='outlined'
                   className={styles.zipCodeInput}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position='start'>
-                        <Place />
-                      </InputAdornment>
-                    ),
-                  }}
-                  value={zipCode}
-                  onChange={(e) => setZipCode(e.target.value)}
-                />
-              </>
-            ) : (
-              ''
+                  startAdornment={
+                    <InputAdornment position='start'>
+                      <Place />
+                    </InputAdornment>
+                  }
+                >
+                  <MenuItem disabled value=''>
+                    <em>Select Governorate</em>
+                  </MenuItem>
+                  {egyptGovernorates.map((governorate) => (
+                    <MenuItem key={governorate} value={governorate}>
+                      {governorate}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             )}
           </FormControl>
         </TabPanel>
@@ -327,7 +389,13 @@ export default function PostTask() {
           <Box sx={{ flex: '1 1 auto' }} />
           <Button
             variant='contained'
-            onClick={handleNext}
+            onClick={() => {
+              if (value === totalSteps - 1) {
+                handleSubmit();
+              } else {
+                handleNext();
+              }
+            }}
             disabled={!isStepComplete()}
             sx={{
               mr: 1,
