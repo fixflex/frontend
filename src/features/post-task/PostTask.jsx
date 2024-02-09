@@ -53,8 +53,10 @@ export default function PostTask() {
   const [locationType, setLocationType] = useState('');
   const [city, setCity] = useState('');
   const [taskDetails, setTaskDetails] = useState('');
-  const [budget, setBudget] = useState('');
+  const [budget, setBudget] = useState(0);
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
+
+  const offers = [];
 
   useEffect(() => {
     if (locationType === 'in-person') {
@@ -110,7 +112,7 @@ export default function PostTask() {
       case 2:
         return taskDetails.trim() !== '';
       case 3:
-        return budget.trim() !== '' && !isNaN(budget) && parseFloat(budget) > 0;
+        return budget > 0 && budget <= 9999;
       default:
         return false;
     }
@@ -147,45 +149,49 @@ export default function PostTask() {
     }
   };
 
-  let dueDate;
-  if (isFlexibleDate) {
-    dueDate = {
-      flexible: isFlexibleDate,
-    };
-  } else {
-    dueDate = {
-      on: selectedDate.format('YYYY-MM-DD'),
-    };
-  }
-
-  let location;
-  if (locationType === 'online') {
-    location = {
-      online: true,
-    };
-  } else if (locationType === 'in-person') {
-    location = {
-      coordinates: [userLocation.lng, userLocation.lat],
-    };
-  } else {
-    location = {};
-  }
-
   const handleSubmit = async () => {
+    let dueDate;
+    if (isFlexibleDate) {
+      dueDate = {
+        flexible: isFlexibleDate,
+      };
+    } else {
+      dueDate = {
+        on: selectedDate.format('YYYY-MM-DD'),
+      };
+    }
+
+    let location;
+    if (locationType === 'online') {
+      location = {
+        coordinates: [0, 0],
+        online: 'true',
+      };
+    } else if (locationType === 'in-person') {
+      location = {
+        coordinates: [userLocation.lng, userLocation.lat],
+      };
+    } else {
+      location = { coordinates: [0, 0] };
+    }
+
+    // Include the offers array in the userData object
     const userData = {
       title: taskTitle,
       category: '65aee72b4adc6b5e31e94044',
       details: taskDetails,
       location,
       dueDate,
-
-      budget: parseInt(budget, 10),
+      budget: budget,
       city: city,
     };
 
     try {
       const response = await baseURL.post('/tasks', userData);
       console.log('Task created successfully:', response.data);
+
+      // Retrieve the user object from local storage
+      // const user = JSON.parse(localStorage.getItem('user'));
     } catch (error) {
       console.error('Error posting task:', error);
     }
@@ -333,7 +339,6 @@ export default function PostTask() {
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   displayEmpty
-                  inputProps={{ 'aria-label': 'Without label' }}
                   variant='outlined'
                   className={styles.zipCodeInput}
                   startAdornment={
@@ -372,6 +377,7 @@ export default function PostTask() {
             label='Write a summary of the key details'
             variant='outlined'
             margin='normal'
+            inputProps={{ minLength: 12 }}
             value={taskDetails}
             onChange={(e) => setTaskDetails(e.target.value)}
           />
@@ -384,6 +390,7 @@ export default function PostTask() {
             fullWidth
             label='What is your budget?'
             variant='outlined'
+            type='number'
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
             margin='normal'
