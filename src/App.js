@@ -30,6 +30,10 @@ function App() {
     } else {
       console.log('user not logged in yet');
     }
+
+    if (!localStorage.getItem('userTasks')) {
+      localStorage.setItem('userTasks', JSON.stringify([]));
+    }
   }, [dispatch]);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);

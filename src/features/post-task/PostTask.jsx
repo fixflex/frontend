@@ -22,6 +22,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Laptop, LocationOn, Place } from '@mui/icons-material';
 import { egyptGovernorates } from '../../utils/gov';
 import baseURL from '../../API/baseURL';
+import { addTask } from './taskSlice';
+import { useDispatch } from 'react-redux';
 
 function TabPanel(props) {
   const { children, value, title, index, ...other } = props;
@@ -53,10 +55,10 @@ export default function PostTask() {
   const [locationType, setLocationType] = useState('');
   const [city, setCity] = useState('');
   const [taskDetails, setTaskDetails] = useState('');
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState(null);
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
 
-  const offers = [];
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (locationType === 'in-person') {
@@ -175,7 +177,6 @@ export default function PostTask() {
       location = { coordinates: [0, 0] };
     }
 
-    // Include the offers array in the userData object
     const userData = {
       title: taskTitle,
       category: '65aee72b4adc6b5e31e94044',
@@ -190,8 +191,7 @@ export default function PostTask() {
       const response = await baseURL.post('/tasks', userData);
       console.log('Task created successfully:', response.data);
 
-      // Retrieve the user object from local storage
-      // const user = JSON.parse(localStorage.getItem('user'));
+      dispatch(addTask(response.data.data));
     } catch (error) {
       console.error('Error posting task:', error);
     }
