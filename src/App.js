@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import AuthRedirect from './features/auth-redirect/AuthRedirect';
 import NotFound from './features/not-found/NotFound';
 import { userLoggedIn } from './features/signup/authSlice';
+import PostTask from './features/post-task/PostTask';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,10 @@ function App() {
       dispatch(userLoggedIn(foundUser));
     } else {
       console.log('user not logged in yet');
+    }
+
+    if (!localStorage.getItem('userTasks')) {
+      localStorage.setItem('userTasks', JSON.stringify([]));
     }
   }, [dispatch]);
 
@@ -53,6 +58,10 @@ function App() {
         <Route
           path='/browse'
           element={isAuthenticated ? <Browse /> : <AuthRedirect />}
+        />
+        <Route
+          path='/post-task'
+          element={isAuthenticated ? <PostTask /> : <AuthRedirect />}
         />
         <Route path='*' element={<NotFound />} />
       </Routes>

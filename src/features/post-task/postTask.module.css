@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.tabButton {
+  color: #080826;
+}
+.tabButton:hover {
+  background-color: #080826 !important;
+  color: white;
+  padding: 1rem;
+  border: 2px solid #3d98c3;
+  border-radius: 25px;
+  transition-duration: 0.5s;
+  scale: 0.8;
+}
+
+.topTitle {
+  font-size: 2.5rem !important;
+  margin-left: 1rem !important;
+  margin-bottom: 2rem;
+  font-family: Anton !important;
+  color: #070826;
+}
+.tabContainer {
+  margin: 4rem 7rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tabTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.taskTitle {
+  margin: 1rem 0 2rem;
+}
+
+.flexButton {
+  border-radius: 25px !important;
+  padding: 0.5rem 1rem !important;
+  font-weight: bold;
+}
+
+.flexButton:hover {
+  scale: 1.1;
+  color: white !important;
+  background-color: #e5bd31;
+  border-color: #e5bd31;
+  font-weight: bolder;
+}
+
+.optionCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 2px solid #f0f0f0;
+  margin: 1rem;
+  transition: all 0.3s ease;
+}
+
+.optionCard.selected {
+  background-color: #070826;
+  color: white;
+  border-color: #070826;
+}
+
+.hiddenRadio {
+  display: none !important;
+}
+
+.formControlLabel {
+  margin-right: 0;
+}
+
+.formControlLabel .MuiFormControlLabel-label {
+  cursor: pointer;
+}
+
+.zipCodeInput {
+  margin: 1rem 0;
+}
