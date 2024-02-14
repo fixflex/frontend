@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.myTasks {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  background-color: #f9f3ef;
+  padding: 5% 10%;
+  border-radius: 25px;
+  width: 55%;
+  align-items: center;
+  margin: 4rem;
+}
+
+.title {
+  font-size: 2rem;
+  color: #333;
+  font-family: Anton !important;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  /* Additional subtitle styles */
+}
+
+.views {
+  font-size: 0.875rem;
+  color: #999;
+  /* Additional views count styles */
+}
+
+.card {
+  /* Add your styles for the card */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Example shadow */
+  border-radius: 8px; /* Example border-radius */
+}
+
+.taskTitle {
+  /* Add your styles for the task title */
+  color: #333; /* Example color */
+  margin-bottom: 4px; /* Example spacing */
+}
+
+.taskSubtitle {
+  /* Add your styles for the task subtitle */
+  color: #666; /* Example color */
+}
+
+.taskDescription {
+  /* Add your styles for the task description */
+  color: #999; /* Example color */
+  margin-bottom: 16px; /* Example spacing */
+}
+
+.infoSection {
+  /* Add your styles for the info section */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Example layout */
+}
+
+.editButton {
+  /* Add your styles for the edit button */
+}
+
+.infoText {
+  /* Add your styles for the info text */
+}
+
+.infoLabel {
+  /* Add your styles for the info label */
+  color: #333; /* Example color */
+  font-size: 0.875rem; /* Example font size */
+}
+
+.infoContent {
+  /* Add your styles for the info content */
+  color: #333; /* Example color */
+  font-weight: 500; /* Example font weight */
+}

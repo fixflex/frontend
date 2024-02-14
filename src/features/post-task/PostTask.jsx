@@ -23,6 +23,8 @@ import { Laptop, LocationOn, Place } from '@mui/icons-material';
 import { egyptGovernorates } from '../../utils/gov';
 import baseURL from '../../API/baseURL';
 import { addTask } from './taskSlice';
+import { useNavigate } from 'react-router-dom';
+
 import { useDispatch } from 'react-redux';
 
 function TabPanel(props) {
@@ -59,6 +61,7 @@ export default function PostTask() {
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (locationType === 'in-person') {
@@ -190,7 +193,7 @@ export default function PostTask() {
     try {
       const response = await baseURL.post('/tasks', userData);
       console.log('Task created successfully:', response.data);
-
+      navigate('/my-tasks');
       dispatch(addTask(response.data.data));
     } catch (error) {
       console.error('Error posting task:', error);
