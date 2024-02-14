@@ -2,63 +2,49 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  padding-right: 16px;
-  height: 29rem;
+  padding: 1rem;
+  max-height: 80vh;
+  margin: auto;
+  width: 90%;
+  max-width: 500px;
+  background-color: #f3f3f7;
 }
 
 .taskCard {
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-  border-radius: 8px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  border-radius: 10px;
   transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
   background-color: #ffffff;
-  padding: 0.5rem;
+  padding: 1rem;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  min-height: 30%;
-}
-
-.taskCard:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
-  background-color: #6666663c;
+  flex-direction: column;
+  min-height: 8rem;
   cursor: pointer;
 }
 
+.taskCard:hover {
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
 .taskCardTitle {
-  font-size: 1.1rem !important;
+  font-size: 1rem;
   color: #333;
-  font-weight: 500;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
 .taskCardDetail {
   font-size: 0.875rem;
-  color: #666;
-  margin: 0.5rem 0 !important;
-}
-
-.taskCardContent {
-  margin: 0.5rem 0 !important;
+  color: #757575;
+  margin-bottom: 0.5rem;
 }
 
 .taskCardBudget {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: #333;
   font-weight: bold;
-  margin: 0.5rem 0 !important;
-}
-
-.taskCardButton {
-  background-color: blue;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
-.taskCardOffers {
-  font-size: 0.875rem;
-  color: #666;
+  margin-bottom: 0.5rem;
 }
