@@ -1,9 +1,7 @@
-// TaskDetail.js
-
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Card, CardContent, Typography } from '@mui/material';
-import styles from './taskDetail.module.css'; // Your CSS module file for TaskDetail
+import styles from './taskDetail.module.css';
 
 const TaskDetail = () => {
   const selectedTask = useSelector((state) => state.task.selectedTask);
@@ -17,30 +15,22 @@ const TaskDetail = () => {
   }
 
   return (
-    <Card className={styles.taskDetailCard}>
-      <CardContent>
-        <Typography
-          gutterBottom
-          variant='h5'
-          component='h2'
-          className={styles.taskDetailTitle}
-        >
-          {selectedTask.title}
-        </Typography>
-        <Typography variant='subtitle1' className={styles.taskDetailUser}>
-          Posted by: {selectedTask.userPosted}
-        </Typography>
-        <Typography variant='body1' className={styles.taskDetailLocation}>
-          Location: {selectedTask.location}
-        </Typography>
-        <Typography variant='body1' className={styles.taskDetailDetails}>
-          Details: {selectedTask.details}
-        </Typography>
-        <Typography variant='h6' className={styles.taskDetailBudget}>
-          Budget: ${selectedTask.budget}
-        </Typography>
-      </CardContent>
-    </Card>
+    <div className={styles.taskDetailContainer}>
+      <div className={styles.taskDetailCard}>
+        <div className={styles.taskDetailHeader}>
+          <Typography gutterBottom variant='h5' component='h2'>
+            {selectedTask.title}
+          </Typography>
+          <Typography variant='subtitle1'>{selectedTask.userPosted}</Typography>
+        </div>
+        <Typography variant='body1'>{selectedTask.location}</Typography>
+        <Typography variant='body1'>{selectedTask.details}</Typography>
+        <div className={styles.taskDetailBudgetContainer}>
+          <Typography variant='h6'>Budget: ${selectedTask.budget}</Typography>
+          <button className={styles.makeOfferButton}>Make an offer</button>
+        </div>
+      </div>
+    </div>
   );
 };
 

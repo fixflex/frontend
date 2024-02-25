@@ -13,6 +13,7 @@ const tasks = [
     budget: 800,
     offers: 6,
     date: 'Flexible',
+    postedBy: 'John Doe',
   },
   {
     title: 'Garden Makeover Magician Wanted',
@@ -22,6 +23,7 @@ const tasks = [
     budget: 600,
     offers: 4,
     date: '2024-03-15',
+    postedBy: 'Alice Smith',
   },
   {
     title: 'Expert Tutor for Quantum Physics',
@@ -31,6 +33,7 @@ const tasks = [
     budget: 350,
     offers: 0,
     date: '2024-02-28',
+    postedBy: 'Bob Johnson',
   },
   {
     title: 'Marketing Guru for Startup Launch',
@@ -39,6 +42,7 @@ const tasks = [
     budget: 500,
     offers: 8,
     date: 'Flexible',
+    postedBy: 'Emma Watson',
   },
   {
     title: 'Pet Portrait Artist Required',
@@ -47,6 +51,7 @@ const tasks = [
     budget: 200,
     offers: 4,
     date: '2024-04-10',
+    postedBy: 'Michael Brown',
   },
   {
     title: 'Yoga Instructor for Weekend Retreat',
@@ -55,6 +60,7 @@ const tasks = [
     budget: 700,
     offers: 1,
     date: '2024-05-20',
+    postedBy: 'Sophia Garcia',
   },
   {
     title: 'Culinary Genius for Private Dinner',
@@ -63,6 +69,7 @@ const tasks = [
     budget: 900,
     offers: 0,
     date: 'Flexible',
+    postedBy: 'David Miller',
   },
   {
     title: 'Mobile App Tester for Innovative Project',
@@ -71,6 +78,7 @@ const tasks = [
     budget: 250,
     offers: 4,
     date: '2024-03-05',
+    postedBy: 'Jennifer Lopez',
   },
   {
     title: 'Mystery Shopper for Boutique Stores',
@@ -80,6 +88,7 @@ const tasks = [
     budget: 400,
     offers: 9,
     date: 'Flexible',
+    postedBy: 'Matthew Davis',
   },
   {
     title: 'Fitness Coach for Personal Training',
@@ -87,6 +96,7 @@ const tasks = [
     details: 'Looking for a dedicated fitness coach for weekly sessions',
     budget: 550,
     date: 'Flexible',
+    postedBy: 'Olivia Wilson',
   },
   {
     title: 'Virtual Assistant for Administrative Tasks',
@@ -95,6 +105,7 @@ const tasks = [
     budget: 300,
     offers: 3,
     date: '2024-03-10',
+    postedBy: 'Daniel Martinez',
   },
   {
     title: 'Interior Designer for Home Renovation Project',
@@ -103,6 +114,7 @@ const tasks = [
     budget: 1000,
     offers: 2,
     date: '2024-04-01',
+    postedBy: 'Ava Johnson',
   },
   {
     title: 'English Language Tutor for ESL Students',
@@ -110,6 +122,7 @@ const tasks = [
     details: 'Teaching English to non-native speakers, must be patient',
     budget: 400,
     date: 'Flexible',
+    postedBy: 'William Taylor',
   },
   {
     title: 'Graphic Designer for Logo Design',
@@ -118,6 +131,7 @@ const tasks = [
     budget: 150,
     offers: 5,
     date: '2024-03-25',
+    postedBy: 'Emily Anderson',
   },
 ];
 

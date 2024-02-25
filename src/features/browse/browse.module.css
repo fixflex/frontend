@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 2rem 9rem;
-  max-height: 100vh; /* Set the maximum height to be that of the viewport */
+  max-height: 100vh !important;
   overflow: hidden; /* Hide the overflow */
 }
 

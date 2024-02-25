@@ -2,12 +2,12 @@ import React from 'react';
 import SecondaryNav from '../../components/secondary-nav/SecondaryNav';
 import TaskList from '../../components/task-list/TaskList';
 import TaskDetail from '../../components/task-detail/TaskDetail';
-import { Grid } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import styles from './browse.module.css';
 
 const Browse = ({ tasks }) => {
   return (
-    <>
+    <Box sx={{ backgroundColor: '#F3F3F7' }}>
       <SecondaryNav />
       <div className={styles.browseContainer}>
         <Grid container spacing={2}>
@@ -25,7 +25,7 @@ const Browse = ({ tasks }) => {
           </Grid>
         </Grid>
       </div>
-    </>
+    </Box>
   );
 };
 
