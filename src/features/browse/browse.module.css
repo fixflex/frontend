@@ -1,8 +1,8 @@
 .browseContainer {
   display: flex;
-  flex-wrap: wrap;
-  margin: 2rem 9rem;
-  max-height: 100vh; /* Set the maximum height to be that of the viewport */
+  margin: 2rem 9rem 0;
+  min-width: 90% !important;
+  max-height: 100vh !important;
   overflow: hidden; /* Hide the overflow */
 }
 

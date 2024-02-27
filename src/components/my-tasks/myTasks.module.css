@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.myTasks {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  background-color: #f9f3ef;
+  padding: 5% 10%;
+  border-radius: 25px;
+  width: 55%;
+  align-items: center;
+  margin: 4rem;
+}
+
+.title {
+  font-size: 2rem;
+  color: #333;
+  font-family: Anton !important;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.views {
+  font-size: 0.875rem;
+  color: #999;
+}
