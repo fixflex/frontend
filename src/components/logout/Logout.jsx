@@ -29,7 +29,7 @@ const Logout = () => {
       <Button
         type='submit'
         variant='contained'
-        endIcon={<LogoutOutlined />}
+        endIcon={<LogoutOutlined sx={{ color: 'white' }} />}
         onClick={handleLogout}
         className={styles.logoutButton}
       >
