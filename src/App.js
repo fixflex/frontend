@@ -61,7 +61,7 @@ function App() {
           element={isAuthenticated ? <Browse /> : <AuthRedirect />}
         />
         <Route
-          path='/post-task'
+          path='/post-task/:taskTitle?'
           element={isAuthenticated ? <PostTask /> : <AuthRedirect />}
         />
         <Route path='*' element={<NotFound />} />
