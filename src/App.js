@@ -18,6 +18,7 @@ import NotFound from './features/not-found/NotFound';
 import { userLoggedIn } from './features/signup/authSlice';
 import PostTask from './features/post-task/PostTask';
 import MyTasks from './components/my-tasks/MyTasks';
+import Profile from './features/profile/Profile';
 
 function App() {
   const dispatch = useDispatch();
@@ -64,10 +65,13 @@ function App() {
           path='/post-task/:taskTitle?'
           element={isAuthenticated ? <PostTask /> : <AuthRedirect />}
         />
-        <Route path='*' element={<NotFound />} />
         <Route
           path='/my-tasks'
           element={isAuthenticated ? <MyTasks /> : <AuthRedirect />}
+        />
+        <Route
+          path='/my-profile'
+          element={isAuthenticated ? <Profile /> : <AuthRedirect />}
         />
         <Route path='*' element={<NotFound />} />
       </Routes>

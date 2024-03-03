@@ -1,0 +1,34 @@
+/* Profile.module.css */
+.profileCard {
+  max-width: 345px;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  margin: auto;
+}
+
+.profileCardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profilePicture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  border: 5px solid #030224;
+}
+
+.customButton {
+  margin-top: 20px;
+}
+
+.customOutlinedButton {
+  margin-left: 8px;
+  color: #030224;
+  border-color: #030224;
+}
+
+/* Other styles can be added as needed */
