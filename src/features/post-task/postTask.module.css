@@ -26,7 +26,8 @@
   justify-content: space-evenly;
 }
 
-.tabTitle {
+.tabTitle,
+.timeTitle {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -84,4 +85,21 @@
 
 .zipCodeInput {
   margin: 1rem 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .tabContainer .tabTitle {
+    display: none !important;
+  }
+  .tabContainer {
+    padding: 3rem 2rem !important;
+    margin: 0 !important;
+  }
+  .formContentBox {
+    width: 100% !important;
+  }
+  .timeBox {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }

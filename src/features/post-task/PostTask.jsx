@@ -231,7 +231,7 @@ export default function PostTask() {
         <Tab label='Details' {...a11yProps(2)} className={styles.tabButton} />
         <Tab label='Budget' {...a11yProps(3)} className={styles.tabButton} />
       </Tabs>
-      <Box sx={{ width: '60%' }}>
+      <Box sx={{ width: '60%' }} className={styles.formContentBox}>
         <TabPanel
           value={value}
           index={0}
@@ -252,7 +252,11 @@ export default function PostTask() {
           />
 
           <Box>
-            <Typography variant='h6' sx={{ mt: 1 }} className={styles.tabTitle}>
+            <Typography
+              variant='h6'
+              sx={{ mt: 1 }}
+              className={styles.timeTitle}
+            >
               When do you need this done?
             </Typography>
 
@@ -263,6 +267,7 @@ export default function PostTask() {
                 alignItems: 'center',
                 margin: '2rem 0',
               }}
+              className={styles.timeBox}
             >
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
