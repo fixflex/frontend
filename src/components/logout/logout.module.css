@@ -11,6 +11,7 @@
   );
   padding: 0.5rem 1rem !important;
   border-radius: 25px !important;
+  margin-left: 1rem !important;
 }
 .logoutButton:hover {
   background: rgba(2, 0, 36, 1) !important;

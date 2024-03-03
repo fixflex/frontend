@@ -23,3 +23,41 @@
 .fadeIn {
   animation: fadeIn 1s ease-out forwards;
 }
+
+@media only screen and (min-width: 1200px) {
+  .servicesContainer .MuiGrid-item {
+    flex-basis: 20%;
+    max-width: 20%;
+  }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1200px) {
+  .servicesContainer .MuiGrid-item {
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  .servicesContainer .MuiGrid-item {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .servicesContainer {
+    padding: 3rem 2rem !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .servicesContainer .MuiGrid-item {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .servicesContainer {
+    padding: 3rem 2rem !important;
+  }
+  .browseTitle {
+    font-size: 2rem !important;
+  }
+}

@@ -43,3 +43,34 @@
     transform: translateY(0);
   }
 }
+@media only screen and (max-width: 600px) {
+  .assurance .MuiGrid-item {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .container {
+    padding: 3rem 2rem !important;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  .assurance .MuiGrid-item {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1200px) {
+  .assurance .MuiGrid-item {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .assurance .MuiGrid-item {
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+}

@@ -131,3 +131,31 @@
 .avatarTile {
   animation: pulse 2s infinite ease-in-out;
 }
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  .flexersContainer {
+    padding: 3rem 2rem !important;
+  }
+  .contentContainer {
+    flex-direction: column-reverse !important;
+    justify-content: center !important;
+  }
+
+  .flexersFeatures {
+    width: 100% !important;
+    margin-top: 1rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .flexersContainer {
+    padding: 3rem 2rem !important;
+  }
+  .avatarGridContainer {
+    display: none !important;
+  }
+  .flexersFeatures {
+    width: 100% !important;
+    margin-top: 1rem;
+  }
+}

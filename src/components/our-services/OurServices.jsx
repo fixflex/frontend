@@ -56,7 +56,12 @@ const services = [
 const OurServices = () => {
   return (
     <Box sx={{ flexGrow: 1, p: 3 }} className={styles.servicesContainer}>
-      <Typography variant='h4' gutterBottom sx={{ mb: 3 }}>
+      <Typography
+        variant='h4'
+        gutterBottom
+        sx={{ mb: 3 }}
+        className={styles.browseTitle}
+      >
         Browse Our services by category
       </Typography>
       <Typography variant='subtitle1' gutterBottom sx={{ mb: 5 }}>

@@ -69,3 +69,37 @@
     transform: scale(1);
   }
 }
+
+@media only screen and (min-width: 1200px) {
+  .ratingsContainer .MuiGrid-item {
+    flex-basis: 20%; /* or whatever percentage fits your design */
+    max-width: 20%;
+  }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1200px) {
+  .ratingsContainer .MuiGrid-item {
+    flex-basis: 33.3333%;
+    max-width: 33.3333%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  .ratingsContainer .MuiGrid-item {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .container {
+    padding: 3rem 2rem !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .ratingsContainer .MuiGrid-item {
+    flex-basis: 90%;
+    max-width: 90%;
+  }
+  .container {
+    padding: 3rem 2rem !important;
+  }
+}
