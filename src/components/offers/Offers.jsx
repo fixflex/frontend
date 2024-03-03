@@ -11,23 +11,22 @@ import styles from './offers.module.css';
 
 const offers = [
   {
-    name: 'Franco L.',
+    name: 'Alice W.',
     status: 'New!',
-    availability: 'Today',
-    description: 'Reliable, reliable and great at following instructions',
+    availability: 'Tomorrow',
+    description: 'Experienced and detail-oriented professional',
   },
   {
-    name: 'Jamard K.',
+    name: 'John D.',
     status: 'New!',
-    availability: 'ASAP',
-    description: "I'm ready and available ASAP",
+    availability: 'Next week',
+    description: 'Highly motivated and eager to start',
   },
   {
-    name: 'Amazing H.',
+    name: 'Eleanor P.',
     status: 'New!',
-    availability: 'Remote Work',
-    description:
-      'I bring to the table a proven history of success in remote work, showcasing a combination of self-discipline, autonomous productivity, and effective communication. My ability to consistently meet and exceed expectations remotely',
+    availability: 'On-site',
+    description: 'Skilled in on-site project management and coordination',
   },
 ];
 

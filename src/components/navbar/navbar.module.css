@@ -27,7 +27,7 @@
 .navButton {
   font-family: Rubik !important;
   color: white !important;
-  font-size: 0.9em;
+  font-size: 0.9rem;
   font-weight: 700;
   opacity: 0.9;
 }
@@ -78,6 +78,14 @@
 .logoSmall {
   width: 190px !important;
   height: 50px !important;
+}
+
+.drawerText {
+  color: black !important;
+}
+
+.drawerText:hover {
+  color: white !important;
 }
 
 /*tablet screens*/

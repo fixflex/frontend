@@ -10,18 +10,17 @@ import {
   Drawer,
   IconButton,
   useMediaQuery,
-  useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from './navbar.module.css';
 import logo from '../../images/logo.png';
 import Logout from '../logout/Logout';
+import { Explore, Home, Person, PostAdd, Search } from '@mui/icons-material';
 
 const Navbar = ({ isLoggedIn }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery('(max-width:1075px)');
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -55,16 +54,22 @@ const Navbar = ({ isLoggedIn }) => {
         <Grid item>
           <List className={styles.navList}>
             <ListItem>
-              <Button className={styles.navButton}>Lorem</Button>
+              <Button className={styles.navButton} href='/discover'>
+                Discover
+              </Button>
             </ListItem>
             <ListItem>
-              <Button className={styles.navButton}>Dolor</Button>
+              <Button className={styles.navButton} href='/browse'>
+                Browse
+              </Button>
             </ListItem>
             <ListItem>
-              <Button className={styles.navButton}>Lorem</Button>
+              <Button className={styles.navButton} href='post-task'>
+                Post
+              </Button>
             </ListItem>
             <ListItem>
-              <Button className={styles.navButton}>Ipsum</Button>
+              <Button className={styles.navButton}>Profile</Button>
             </ListItem>
           </List>
         </Grid>
@@ -107,9 +112,17 @@ const Navbar = ({ isLoggedIn }) => {
       </IconButton>
       <Drawer anchor='right' open={drawerOpen} onClose={toggleDrawer(false)}>
         <List className={styles.drawerList}>
-          {['Lorem', 'Ipsum', 'Dolor', 'Login'].map((text) => (
-            <ListItem button key={text}>
-              <Button>{text}</Button>
+          {[
+            { text: 'Discover', icon: <Explore /> },
+            { text: 'Browse', icon: <Search /> },
+            { text: 'Post', icon: <PostAdd /> },
+            { text: 'Profile', icon: <Person /> },
+            { text: 'Home', icon: <Home /> },
+          ].map((item) => (
+            <ListItem button key={item.text}>
+              <Button startIcon={item.icon} className={styles.drawerText}>
+                {item.text}
+              </Button>
             </ListItem>
           ))}
           <Logout />

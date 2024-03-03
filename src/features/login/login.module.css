@@ -17,7 +17,7 @@
   margin: 1rem 0 !important;
 }
 
-button:hover {
+.submitButton:hover {
   background-color: #efc734 !important;
   scale: 1.01;
 }
