@@ -1,5 +1,4 @@
-// SearchBar.js
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -13,6 +12,12 @@ import styles from './searchBar.module.css';
 import Assurance from '../assurance/Assurance';
 
 const SearchBar = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <>
       <AppBar position='static' className={styles.appBar}>
@@ -25,16 +30,18 @@ const SearchBar = () => {
               Post a task we're here to help!
             </Typography>
           </Box>
-        </Toolbar>
+        </Toolbar>{' '}
         <Paper component='form' className={styles.searchContainer}>
           <InputBase
             className={styles.inputBase}
             placeholder='In a few words, what do you need done?'
             inputProps={{ 'aria-label': 'What do you need done?' }}
+            value={inputValue} // Bind input value to state
+            onChange={handleInputChange} // Update state on change
           />
           <Button
             variant='contained'
-            href='/post-task'
+            href={`/post-task/${encodeURIComponent(inputValue)}`} // Dynamically create href
             className={styles.button}
           >
             Get Offers

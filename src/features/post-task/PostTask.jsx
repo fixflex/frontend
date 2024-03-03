@@ -23,7 +23,7 @@ import { Laptop, LocationOn, Place } from '@mui/icons-material';
 import { egyptGovernorates } from '../../utils/gov';
 import baseURL from '../../API/baseURL';
 import { addTask } from './taskSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
@@ -62,12 +62,16 @@ export default function PostTask() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { taskTitle: encodedTaskTitle } = useParams();
 
   useEffect(() => {
+    if (encodedTaskTitle) {
+      setTaskTitle(decodeURIComponent(encodedTaskTitle));
+    }
     if (locationType === 'in-person') {
       getUserLocation();
     }
-  }, [locationType]);
+  }, [locationType, encodedTaskTitle]);
 
   const handleLocationChange = (event) => {
     setLocationType(event.target.value);
