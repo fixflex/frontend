@@ -46,3 +46,77 @@
 .slogan {
   font-family: Rubik Doodle shadow !important;
 }
+
+@media only screen and (max-width: 767px) {
+  .appBar {
+    padding: 2em !important;
+  }
+  .toolbar {
+    padding: 0.5rem 1rem;
+  }
+  .searchContainer {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem !important;
+    width: 100%;
+    margin-bottom: 3rem;
+  }
+  .inputBase {
+    width: 100%;
+    margin-bottom: 1rem;
+    max-height: 2vh !important;
+  }
+  .button {
+    width: 100%;
+    margin: 1rem 0;
+  }
+  .slogan,
+  .greeting {
+    text-align: center;
+  }
+
+  .searchContainer {
+    width: 100% !important;
+    max-height: 2vh !important;
+  }
+  .searchContainer {
+    height: 4rem !important;
+    width: 65% !important;
+  }
+
+  .sloganContainer {
+    padding: 0 !important;
+  }
+
+  .slogan {
+    font-size: 2rem !important;
+  }
+  .greeting {
+    font-size: 1rem !important;
+    margin: 1rem 0 !important;
+  }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 768px) {
+  .appBar {
+    padding: 4em 6em !important;
+  }
+  .toolbar {
+    padding: 1rem 3rem;
+  }
+  .searchContainer {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .appBar {
+    padding: 6em 12em !important;
+  }
+  .toolbar {
+    padding: 1.5rem 6rem;
+  }
+  .searchContainer {
+    width: 80%;
+  }
+}
