@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Typography, Button, Paper, Stack, Divider } from '@mui/material';
 import {
@@ -8,9 +8,25 @@ import {
 } from '@mui/icons-material';
 import styles from './taskDetail.module.css';
 import Offers from '../offers/Offers';
+import OfferModal from '../offer-modal/OfferModal';
 
 const TaskDetails = () => {
   const selectedTask = useSelector((state) => state.task.selectedTask);
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleSubmitOffer = (data) => {
+    console.log(data); // Here you would handle the submission e.g., send to API
+    setModalOpen(false);
+  };
 
   if (!selectedTask) {
     return (
@@ -153,9 +169,16 @@ const TaskDetails = () => {
             variant='contained'
             sx={{ mt: 2 }}
             className={styles.offerButton}
+            onClick={handleOpenModal}
           >
             Make an offer
           </Button>
+
+          <OfferModal
+            open={modalOpen}
+            handleClose={handleCloseModal}
+            handleSubmit={handleSubmitOffer}
+          />
         </Box>
       </Box>
       <Box>

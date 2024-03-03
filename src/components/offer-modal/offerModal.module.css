@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&display=swap');
+
+.title {
+  font-family: Anton !important;
+  font-size: 2rem !important;
+}
+
+.label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #272727;
+}
+.customWidth {
+  width: 80%;
+}
+
+.submitButton {
+  background-color: #272727;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.cancelButton {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.cancelButton:hover {
+  background-color: #d32f2f;
+}

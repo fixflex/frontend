@@ -1,14 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Typography, IconButton, Box } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
 import styles from './myTasks.module.css';
-import {
-  AttachMoney,
-  DateRange,
-  EventNote,
-  MoreHoriz,
-  MoreVert,
-} from '@mui/icons-material';
+import { AttachMoney, EventNote, MoreHoriz } from '@mui/icons-material';
 
 const MyTasks = () => {
   return (
