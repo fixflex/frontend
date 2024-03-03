@@ -5,8 +5,8 @@
   padding: 1rem;
   max-height: 80vh;
   margin: auto;
-  width: 90%;
-  max-width: 500px;
+  min-width: 23rem;
+  max-width: 23rem;
   background-color: #f3f3f7;
 }
 
