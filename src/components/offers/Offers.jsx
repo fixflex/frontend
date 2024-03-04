@@ -40,7 +40,9 @@ const Offers = () => {
           <CardContent>
             <Grid container spacing={2} alignItems='center'>
               <Grid item>
-                <Avatar>{offer.name[0]}</Avatar>
+                <Avatar sx={{ backgroundColor: '#272727' }}>
+                  {offer.name[0]}
+                </Avatar>
               </Grid>
               <Grid item xs>
                 <Typography variant='h6'>{offer.name}</Typography>

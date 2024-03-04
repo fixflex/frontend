@@ -53,3 +53,40 @@
   text-transform: none;
   margin-top: 16px;
 }
+
+@media (max-width: 768px) {
+  .secondaryNav {
+    flex-direction: row;
+    align-items: baseline;
+    padding: 1rem;
+  }
+
+  .searchInput {
+    margin-bottom: 16px;
+  }
+
+  .filterButton {
+    width: 100%;
+  }
+}
+
+.searchInput {
+  flex-grow: 1;
+  border: 1px solid darkgrey;
+  border-radius: 25px;
+  padding: 0.5rem 2rem;
+}
+
+.filterButton {
+  border: 1px solid #dcdcdc;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 0.5rem 0.2rem;
+  border-radius: 4px;
+  color: white !important;
+  background-color: #070727 !important;
+  width: 40%;
+}
+.searchInput {
+  margin: 0 0.4rem;
+}

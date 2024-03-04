@@ -135,11 +135,14 @@ const tasks = [
   },
 ];
 
-const TaskList = () => {
+const TaskList = ({ setIsModalOpen, isMobile }) => {
   const dispatch = useDispatch();
 
   const handleSelectTask = (task) => {
     dispatch(selectTask(task));
+    if (isMobile) {
+      setIsModalOpen(true);
+    }
   };
 
   return (
