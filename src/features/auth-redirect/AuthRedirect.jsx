@@ -18,7 +18,7 @@ const AuthRedirect = () => {
       className={styles.container}
     >
       <Typography variant='h4' gutterBottom className={styles.notFoundText}>
-        Lost in space? Get back to the action!
+        You must be logged in to view this page!
       </Typography>
       <Box sx={{ display: 'flex' }}>
         <Button

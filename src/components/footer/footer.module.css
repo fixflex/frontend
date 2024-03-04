@@ -45,4 +45,16 @@
   opacity: 0.7;
 }
 
-/* Add more styles as needed for layout and typography */
+/* New Media Query for Mobile Devices */
+@media (max-width: 600px) {
+  .preFooter,
+  .footer {
+    display: none !important;
+  }
+
+  .bottomBar {
+    position: absolute !important;
+    width: 100% !important;
+    bottom: 0 !important;
+  }
+}

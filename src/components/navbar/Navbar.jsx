@@ -59,17 +59,19 @@ const Navbar = ({ isLoggedIn }) => {
               </Button>
             </ListItem>
             <ListItem>
-              <Button className={styles.navButton} href='/browse'>
-                Browse
+              <Button className={styles.navButton} href='/my-profile'>
+                Profile
               </Button>
             </ListItem>
             <ListItem>
-              <Button className={styles.navButton} href='post-task'>
+              <Button className={styles.navButton} href='/browse'>
                 Post
               </Button>
             </ListItem>
             <ListItem>
-              <Button className={styles.navButton}>Profile</Button>
+              <Button className={styles.navButton} href='my-tasks'>
+                Tasks
+              </Button>
             </ListItem>
           </List>
         </Grid>
