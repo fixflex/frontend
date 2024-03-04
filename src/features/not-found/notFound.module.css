@@ -28,3 +28,8 @@
 .homeButton:hover {
   scale: 1.2;
 }
+@media only screen and (max-width: 1023px) {
+  .notFound {
+    text-align: center !important;
+  }
+}

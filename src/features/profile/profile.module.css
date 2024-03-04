@@ -1,15 +1,37 @@
-/* Profile.module.css */
-.profileCard {
-  max-width: 345px;
-  border-radius: 16px;
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-  margin: auto;
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.profileCardContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.flexItem {
+  flex: 1;
+}
+
+.leftColumn {
+  margin: 2rem !important;
+  min-width: 25% !important;
+  max-width: 25%;
+}
+
+.rightColumn {
+  max-width: 75%;
+}
+
+.profileCard {
+  border-radius: 16px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.profileCardContent,
+.profileCardInfo {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding-bottom: 0;
+  background-color: #f3f3f7;
 }
 
 .profilePicture {
@@ -18,17 +40,41 @@
   border-radius: 50%;
   background-size: cover;
   background-position: center;
-  border: 5px solid #030224;
+  background-image: url('https://images.unsplash.com/photo-1617289755070-3590b660a06e');
+  margin-bottom: 20px;
 }
 
-.customButton {
-  margin-top: 20px;
+.navList {
+  width: 100%;
 }
 
-.customOutlinedButton {
-  margin-left: 8px;
-  color: #030224;
-  border-color: #030224;
+.textButton {
+  text-transform: none;
+  margin-right: 8px;
 }
 
-/* Other styles can be added as needed */
+.notificationsButton {
+  background-color: #040225 !important;
+  color: white !important;
+  padding: 0.7rem !important;
+  border-radius: 25px !important;
+  margin: 0 0.5rem !important;
+}
+
+/* Media queries for responsiveness */
+@media only screen and (max-width: 1023px) {
+  .leftColumn,
+  .rightColumn {
+    max-width: 100%;
+  }
+
+  .flexContainer {
+    flex-direction: column !important;
+  }
+  .rightColumn {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
