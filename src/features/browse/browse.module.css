@@ -3,12 +3,12 @@
   margin: 2rem 9rem 0;
   min-width: 90% !important;
   max-height: 100vh !important;
-  overflow: hidden; /* Hide the overflow */
+  overflow: hidden;
 }
 
-/* Add responsive styles if necessary */
-@media (max-width: 768px) {
+/* Small and medium-sized mobile screens */
+@media only screen and (max-width: 1023px) {
   .browseContainer {
-    flex-direction: column;
+    margin: 1rem;
   }
 }

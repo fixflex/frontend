@@ -15,22 +15,22 @@
 }
 
 .submitButton {
-  background-color: #272727;
-  color: white;
-  padding: 14px 20px;
+  background-color: #272727 !important;
+  color: white !important;
+  padding: 14px 20px !important;
   margin: 8px 0;
   border: none;
-  border-radius: 25px;
+  border-radius: 25px !important;
   cursor: pointer;
 }
 
 .cancelButton {
-  background-color: #f44336;
-  color: white;
-  padding: 14px 20px;
+  background-color: #f44336 !important;
+  color: white !important;
+  padding: 14px 20px !important;
   margin: 8px 0;
   border: none;
-  border-radius: 25px;
+  border-radius: 25px !important;
   cursor: pointer;
 }
 

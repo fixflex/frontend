@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Box, Typography, Button, Paper, Stack, Divider } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Button,
+  Paper,
+  Stack,
+  Divider,
+  Modal,
+} from '@mui/material';
 import {
   DateRangeOutlined,
   GpsFixedOutlined,
@@ -9,10 +17,11 @@ import {
 import styles from './taskDetail.module.css';
 import Offers from '../offers/Offers';
 import OfferModal from '../offer-modal/OfferModal';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-const TaskDetails = () => {
+const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
   const selectedTask = useSelector((state) => state.task.selectedTask);
-
+  const isMobile = useMediaQuery('(max-width:600px)');
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -27,6 +36,14 @@ const TaskDetails = () => {
     console.log(data); // Here you would handle the submission e.g., send to API
     setModalOpen(false);
   };
+
+  if (isMobile && isModalOpen) {
+    return (
+      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <TaskDetails />
+      </Modal>
+    );
+  }
 
   if (!selectedTask) {
     return (
