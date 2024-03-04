@@ -54,6 +54,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
           justifyContent: 'center',
           height: '100%',
         }}
+        className={styles.browseFiller}
       >
         Please select a task to view details.
       </Box>
@@ -70,8 +71,12 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
         width: '75%',
         marginLeft: '3rem',
       }}
+      className={styles.detailsContainer}
     >
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box
+        sx={{ display: 'flex', justifyContent: 'space-between' }}
+        className={styles.topDetailContainer}
+      >
         <Box sx={{ flexGrow: 1 }}>
           <Typography variant='h5' gutterBottom className={styles.title}>
             {selectedTask.title}
