@@ -59,7 +59,7 @@ const Navbar = ({ isLoggedIn }) => {
               </Button>
             </ListItem>
             <ListItem>
-              <Button className={styles.navButton} href='/my-profile'>
+              <Button className={styles.navButton} href='/account'>
                 Profile
               </Button>
             </ListItem>

@@ -53,7 +53,7 @@
   }
 
   .bottomBar {
-    position: absolute !important;
+    position: relative !important;
     width: 100% !important;
     bottom: 0 !important;
   }

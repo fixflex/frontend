@@ -70,7 +70,7 @@ function App() {
           element={isAuthenticated ? <MyTasks /> : <AuthRedirect />}
         />
         <Route
-          path='/my-profile'
+          path='/account'
           element={isAuthenticated ? <Profile /> : <AuthRedirect />}
         />
         <Route path='*' element={<NotFound />} />
