@@ -51,8 +51,8 @@
 
 @media only screen and (max-width: 1023px) {
   .taskListContainer {
-    min-width: 19rem;
-    max-width: 19rem;
+    min-width: 19.7rem;
+    max-width: 19.7rem;
   }
 
   .taskCard {
