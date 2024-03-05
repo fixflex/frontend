@@ -19,6 +19,8 @@ import { userLoggedIn } from './features/signup/authSlice';
 import PostTask from './features/post-task/PostTask';
 import MyTasks from './components/my-tasks/MyTasks';
 import Profile from './features/profile/Profile';
+import baseURL from './API/baseURL';
+import { setCategories } from './features/task-category/categorySlice';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +38,23 @@ function App() {
     if (!localStorage.getItem('userTasks')) {
       localStorage.setItem('userTasks', JSON.stringify([]));
     }
+
+    (async () => {
+      try {
+        const response = (await baseURL.get('/categories')).data.data;
+        console.log('Data:', response);
+
+        const filteredCategories = response.map((category) => ({
+          name: category.name.en,
+          id: category._id,
+        }));
+
+        console.log('filtered Data: ', filteredCategories);
+        dispatch(setCategories(filteredCategories));
+      } catch (error) {
+        console.error('Failed to fetch categories:', error);
+      }
+    })();
   }, [dispatch]);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
