@@ -24,8 +24,7 @@ import { egyptGovernorates } from '../../utils/gov';
 import baseURL from '../../API/baseURL';
 import { addTask } from './taskSlice';
 import { useNavigate, useParams } from 'react-router-dom';
-
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 function TabPanel(props) {
   const { children, value, title, index, ...other } = props;
@@ -58,7 +57,10 @@ export default function PostTask() {
   const [city, setCity] = useState('');
   const [taskDetails, setTaskDetails] = useState('');
   const [budget, setBudget] = useState(null);
+  const [category, setCategory] = useState('');
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
+
+  const categories = useSelector((state) => state.categories.categoriesList);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -186,13 +188,15 @@ export default function PostTask() {
 
     const userData = {
       title: taskTitle,
-      category: '65aee72b4adc6b5e31e94044',
+      categoryId: category,
       details: taskDetails,
       location,
       dueDate,
       budget: budget,
       city: city,
     };
+
+    console.log(userData);
 
     try {
       const response = await baseURL.post('/tasks', userData);
@@ -250,6 +254,33 @@ export default function PostTask() {
             value={taskTitle}
             onChange={(e) => setTaskTitle(e.target.value)}
           />
+
+          <Typography
+            variant='h6'
+            sx={{ marginTop: '1rem ' }}
+            className={styles.tabTitle}
+          >
+            Pick a category for your task{' '}
+          </Typography>
+
+          <FormControl fullWidth margin='normal' sx={{ marginBottom: '1rem ' }}>
+            <Select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              displayEmpty
+              className={styles.categorySelect}
+              inputProps={{ 'aria-label': 'Without label' }}
+            >
+              <MenuItem disabled value=''>
+                <em>Select a category</em>
+              </MenuItem>
+              {categories.map((category) => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
           <Box>
             <Typography
