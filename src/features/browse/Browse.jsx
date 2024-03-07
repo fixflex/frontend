@@ -20,8 +20,21 @@ const Browse = () => {
       try {
         const response = await baseURL.get('/tasks?limit=9999');
         if (response.data.success) {
-          console.log('All Tasks:', response.data.data);
-          dispatch(addAllTasks(response.data.data));
+          let tasks = response.data.data;
+
+          tasks = tasks.map((task) => ({
+            ...task,
+            createdAt: task.createdAt
+              ? new Date(task.createdAt).toISOString().slice(0, 10)
+              : new Date().toISOString().slice(0, 10),
+            dueDate: task.dueDate.on
+              ? { ...task.dueDate, on: task.dueDate.on.slice(0, 10) }
+              : task.dueDate,
+          }));
+
+          tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+          dispatch(addAllTasks(tasks));
         } else {
           throw new Error(response.data.message || 'Failed to fetch tasks');
         }
