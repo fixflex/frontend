@@ -16,39 +16,19 @@ const Browse = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let isMounted = true;
-
-    const fetchAllTasks = async () => {
-      let allTasks = [];
-      let currentPage = 1;
-      let totalPages = 1;
-
+    (async () => {
       try {
-        let response = await baseURL.get(`/tasks?page=${currentPage}`);
-        allTasks = response.data.data;
-        totalPages = response.data.pagination.totalPages;
-
-        for (currentPage = 2; currentPage <= totalPages; currentPage++) {
-          response = await baseURL.get(`/tasks?page=${currentPage}`);
-          allTasks = [...allTasks, ...response.data.data];
-        }
-
-        if (isMounted) {
-          console.log('All Tasks:', allTasks);
-          dispatch(addAllTasks(allTasks));
+        const response = await baseURL.get('/tasks?limit=9999');
+        if (response.data.success) {
+          console.log('All Tasks:', response.data.data);
+          dispatch(addAllTasks(response.data.data));
+        } else {
+          throw new Error(response.data.message || 'Failed to fetch tasks');
         }
       } catch (error) {
-        if (isMounted) {
-          console.error('Failed to fetch tasks:', error);
-        }
+        console.error('Failed to fetch tasks:', error);
       }
-    };
-
-    fetchAllTasks();
-
-    return () => {
-      isMounted = false;
-    };
+    })();
   }, [dispatch]);
 
   return (
