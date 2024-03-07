@@ -1,92 +1,67 @@
-/* SecondaryNav.module.css */
 .secondaryNav {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   background-color: #f3f3f7;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1rem 12rem;
+  padding: 1rem 2rem;
+  gap: 1rem;
+  margin: 0 4rem;
 }
 
 .searchInput {
   flex-grow: 1;
-  margin-right: 16px;
-  border: 1px solid darkgrey;
+  border: 1px solid #ccc;
   border-radius: 25px;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+}
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.dropdownButton {
+.filterButton {
   text-transform: none;
-  margin-right: 8px;
-  border: 1px solid #dcdcdc;
-  padding: 8px 24px;
-  border-radius: 4px;
-  color: black !important;
-}
-
-.dropdownContent {
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  padding: 12px 16px;
-  z-index: 1;
-}
-
-/* Additional styles for checkboxes, buttons and other elements inside the dropdown */
-.checkboxList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: 300px; /* Set a max-height for scrollable lists */
-  overflow-y: auto;
-}
-
-.checkboxItem {
-  margin-bottom: 8px;
+  background-color: #070727;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  box-shadow: none;
 }
 
 .applyButton {
-  background-color: black !important;
-  color: #ffffff;
-  text-transform: none;
   margin-top: 16px;
+  color: #fff;
+  background-color: #070727;
+  text-transform: none;
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
 }
 
 @media (max-width: 768px) {
   .secondaryNav {
-    flex-direction: row;
-    align-items: baseline;
+    flex-direction: column;
+    align-items: stretch;
     padding: 1rem;
   }
 
   .searchInput {
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
+  }
+
+  .filters {
+    display: none;
   }
 
   .filterButton {
     width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
   }
 }
 
-.searchInput {
-  flex-grow: 1;
-  border: 1px solid darkgrey;
-  border-radius: 25px;
-  padding: 0.5rem 2rem;
-}
-
-.filterButton {
-  border: 1px solid #dcdcdc;
-  font-weight: bold;
-  border-radius: 25px;
-  padding: 0.5rem 0.2rem;
-  border-radius: 4px;
-  color: white !important;
-  background-color: #070727 !important;
-  width: 40%;
-}
-.searchInput {
-  margin: 0 0.4rem;
-}
+/* Modal styles /
+  .modalStyle {
+  / You can add more specific styles for the modal here */

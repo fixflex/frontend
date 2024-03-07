@@ -28,7 +28,6 @@ function App() {
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user');
     if (loggedInUser) {
-      console.log('user logged in');
       const foundUser = JSON.parse(loggedInUser);
       dispatch(userLoggedIn(foundUser));
     } else {
@@ -42,14 +41,12 @@ function App() {
     (async () => {
       try {
         const response = (await baseURL.get('/categories')).data.data;
-        console.log('Data:', response);
 
         const filteredCategories = response.map((category) => ({
           name: category.name.en,
           id: category._id,
         }));
 
-        console.log('filtered Data: ', filteredCategories);
         dispatch(setCategories(filteredCategories));
       } catch (error) {
         console.error('Failed to fetch categories:', error);
