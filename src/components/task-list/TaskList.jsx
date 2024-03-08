@@ -42,6 +42,26 @@ const TaskList = ({ setIsModalOpen, isMobile }) => {
             >
               {task.title}
             </Typography>
+            <Box
+              sx={{ display: 'flex', alignItems: 'center', margin: '1rem 0' }}
+              mt={2}
+            >
+              <Person2 />
+              <Typography variant='body2' ml={2} sx={{ fontWeight: 'bold' }}>
+                {`${task.userId.firstName} ${task.userId.lastName}`}
+              </Typography>
+            </Box>
+
+            <Box
+              sx={{ display: 'flex', alignItems: 'center', margin: '1rem 0' }}
+              mt={2}
+            >
+              <CalendarMonth />
+              <Typography variant='body2' ml={2} sx={{ fontWeight: 'bold' }}>
+                {formatDate(task.dueDate)}
+              </Typography>
+            </Box>
+
             {task.location.online ? (
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Public />
@@ -57,19 +77,6 @@ const TaskList = ({ setIsModalOpen, isMobile }) => {
                 </Typography>
               </Box>
             )}
-
-            <Box sx={{ display: 'flex', alignItems: 'center' }} mt={2}>
-              <CalendarMonth />
-              <Typography variant='body2' ml={2} sx={{ fontWeight: 'bold' }}>
-                {formatDate(task.dueDate)}
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center' }} mt={2}>
-              <Person2 />
-              <Typography variant='body2' ml={2} sx={{ fontWeight: 'bold' }}>
-                {`${task.userId.firstName} ${task.userId.lastName}`}
-              </Typography>
-            </Box>
           </CardContent>
         </Card>
       ))}
