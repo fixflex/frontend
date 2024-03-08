@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   Box,
@@ -18,11 +18,28 @@ import styles from './taskDetail.module.css';
 import Offers from '../offers/Offers';
 import OfferModal from '../offer-modal/OfferModal';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import baseURL from '../../API/baseURL';
 
 const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
   const selectedTask = useSelector((state) => state.task.selectedTask);
   const isMobile = useMediaQuery('(max-width:600px)');
   const [modalOpen, setModalOpen] = useState(false);
+  const [taskDetail, setTaskDetail] = useState('');
+
+  useEffect(() => {
+    if (selectedTask && selectedTask._id) {
+      (async () => {
+        try {
+          const response = await baseURL.get(`/tasks/${selectedTask._id}`);
+          if (response.data.success) {
+            setTaskDetail(response.data.data.details);
+          }
+        } catch (error) {
+          console.error('Failed to fetch tasks:', error);
+        }
+      })();
+    }
+  }, [selectedTask]);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -33,7 +50,6 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
   };
 
   const handleSubmitOffer = (data) => {
-    console.log(data); // Here you would handle the submission e.g., send to API
     setModalOpen(false);
   };
 
@@ -101,7 +117,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
                   >
                     POSTED BY
                   </Typography>
-                  <Typography>{selectedTask.postedBy}</Typography>
+                  <Typography>{`${selectedTask.userId.firstName} ${selectedTask.userId.lastName}`}</Typography>
                 </Stack>
               </Box>
               <Typography
@@ -136,7 +152,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
                   >
                     Location
                   </Typography>
-                  <Typography>{selectedTask.location}</Typography>
+                  <Typography>{selectedTask.city}</Typography>
                 </Stack>
               </Box>
             </Box>
@@ -165,7 +181,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
                   >
                     Date
                   </Typography>
-                  <Typography>{selectedTask.date}</Typography>
+                  <Typography>{selectedTask.dueDate.on}</Typography>
                 </Stack>
               </Box>
             </Box>
@@ -174,7 +190,9 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
           <Divider sx={{ my: 2 }} textAlign='left'>
             Details
           </Divider>
-          <Typography variant='body1'>{selectedTask.details}</Typography>
+          <Typography variant='body1'>
+            {taskDetail ? taskDetail : ''}
+          </Typography>
         </Box>
         <Box className={styles.budgetBox}>
           <Typography

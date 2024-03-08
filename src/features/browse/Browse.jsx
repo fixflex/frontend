@@ -16,39 +16,32 @@ const Browse = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let isMounted = true;
-
-    const fetchAllTasks = async () => {
-      let allTasks = [];
-      let currentPage = 1;
-      let totalPages = 1;
-
+    (async () => {
       try {
-        let response = await baseURL.get(`/tasks?page=${currentPage}`);
-        allTasks = response.data.data;
-        totalPages = response.data.pagination.totalPages;
+        const response = await baseURL.get('/tasks?limit=9999');
+        if (response.data.success) {
+          let tasks = response.data.data;
 
-        for (currentPage = 2; currentPage <= totalPages; currentPage++) {
-          response = await baseURL.get(`/tasks?page=${currentPage}`);
-          allTasks = [...allTasks, ...response.data.data];
-        }
+          tasks = tasks.map((task) => ({
+            ...task,
+            createdAt: task.createdAt
+              ? new Date(task.createdAt).toISOString().slice(0, 10)
+              : new Date().toISOString().slice(0, 10),
+            dueDate: task.dueDate.on
+              ? { ...task.dueDate, on: task.dueDate.on.slice(0, 10) }
+              : task.dueDate,
+          }));
 
-        if (isMounted) {
-          console.log('All Tasks:', allTasks);
-          dispatch(addAllTasks(allTasks));
+          tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+          dispatch(addAllTasks(tasks));
+        } else {
+          throw new Error(response.data.message || 'Failed to fetch tasks');
         }
       } catch (error) {
-        if (isMounted) {
-          console.error('Failed to fetch tasks:', error);
-        }
+        console.error('Failed to fetch tasks:', error);
       }
-    };
-
-    fetchAllTasks();
-
-    return () => {
-      isMounted = false;
-    };
+    })();
   }, [dispatch]);
 
   return (
