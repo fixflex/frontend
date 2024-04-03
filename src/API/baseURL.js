@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const baseURL = axios.create({
-  baseURL: 'https://fixflex.onrender.com/api/v1',
+  baseURL: 'https://server.fixflex.tech/api/v1/',
   withCredentials: true,
 });
 

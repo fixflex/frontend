@@ -10,6 +10,7 @@ import {
   Modal,
 } from '@mui/material';
 import {
+  BlurCircular,
   DateRangeOutlined,
   GpsFixedOutlined,
   Person3Outlined,
@@ -49,8 +50,23 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
     setModalOpen(false);
   };
 
-  const handleSubmitOffer = (data) => {
+  const handleSubmitOffer = async (data) => {
+    <BlurCircular />;
     setModalOpen(false);
+
+    try {
+      const response = await baseURL.post('/offers', {
+        taskId: selectedTask._id,
+        price: data.budget,
+        message: data.offer,
+      });
+
+      if (response) {
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log('error making an offer : ', error);
+    }
   };
 
   if (isMobile && isModalOpen) {
