@@ -49,23 +49,23 @@ const Signup = () => {
       lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
-      phone: data.get('phone'),
+      phoneNumber: data.get('phone'),
       address: data.get('address'),
     };
 
     try {
       const response = await baseURL.post('/auth/signup', userData);
-
       localStorage.setItem('user', JSON.stringify(response.data.data));
 
       dispatch(userLoggedIn(response.data.data));
 
       navigate('/discover');
     } catch (err) {
+      console.log(err);
       if (err.response) {
-        console.log(err.response.data.errors[0].msg);
+        console.log(err.response.data.errors);
         setSignupError(
-          err.response.data.errors[0].msg || 'An error occurred during signup.'
+          err.response.data.errors || 'An error occurred during signup.'
         );
       } else {
         console.log('Error', err.message);
