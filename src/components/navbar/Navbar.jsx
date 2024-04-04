@@ -115,19 +115,42 @@ const Navbar = ({ isLoggedIn }) => {
       <Drawer anchor='right' open={drawerOpen} onClose={toggleDrawer(false)}>
         <List className={styles.drawerList}>
           {[
-            { text: 'Discover', icon: <Explore /> },
-            { text: 'Browse', icon: <Search /> },
-            { text: 'Post', icon: <PostAdd /> },
-            { text: 'Profile', icon: <Person /> },
-            { text: 'Home', icon: <Home /> },
+            { text: 'Discover', icon: <Explore />, link: '/browse' },
+            { text: 'Browse', icon: <Search />, link: '/discover' },
+            { text: 'Post', icon: <PostAdd />, link: '/post-task' },
+            { text: 'Profile', icon: <Person />, link: '/account' },
+            { text: 'Home', icon: <Home />, link: '/' },
           ].map((item) => (
             <ListItem button key={item.text}>
-              <Button startIcon={item.icon} className={styles.drawerText}>
+              <Button
+                startIcon={item.icon}
+                className={styles.drawerText}
+                href={item.link}
+              >
                 {item.text}
               </Button>
             </ListItem>
           ))}
-          <Logout />
+          {isLoggedIn ? (
+            <Logout />
+          ) : (
+            <Grid item className={styles.rightNav}>
+              <Button
+                variant='contained'
+                className={styles.rightNavButtons}
+                href='/signup'
+              >
+                Join
+              </Button>
+              <Button
+                variant='contained'
+                className={styles.rightNavButtons}
+                href='/login'
+              >
+                Login
+              </Button>
+            </Grid>
+          )}
         </List>
       </Drawer>
     </Box>
