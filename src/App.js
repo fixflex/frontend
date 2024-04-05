@@ -21,6 +21,7 @@ import MyTasks from './components/my-tasks/MyTasks';
 import Profile from './features/profile/Profile';
 import baseURL from './API/baseURL';
 import { setCategories } from './features/task-category/categorySlice';
+import TaskerVerify from './features/tasker-verify/TaskerVerify';
 
 function App() {
   const dispatch = useDispatch();
@@ -84,6 +85,10 @@ function App() {
         <Route
           path='/my-tasks'
           element={isAuthenticated ? <MyTasks /> : <AuthRedirect />}
+        />
+        <Route
+          path='/tasker-verify'
+          element={isAuthenticated ? <TaskerVerify /> : <AuthRedirect />}
         />
         <Route
           path='/account'
