@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TextField,
   MenuItem,
@@ -12,11 +12,49 @@ import {
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { egyptGovernorates } from '../../utils/gov';
+import baseURL from '../../API/baseURL';
 
 const TaskerOnboarding = () => {
   const [service, setService] = useState('');
   const [governorate, setGovernorate] = useState('');
   const [otp, setOtp] = useState('');
+  const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
+
+  const getUserLocation = () => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error('Error getting the location: ', error);
+          alert('You cannot become a tasker without turning location on');
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
+  };
+
+  useEffect(() => {
+    getUserLocation();
+    (async () => {
+      try {
+        const response = await baseURL.get(`/users/send-verification-code`);
+        if (response.data.success) {
+          console.log(response);
+        }
+      } catch (error) {
+        console.error('Failed to get verification code:', error);
+      }
+    })();
+  }, []);
 
   const categories = useSelector((state) => state.categories.categoriesList);
   const handleServiceChange = (event) => {
@@ -52,12 +90,12 @@ const TaskerOnboarding = () => {
     >
       <form onSubmit={handleSubmit}>
         <Typography
-          variant='h2'
+          variant='h1'
           sx={{
             fontSize: '1.5rem',
             fontWeight: 'bolder',
             textAlign: 'center',
-            marginBottom: '1rem',
+            margin: '1.5rem 0',
           }}
         >
           A few more steps to become a tasker !
@@ -74,9 +112,6 @@ const TaskerOnboarding = () => {
                 value={service}
                 label='What services do you provide?'
                 onChange={handleServiceChange}
-                sx={{
-                  margin: '1rem 0',
-                }}
               >
                 {categories.map((category) => (
                   <MenuItem key={category.id} value={category.id}>
@@ -87,7 +122,12 @@ const TaskerOnboarding = () => {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <FormControl fullWidth>
+            <FormControl
+              fullWidth
+              sx={{
+                margin: '1rem 0',
+              }}
+            >
               <InputLabel id='governorate-label'>City</InputLabel>
               <Select
                 labelId='governorate-label'
@@ -95,9 +135,6 @@ const TaskerOnboarding = () => {
                 value={governorate}
                 label='City'
                 onChange={handleGovernorateChange}
-                sx={{
-                  margin: '1rem 0',
-                }}
               >
                 {egyptGovernorates.map((governorate) => (
                   <MenuItem key={governorate} value={governorate}>
@@ -115,9 +152,6 @@ const TaskerOnboarding = () => {
               value={otp}
               onChange={handleOtpChange}
               variant='outlined'
-              sx={{
-                margin: '1rem 0',
-              }}
             />
           </Grid>
           <Grid item xs={12}>
