@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   CssBaseline,
@@ -39,6 +39,18 @@ const Signup = () => {
   const [userType, setUserType] = useState('');
   const navigate = useNavigate('');
   const dispatch = useDispatch();
+  const loggedInUser = localStorage.getItem('user');
+
+  useEffect(() => {
+    if (loggedInUser) {
+      navigate('/discover');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handlePurposeChange = (event) => {
+    setUserType(event.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,8 +70,6 @@ const Signup = () => {
       localStorage.setItem('user', JSON.stringify(response.data.data));
 
       dispatch(userLoggedIn(response.data.data));
-
-      navigate('/discover');
     } catch (err) {
       console.log(err);
       if (err.response) {
@@ -72,10 +82,12 @@ const Signup = () => {
         setSignupError(err.message || 'An error occurred during signup.');
       }
     }
-  };
 
-  const handlePurposeChange = (event) => {
-    setUserType(event.target.value);
+    if (userType === 'tasker') {
+      navigate('/tasker-onboarding');
+    } else if (userType === 'user') {
+      navigate('/browse');
+    }
   };
 
   return (
@@ -178,7 +190,7 @@ const Signup = () => {
                 className={styles.textField}
               >
                 <MenuItem value={'user'}>look for a handyman</MenuItem>
-                <MenuItem value={'flexer'}>find work as a handyman</MenuItem>
+                <MenuItem value={'tasker'}>find work as a handyman</MenuItem>
               </Select>
             </FormControl>
             {signupError && (

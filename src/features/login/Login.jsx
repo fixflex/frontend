@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   CssBaseline,
@@ -36,7 +36,16 @@ const Login = () => {
   const [loginError, setLoginError] = useState('');
   const dispatch = useDispatch();
 
+  const loggedInUser = localStorage.getItem('user');
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loggedInUser) {
+      navigate('/discover');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
