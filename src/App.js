@@ -21,7 +21,7 @@ import MyTasks from './components/my-tasks/MyTasks';
 import Profile from './features/profile/Profile';
 import baseURL from './API/baseURL';
 import { setCategories } from './features/task-category/categorySlice';
-import TaskerVerify from './features/tasker-verify/TaskerVerify';
+import TaskerOnboarding from './features/tasker-onboarding/TaskerOnboarding';
 
 function App() {
   const dispatch = useDispatch();
@@ -53,6 +53,18 @@ function App() {
         console.error('Failed to fetch categories:', error);
       }
     })();
+    // (async () => {
+    //   try {
+    //     const response = await baseURL.delete(
+    //       '/user',
+    //       '661d560278eaa7d03ad460d2'
+    //     );
+
+    //     console.log(response);
+    //   } catch (error) {
+    //     console.error('Failed to delete user:', error);
+    //   }
+    // })();
   }, [dispatch]);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -62,14 +74,8 @@ function App() {
       <Navbar isLoggedIn={isAuthenticated} />
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        <Route
-          path='/login'
-          element={!isAuthenticated ? <Login /> : <Navigate to='/discover' />}
-        />
-        <Route
-          path='/signup'
-          element={!isAuthenticated ? <Signup /> : <Navigate to='/discover' />}
-        />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
         <Route
           path='/discover'
           element={isAuthenticated ? <Discover /> : <AuthRedirect />}
@@ -87,8 +93,8 @@ function App() {
           element={isAuthenticated ? <MyTasks /> : <AuthRedirect />}
         />
         <Route
-          path='/tasker-verify'
-          element={isAuthenticated ? <TaskerVerify /> : <AuthRedirect />}
+          path='/tasker-onboarding'
+          element={isAuthenticated ? <TaskerOnboarding /> : <AuthRedirect />}
         />
         <Route
           path='/account'
