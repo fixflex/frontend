@@ -68,7 +68,10 @@ const Signup = () => {
     try {
       const response = await baseURL.post('/auth/signup', userData);
       localStorage.setItem('user', JSON.stringify(response.data.data));
-
+      const accessToken = response.data.accessToken;
+      if (accessToken) {
+        localStorage.setItem('accessToken', accessToken);
+      }
       dispatch(userLoggedIn(response.data.data));
     } catch (err) {
       console.log(err);

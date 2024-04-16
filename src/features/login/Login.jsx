@@ -58,7 +58,10 @@ const Login = () => {
         email,
         password,
       });
-
+      const accessToken = response.data.accessToken;
+      if (accessToken) {
+        localStorage.setItem('accessToken', accessToken);
+      }
       localStorage.setItem('user', JSON.stringify(response.data.data));
       dispatch(userLoggedIn(response.data.data));
       console.log(response);

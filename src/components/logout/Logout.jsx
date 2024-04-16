@@ -14,6 +14,7 @@ const Logout = () => {
   const handleLogout = async () => {
     dispatch(userLoggedOut());
     localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
 
     try {
       await baseURL.post('/auth/logout');
