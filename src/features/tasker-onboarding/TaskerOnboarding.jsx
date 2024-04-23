@@ -11,15 +11,21 @@ import {
   Typography,
   Box,
   IconButton,
+  CircularProgress,
 } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { egyptGovernorates } from '../../utils/gov';
 import baseURL from '../../API/baseURL';
 import { GpsFixed } from '@mui/icons-material';
 import styles from './taskerOnboarding.module.css';
+import { setTaskerInfo } from './taskerInfoSlice';
+import { useNavigate } from 'react-router-dom';
 
 const TaskerOnboarding = () => {
-  const [service, setService] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState({
+    id: '',
+    name: '',
+  });
   const [governorate, setGovernorate] = useState('');
   const [otp, setOtp] = useState('');
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
@@ -27,6 +33,13 @@ const TaskerOnboarding = () => {
   const [countdown, setCountdown] = useState(0);
   const [locationError, setLocationError] = useState('');
   const [locationButtonColor, setLocationButtonColor] = useState('default');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const navigate = useNavigate('');
+  const dispatch = useDispatch('');
+
+  const phoneNumber = useSelector((state) => state.auth.user.phoneNumber);
 
   const getUserLocation = () => {
     if ('geolocation' in navigator) {
@@ -124,8 +137,11 @@ const TaskerOnboarding = () => {
   };
 
   const categories = useSelector((state) => state.categories.categoriesList);
-  const handleServiceChange = (e) => {
-    setService(e.target.value);
+  const handleCategoryChange = (e) => {
+    const selected = categories.find(
+      (category) => category.id === e.target.value
+    );
+    setSelectedCategory({ id: selected.id, name: selected.name });
   };
 
   const handleGovernorateChange = (e) => {
@@ -136,13 +152,45 @@ const TaskerOnboarding = () => {
     setOtp(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ service, governorate, otp });
+
+    const requestData = {
+      categories: [selectedCategory.id],
+      location: {
+        coordinates: [userLocation.lng, userLocation.lat],
+      },
+      phoneNumber,
+    };
+
+    console.log(requestData);
+
+    setIsLoading(true);
+
+    try {
+      await baseURL.post('/taskers/become-tasker', requestData);
+      dispatch(
+        setTaskerInfo({
+          city: governorate.name,
+          specialty: {
+            id: selectedCategory.id,
+            name: selectedCategory.name,
+          },
+          isTasker: true,
+        })
+      );
+
+      navigate('/browse');
+    } catch (error) {
+      console.error('Error sending request:', error);
+      setError('Failed to submit. Please try again.');
+    }
+
+    setIsLoading(false);
   };
 
   const formIsValid =
-    service &&
+    selectedCategory.id &&
     governorate &&
     otp &&
     userLocation.lat &&
@@ -170,11 +218,10 @@ const TaskerOnboarding = () => {
                 What services do you provide?
               </InputLabel>
               <Select
-                labelId='service-label'
-                id='service'
-                value={service}
-                label='What services do you provide?'
-                onChange={handleServiceChange}
+                labelId='category-label'
+                id='category'
+                value={selectedCategory.id}
+                onChange={handleCategoryChange}
               >
                 {categories.map((category) => (
                   <MenuItem key={category.id} value={category.id}>
@@ -280,6 +327,14 @@ const TaskerOnboarding = () => {
               </Typography>
             </Grid>
           )}
+          {error && (
+            <Typography
+              color='error'
+              sx={{ textAlign: 'center', width: '100%' }}
+            >
+              {error}
+            </Typography>
+          )}
           <Grid item xs={12}>
             <Button
               type='submit'
@@ -297,7 +352,11 @@ const TaskerOnboarding = () => {
               }}
               disabled={!formIsValid}
             >
-              Submit
+              {isLoading ? (
+                <CircularProgress size={24} color='inherit' />
+              ) : (
+                'Submit'
+              )}
             </Button>
           </Grid>
         </Grid>

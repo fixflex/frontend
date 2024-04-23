@@ -5,6 +5,7 @@ import userTasksReducer from '../features/post-task/taskSlice';
 import localStorageMiddleware from '../middleware/localStorageMiddleware';
 import categoryReducer from '../features/task-category/categorySlice';
 import allTasksReducer from '../features/browse/allTasksSlice';
+import taskerInfoReducer from '../features/tasker-onboarding/taskerInfoSlice';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     userTasks: userTasksReducer,
     categories: categoryReducer,
     allTasks: allTasksReducer,
+    taskerInfo: taskerInfoReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(localStorageMiddleware),
