@@ -15,6 +15,8 @@ const Logout = () => {
     dispatch(userLoggedOut());
     localStorage.removeItem('user');
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('userTasks');
+    localStorage.removeItem('taskerInfo');
 
     try {
       await baseURL.post('/auth/logout');

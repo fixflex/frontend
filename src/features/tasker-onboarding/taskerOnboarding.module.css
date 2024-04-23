@@ -1,0 +1,43 @@
+/* TaskerOnboarding.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
+  padding: 5rem;
+  margin: 5rem auto; /* Center the container */
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 2rem;
+    margin: 2rem auto;
+  }
+}
+
+.formItem {
+  width: 100%;
+}
+
+.iconButton {
+  margin-left: 1rem;
+}
+
+/* Responsive typography for smaller screens */
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+  }
+}
+
+/* Adjust button sizes for smaller screens */
+@media (max-width: 600px) {
+  .submitButton {
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+  }
+}
