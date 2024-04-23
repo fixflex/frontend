@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 const persistedTaskerInfo = JSON.parse(localStorage.getItem('taskerInfo')) || {
-  city: '',
-  specialty: {
-    name: '',
-    id: '',
-  },
+  specialtyId: '',
   isTasker: false,
 };
 
@@ -13,8 +9,7 @@ const taskerInfoSlice = createSlice({
   initialState: persistedTaskerInfo,
   reducers: {
     setTaskerInfo(state, action) {
-      state.city = action.payload.city;
-      state.specialty = action.payload.specialty;
+      state.specialtyId = action.payload.specialtyId;
       state.isTasker = action.payload.isTasker;
     },
     setIsTasker(state, action) {

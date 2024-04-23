@@ -20,6 +20,7 @@ import styles from './login.module.css';
 import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { useNavigate } from 'react-router-dom';
 import baseURL from '../../API/baseURL';
+import { setTaskerInfo } from '../tasker-onboarding/taskerInfoSlice';
 
 const defaultTheme = createTheme({
   palette: {
@@ -58,13 +59,27 @@ const Login = () => {
         email,
         password,
       });
+
+      console.log(response);
+
       const accessToken = response.data.accessToken;
       if (accessToken) {
         localStorage.setItem('accessToken', accessToken);
       }
       localStorage.setItem('user', JSON.stringify(response.data.data));
       dispatch(userLoggedIn(response.data.data));
-      console.log(response);
+
+      const isTasker = await baseURL.get('/taskers/me');
+
+      if (isTasker?.data?.success) {
+        dispatch(
+          setTaskerInfo({
+            specialtyId: isTasker?.data?.data?.categories[0],
+            isTasker: true,
+          })
+        );
+      }
+
       navigate('/browse');
     } catch (error) {
       if (error.response) {

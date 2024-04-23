@@ -21,7 +21,7 @@ const Logout = () => {
     try {
       await baseURL.post('/auth/logout');
       navigate('/');
-      window.location.reload(false);
+      window.location.reload();
     } catch (error) {
       console.error('Logout failed:', error);
     }
