@@ -40,6 +40,9 @@ const TaskerOnboarding = () => {
   const dispatch = useDispatch('');
 
   const phoneNumber = useSelector((state) => state.auth.user.phoneNumber);
+  const taskerInfo = useSelector((state) => state.taskerInfo);
+
+  console.log(taskerInfo);
 
   const getUserLocation = () => {
     if ('geolocation' in navigator) {
@@ -109,6 +112,10 @@ const TaskerOnboarding = () => {
   };
 
   useEffect(() => {
+    if (taskerInfo?.isTasker) {
+      navigate('/browse');
+      return;
+    }
     getVerificationCode();
     getUserLocation();
   }, []);
@@ -171,11 +178,7 @@ const TaskerOnboarding = () => {
       await baseURL.post('/taskers/become-tasker', requestData);
       dispatch(
         setTaskerInfo({
-          city: governorate.name,
-          specialty: {
-            id: selectedCategory.id,
-            name: selectedCategory.name,
-          },
+          specialtyId: selectedCategory.id,
           isTasker: true,
         })
       );

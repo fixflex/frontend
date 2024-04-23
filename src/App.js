@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './features/landing-page/LandingPage';
 import Login from './features/login/Login';
 import Navbar from './components/navbar/Navbar';
@@ -55,14 +50,11 @@ function App() {
     })();
     // (async () => {
     //   try {
-    //     const response = await baseURL.delete(
-    //       '/user',
-    //       '661d560278eaa7d03ad460d2'
-    //     );
+    //     const response = await baseURL.get('/users/me');
 
-    //     console.log(response);
+    //     console.log('get me : ', response);
     //   } catch (error) {
-    //     console.error('Failed to delete user:', error);
+    //     console.error('Failed to fetch me:', error);
     //   }
     // })();
   }, [dispatch]);
