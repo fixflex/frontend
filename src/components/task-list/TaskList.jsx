@@ -9,10 +9,61 @@ import {
   Person2,
   Public,
 } from '@mui/icons-material';
+import dayjs from 'dayjs';
 
-const TaskList = ({ setIsModalOpen, isMobile }) => {
+const TaskList = ({
+  setIsModalOpen,
+  isMobile,
+  titleFilter,
+  categoryFilter,
+  locationFilter,
+  sortOption,
+}) => {
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state.allTasks.tasks);
+  const formatDate = (dueDate) => {
+    return dueDate.flexible ? 'Flexible' : dueDate.on;
+  };
+
+  // Filtering logic
+  const filteredTasks = tasks.filter((task) => {
+    const matchesTitle = titleFilter
+      ? task.title &&
+        task.title.toLowerCase().includes(titleFilter.toLowerCase())
+      : true;
+
+    const matchesCategory = categoryFilter
+      ? task.categoryId && task.categoryId === categoryFilter
+      : true;
+
+    const matchesLocation = locationFilter
+      ? locationFilter === 'online'
+        ? task.location?.online
+        : !task.location?.online
+      : true;
+
+    return matchesTitle && matchesCategory && matchesLocation;
+  });
+
+  // Sorting logic
+  const sortedTasks = [...filteredTasks].sort((a, b) => {
+    if (!sortOption) {
+      return 0;
+    }
+
+    switch (sortOption) {
+      case 'priceLowHigh':
+        return a.budget - b.budget;
+      case 'priceHighLow':
+        return b.budget - a.budget;
+      case 'newestOldest':
+        return dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix();
+      case 'oldestNewest':
+        return dayjs(a.createdAt).unix() - dayjs(b.createdAt).unix();
+      default:
+        return 0;
+    }
+  });
 
   const handleSelectTask = (task) => {
     dispatch(selectTask(task));
@@ -21,13 +72,9 @@ const TaskList = ({ setIsModalOpen, isMobile }) => {
     }
   };
 
-  const formatDate = (dueDate) => {
-    return dueDate.flexible ? 'Flexible' : dueDate.on;
-  };
-
   return (
     <div className={styles.taskListContainer}>
-      {tasks.map((task, index) => (
+      {sortedTasks.map((task) => (
         <Card
           key={task._id}
           className={styles.taskCard}
@@ -51,7 +98,6 @@ const TaskList = ({ setIsModalOpen, isMobile }) => {
                 {`${task.userId.firstName} ${task.userId.lastName}`}
               </Typography>
             </Box>
-
             <Box
               sx={{ display: 'flex', alignItems: 'center', margin: '1rem 0' }}
               mt={2}
@@ -61,7 +107,6 @@ const TaskList = ({ setIsModalOpen, isMobile }) => {
                 {formatDate(task.dueDate)}
               </Typography>
             </Box>
-
             {task.location.online ? (
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Public />
