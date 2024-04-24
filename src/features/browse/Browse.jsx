@@ -12,6 +12,10 @@ import { addAllTasks } from './allTasksSlice';
 
 const Browse = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [titleFilter, setTitleFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
+  const [locationFilter, setLocationFilter] = useState('');
+  const [sortOption, setSortOption] = useState('');
   const isMobile = useMediaQuery('(max-width:600px)');
   const dispatch = useDispatch();
 
@@ -46,11 +50,24 @@ const Browse = () => {
 
   return (
     <Box sx={{ backgroundColor: '#F3F3F7' }}>
-      <SecondaryNav />
+      <SecondaryNav
+        placeholder='Search for a task'
+        setTitleFilter={setTitleFilter}
+        setCategoryFilter={setCategoryFilter}
+        setLocationFilter={setLocationFilter}
+        setSortOption={setSortOption}
+      />{' '}
       <div className={styles.browseContainer}>
         <Box>
           <div className={styles.taskContainer}>
-            <TaskList setIsModalOpen={setIsModalOpen} isMobile={isMobile} />
+            <TaskList
+              setIsModalOpen={setIsModalOpen}
+              isMobile={isMobile}
+              titleFilter={titleFilter}
+              categoryFilter={categoryFilter}
+              locationFilter={locationFilter}
+              sortOption={sortOption}
+            />
           </div>
         </Box>
 

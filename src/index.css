@@ -32,3 +32,7 @@ code {
   border-radius: 20px;
   border: 3px solid #f0f0f0;
 }
+
+.MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: #212121 !important;
+}
