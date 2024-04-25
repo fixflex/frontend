@@ -40,10 +40,22 @@ const Profile = () => {
                   <ListItemText primary='Payment methods' />
                 </ListItem>
                 <ListItem button>
-                  <ListItemText primary='Notifications' />
+                  <Button
+                    variant='text'
+                    href='/my-tasks'
+                    sx={{ color: '#212121', fontWeight: 'bold' }}
+                  >
+                    My Tasks
+                  </Button>
                 </ListItem>
                 <ListItem button>
-                  <ListItemText primary='Settings' />
+                  <Button
+                    variant='text'
+                    href='/account-settings'
+                    sx={{ color: '#212121', fontWeight: 'bold' }}
+                  >
+                    Settings
+                  </Button>
                 </ListItem>
               </List>
             </CardContent>

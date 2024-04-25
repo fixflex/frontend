@@ -1,0 +1,32 @@
+@keyframes colorShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.animatedText {
+  background: linear-gradient(90deg, #050425, #213a49, #3f9fcc);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: colorShift 3s infinite;
+  display: inline-block;
+}
+
+.typographyCustom {
+  font-size: 3rem;
+  font-weight: bolder !important;
+}
+
+@media (max-width: 600px) {
+}
+
+@media (min-width: 601px) and (max-width: 960px) {
+}
