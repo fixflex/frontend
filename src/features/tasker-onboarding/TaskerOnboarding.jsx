@@ -118,6 +118,7 @@ const TaskerOnboarding = () => {
     }
     getVerificationCode();
     getUserLocation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

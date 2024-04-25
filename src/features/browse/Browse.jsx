@@ -56,6 +56,10 @@ const Browse = () => {
         setCategoryFilter={setCategoryFilter}
         setLocationFilter={setLocationFilter}
         setSortOption={setSortOption}
+        titleFilter={titleFilter}
+        categoryFilter={categoryFilter}
+        locationFilter={locationFilter}
+        sortOption={sortOption}
       />{' '}
       <div className={styles.browseContainer}>
         <Box>
