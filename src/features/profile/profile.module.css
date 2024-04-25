@@ -8,6 +8,32 @@
   flex: 1;
 }
 
+.navListItem {
+  margin: 1rem 0;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+}
+
+.navListItem:hover::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: rgba(0, 0, 0, 0.1);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  transition: transform 0.5s ease-out;
+  cursor: pointer;
+  width: 70%;
+}
+
+.navListItem:hover::after {
+  transform: translate(-50%, -50%) scale(2);
+}
+
 .leftColumn {
   margin: 2rem !important;
   min-width: 25% !important;
