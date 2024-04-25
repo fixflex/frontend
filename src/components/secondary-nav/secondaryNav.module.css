@@ -7,6 +7,50 @@
   justify-content: center;
 }
 
+.filterOptionsContainer {
+  display: flex;
+  align-items: baseline;
+}
+
 .dropdown {
   width: 10vw;
+}
+
+@media (max-width: 600px) and (max-width: 1110px) {
+  .filterOptionsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .dropdown {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .dropTitle {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0 1.5rem;
+  }
+
+  .filterButton {
+    font-size: 1.2rem;
+    background-color: #212121;
+    color: white;
+    padding: 0.5rem 1rem;
+  }
+
+  .dropDownSelect {
+    width: 100%;
+  }
+}
+
+/* Media query for tablet devices (min-width: 601px and max-width: 1024px) */
+@media (min-width: 601px) and (max-width: 1106px) {
+  /* Adjust styles for dropdown in tablet here */
 }
