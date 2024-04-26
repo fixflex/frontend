@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Button, TextField, Box } from '@mui/material';
 import styles from './userAccountUpdate.module.css';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import baseURL from '../../API/baseURL';
 
 const UserAccountUpdate = () => {
@@ -9,6 +10,8 @@ const UserAccountUpdate = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const userInfo = useSelector((state) => state.auth?.user);
   const isTasker = useSelector((state) => state.taskerInfo.isTasker);
@@ -23,21 +26,25 @@ const UserAccountUpdate = () => {
 
   const handleSubmit = async () => {
     const patchData = {
-      firstName: userInfo.firstName,
-      lastName: userInfo.lastName,
-      email: userInfo.email,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
     };
 
     try {
       const response = await baseURL.patch('/users/me', patchData);
 
       if (response.data.success) {
-      }
+        setSuccessMessage('Contact information updated successfully!');
+        setErrorMessage('');
 
-      console.log(response);
+        setTimeout(() => {
+          navigate('/browse');
+        }, 1500);
+      }
     } catch (error) {
-      console.error('Request error:', error);
-      setErrorMessage(error.response.data.message);
+      setErrorMessage(error.response?.data?.message || 'An error occurred');
+      setSuccessMessage('');
     }
   };
 
@@ -56,7 +63,7 @@ const UserAccountUpdate = () => {
           Here's where you can update your contact info.
         </Typography>
         <div className={styles.buttonContainer}>
-          <Button className={styles.textButton} href='#'>
+          <Button className={styles.textButton} href='/change-password'>
             Change password?
           </Button>
           {!isTasker && (
@@ -92,8 +99,12 @@ const UserAccountUpdate = () => {
             {errorMessage}
           </Typography>
         )}
+        {successMessage && (
+          <Typography sx={{ color: 'green', textAlign: 'center' }}>
+            {successMessage}
+          </Typography>
+        )}
         <Button
-          href='#'
           variant='contained'
           sx={{
             color: 'white',

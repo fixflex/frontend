@@ -19,6 +19,7 @@ import { setCategories } from './features/task-category/categorySlice';
 import TaskerOnboarding from './features/tasker-onboarding/TaskerOnboarding';
 import AccountSettings from './features/account-settings/AccountSettings';
 import UserAccountUpdate from './features/update-user/UserAccountUpdate';
+import ChangePassword from './features/change-password/ChangePassword';
 
 function App() {
   const dispatch = useDispatch();
@@ -97,6 +98,10 @@ function App() {
         <Route
           path='/account-settings'
           element={isAuthenticated ? <AccountSettings /> : <AuthRedirect />}
+        />
+        <Route
+          path='/change-password'
+          element={isAuthenticated ? <ChangePassword /> : <AuthRedirect />}
         />
         <Route
           path='/update-account'
