@@ -8,12 +8,16 @@ import {
   List,
   ListItem,
   Box,
-  ListItemText,
 } from '@mui/material';
 import styles from './profile.module.css';
 import popup from '../../images/popup1.png';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
+  const user = useSelector((state) => state.auth.user);
+  const isTasker = useSelector((state) => state.taskerInfo.isTasker);
+
   return (
     <Container>
       <div className={styles.flexContainer}>
@@ -24,38 +28,58 @@ const Profile = () => {
             <CardContent className={styles.profileCardInfo}>
               <div className={styles.profilePicture} />
               <Typography gutterBottom variant='h5' component='div'>
-                James Kennedy
+                {user.firstName + ' ' + user.lastName}
               </Typography>
               <List component='nav' className={styles.navList}>
-                <ListItem button>
-                  <ListItemText primary='Home' />
-                </ListItem>
-                <ListItem button>
-                  <ListItemText primary='My Tasker Dashboard' />
-                </ListItem>
-                <ListItem button>
-                  <ListItemText primary='Payments history' />
-                </ListItem>
-                <ListItem button>
-                  <ListItemText primary='Payment methods' />
-                </ListItem>
-                <ListItem button>
-                  <Button
-                    variant='text'
-                    href='/my-tasks'
-                    sx={{ color: '#212121', fontWeight: 'bold' }}
+                <ListItem className={styles.navListItem}>
+                  <Link
+                    to='/my-tasks'
+                    style={{
+                      textDecoration: 'none',
+                      color: '#212121',
+                      fontWeight: 'bold',
+                    }}
                   >
                     My Tasks
-                  </Button>
+                  </Link>
                 </ListItem>
-                <ListItem button>
-                  <Button
-                    variant='text'
-                    href='/account-settings'
-                    sx={{ color: '#212121', fontWeight: 'bold' }}
+                {isTasker && (
+                  <ListItem className={styles.navListItem}>
+                    <Link
+                      to='#'
+                      style={{
+                        textDecoration: 'none',
+                        color: '#212121',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Tasker Dashboard
+                    </Link>
+                  </ListItem>
+                )}
+                <ListItem className={styles.navListItem}>
+                  <Link
+                    to='/'
+                    style={{
+                      textDecoration: 'none',
+                      color: '#212121',
+                      fontWeight: 'bold',
+                    }}
                   >
-                    Settings
-                  </Button>
+                    Home
+                  </Link>
+                </ListItem>
+                <ListItem className={styles.navListItem}>
+                  <Link
+                    to='/account-settings'
+                    style={{
+                      textDecoration: 'none',
+                      color: '#212121',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    Account Settings
+                  </Link>
                 </ListItem>
               </List>
             </CardContent>

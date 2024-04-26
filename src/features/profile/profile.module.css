@@ -8,6 +8,17 @@
   flex: 1;
 }
 
+.navListItem {
+  margin: 1rem 0;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+}
+
+.navListItem :hover {
+  scale: 1.1;
+}
+
 .leftColumn {
   margin: 2rem !important;
   min-width: 25% !important;
