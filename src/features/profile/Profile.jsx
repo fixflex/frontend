@@ -8,7 +8,6 @@ import {
   List,
   ListItem,
   Box,
-  ListItemText,
 } from '@mui/material';
 import styles from './profile.module.css';
 import popup from '../../images/popup1.png';
