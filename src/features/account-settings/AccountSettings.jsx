@@ -120,6 +120,33 @@ const AccountSettings = () => {
               </Button>
             </ListItem>
           )}
+          {isTasker && (
+            <ListItem
+              sx={{ display: 'flex', justifyContent: 'space-between' }}
+              className={styles.actionItem}
+            >
+              <Typography
+                sx={{ fontWeight: 'bold' }}
+                className={styles.actionItemTitle}
+              >
+                Here's where you can change the category you work in
+              </Typography>
+              <Button
+                href='/update-tasker'
+                variant='contained'
+                sx={{
+                  color: 'white',
+                  borderRadius: '10px',
+                  backgroundColor: '#212121',
+                  '&:hover': {
+                    backgroundColor: '#F2CC41',
+                  },
+                }}
+              >
+                Tasker Category
+              </Button>
+            </ListItem>
+          )}
           <ListItem
             sx={{ display: 'flex', justifyContent: 'space-between' }}
             className={styles.actionItem}
@@ -131,7 +158,7 @@ const AccountSettings = () => {
               Update your Info
             </Typography>
             <Button
-              href='#'
+              href='/update-account'
               variant='contained'
               sx={{
                 color: 'white',

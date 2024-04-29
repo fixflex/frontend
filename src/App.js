@@ -20,6 +20,7 @@ import TaskerOnboarding from './features/tasker-onboarding/TaskerOnboarding';
 import AccountSettings from './features/account-settings/AccountSettings';
 import UserAccountUpdate from './features/update-user/UserAccountUpdate';
 import ChangePassword from './features/change-password/ChangePassword';
+import TaskerAccountUpdate from './features/update-tasker/TaskerAccountUpdate';
 
 function App() {
   const dispatch = useDispatch();
@@ -106,6 +107,10 @@ function App() {
         <Route
           path='/update-account'
           element={isAuthenticated ? <UserAccountUpdate /> : <AuthRedirect />}
+        />
+        <Route
+          path='/update-tasker'
+          element={isAuthenticated ? <TaskerAccountUpdate /> : <AuthRedirect />}
         />
         <Route path='*' element={<NotFound />} />
       </Routes>
