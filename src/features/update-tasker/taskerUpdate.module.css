@@ -1,0 +1,59 @@
+.centerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height to center the content */
+  padding: 20px;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(27, 37, 46, 1) 35%,
+    rgba(64, 163, 209, 1) 100%
+  );
+}
+
+.typography {
+  margin-bottom: 20px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.textButton {
+  color: #3f9fcc;
+  text-transform: none;
+  font-weight: bold !important;
+}
+
+.textButton:hover {
+  color: white;
+  background-color: #212121;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 5rem;
+  border-radius: 25px;
+  border: 3px solid #212121;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  max-width: 25%;
+}
+
+.textField {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .form {
+    padding: 1rem !important;
+    max-width: 100% !important;
+  }
+}
