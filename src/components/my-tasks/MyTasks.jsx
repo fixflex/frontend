@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -6,6 +6,11 @@ import {
   Box,
   Grid,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from '@mui/material';
 import {
   Person2,
@@ -13,9 +18,12 @@ import {
   LocationOn,
   Public,
 } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 import styles from './myTasks.module.css';
+import { deleteTask } from '../../features/post-task/taskSlice';
+import baseURL from '../../API/baseURL';
+
 const TaskLocation = ({ task }) => (
   <Box className={styles.taskLocation}>
     {task.location?.online ? <Public /> : <LocationOn />}
@@ -26,13 +34,39 @@ const TaskLocation = ({ task }) => (
 );
 
 const MyTasks = () => {
-  const tasks = useSelector((state) => state?.allTasks?.tasks);
-  const myId = useSelector((state) => state?.auth?.user?._id);
+  const [open, setOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const dispatch = useDispatch();
+  const tasks = useSelector((state) => state.userTasks.tasks);
+  const myId = useSelector((state) => state.auth.user._id);
 
-  const filteredTasks = tasks.filter((task) => task?.userId?._id === myId);
+  const filteredTasks = tasks.filter((task) => task.userId._id === myId);
 
   const formatDate = (dueDate) =>
     dueDate.flexible ? 'Flexible' : dayjs(dueDate.on).format('MMM D, YYYY');
+
+  const handleOpen = (task) => {
+    setSelectedTask(task);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleDelete = async () => {
+    console.log(selectedTask);
+    try {
+      const response = await baseURL.delete(`/tasks/${selectedTask._id}`);
+      console.log(response);
+      if (response.status === 200) {
+        dispatch(deleteTask(selectedTask._id));
+        handleClose();
+      }
+    } catch (error) {
+      console.error('There was an error deleting the task:', error);
+    }
+  };
 
   return (
     <Box className={styles.myTasks}>
@@ -51,16 +85,20 @@ const MyTasks = () => {
                   {task.title}
                 </Typography>
                 <Box className={styles.taskUser}>
-                  <Person2 />
+                  {' '}
+                  <Person2 />{' '}
                   <Typography variant='body2'>
-                    {task.userId?.firstName} {task.userId?.lastName}
-                  </Typography>
-                </Box>
+                    {' '}
+                    {task.userId?.firstName} {task.userId?.lastName}{' '}
+                  </Typography>{' '}
+                </Box>{' '}
                 <Box className={styles.taskDueDate}>
-                  <CalendarMonth />
+                  {' '}
+                  <CalendarMonth />{' '}
                   <Typography variant='body2'>
-                    {formatDate(task.dueDate)}
-                  </Typography>
+                    {' '}
+                    {formatDate(task.dueDate)}{' '}
+                  </Typography>{' '}
                 </Box>
                 <TaskLocation task={task} />
                 <Box className={styles.taskActions}>
@@ -72,7 +110,10 @@ const MyTasks = () => {
                   <Button className={`${styles.taskButton} ${styles.update}`}>
                     Update
                   </Button>
-                  <Button className={`${styles.taskButton} ${styles.delete}`}>
+                  <Button
+                    className={`${styles.taskButton} ${styles.delete}`}
+                    onClick={() => handleOpen(task)}
+                  >
                     Delete
                   </Button>
                 </Box>
@@ -81,6 +122,32 @@ const MyTasks = () => {
           </Grid>
         ))}
       </Grid>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle sx={{ fontWeight: 'bold' }}>{'Are you sure?'}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            This Action will delete this task and all its offers
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleClose}
+            variant='contained'
+            sx={{ backgroundColor: '#398CB4', borderRadius: '10px' }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleDelete}
+            color='primary'
+            autoFocus
+            variant='contained'
+            sx={{ backgroundColor: '#cc282f', borderRadius: '10px' }}
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
