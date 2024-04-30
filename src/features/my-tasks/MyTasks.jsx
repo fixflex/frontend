@@ -21,8 +21,9 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 import styles from './myTasks.module.css';
-import { deleteTask } from '../../features/post-task/taskSlice';
+import { deleteTask } from '../post-task/taskSlice';
 import baseURL from '../../API/baseURL';
+import { useNavigate } from 'react-router-dom';
 
 const TaskLocation = ({ task }) => (
   <Box className={styles.taskLocation}>
@@ -37,6 +38,7 @@ const MyTasks = () => {
   const [open, setOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const tasks = useSelector((state) => state.userTasks.tasks);
   const myId = useSelector((state) => state.auth.user._id);
 
@@ -55,17 +57,23 @@ const MyTasks = () => {
   };
 
   const handleDelete = async () => {
-    console.log(selectedTask);
-    try {
-      const response = await baseURL.delete(`/tasks/${selectedTask._id}`);
-      console.log(response);
-      if (response.status === 200) {
-        dispatch(deleteTask(selectedTask._id));
-        handleClose();
+    if (selectedTask) {
+      try {
+        const response = await baseURL.delete(`/tasks/${selectedTask._id}`);
+        console.log(response);
+        if (response.status === 200) {
+          dispatch(deleteTask(selectedTask._id));
+          handleClose();
+        }
+      } catch (error) {
+        console.error('There was an error deleting the task:', error);
       }
-    } catch (error) {
-      console.error('There was an error deleting the task:', error);
     }
+  };
+
+  const handleUpdate = (task) => {
+    setSelectedTask(task); // Set the selected task
+    navigate(`/update-task/${task._id}`); // Navigate using the selected task's ID
   };
 
   return (
@@ -85,20 +93,16 @@ const MyTasks = () => {
                   {task.title}
                 </Typography>
                 <Box className={styles.taskUser}>
-                  {' '}
-                  <Person2 />{' '}
+                  <Person2 />
                   <Typography variant='body2'>
-                    {' '}
-                    {task.userId?.firstName} {task.userId?.lastName}{' '}
-                  </Typography>{' '}
-                </Box>{' '}
+                    {task.userId?.firstName} {task.userId?.lastName}
+                  </Typography>
+                </Box>
                 <Box className={styles.taskDueDate}>
-                  {' '}
-                  <CalendarMonth />{' '}
+                  <CalendarMonth />
                   <Typography variant='body2'>
-                    {' '}
-                    {formatDate(task.dueDate)}{' '}
-                  </Typography>{' '}
+                    {formatDate(task.dueDate)}
+                  </Typography>
                 </Box>
                 <TaskLocation task={task} />
                 <Box className={styles.taskActions}>
@@ -107,7 +111,10 @@ const MyTasks = () => {
                   >
                     Done
                   </Button>
-                  <Button className={`${styles.taskButton} ${styles.update}`}>
+                  <Button
+                    className={`${styles.taskButton} ${styles.update}`}
+                    onClick={() => handleUpdate(task)}
+                  >
                     Update
                   </Button>
                   <Button
