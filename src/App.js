@@ -12,7 +12,7 @@ import AuthRedirect from './features/auth-redirect/AuthRedirect';
 import NotFound from './features/not-found/NotFound';
 import { userLoggedIn } from './features/signup/authSlice';
 import PostTask from './features/post-task/PostTask';
-import MyTasks from './components/my-tasks/MyTasks';
+import MyTasks from './features/my-tasks/MyTasks';
 import Profile from './features/profile/Profile';
 import baseURL from './API/baseURL';
 import { setCategories } from './features/task-category/categorySlice';
@@ -21,6 +21,7 @@ import AccountSettings from './features/account-settings/AccountSettings';
 import UserAccountUpdate from './features/update-user/UserAccountUpdate';
 import ChangePassword from './features/change-password/ChangePassword';
 import TaskerAccountUpdate from './features/update-tasker/TaskerAccountUpdate';
+import UpdateTask from './features/update-task/UpdateTask';
 
 function App() {
   const dispatch = useDispatch();
@@ -111,6 +112,10 @@ function App() {
         <Route
           path='/update-tasker'
           element={isAuthenticated ? <TaskerAccountUpdate /> : <AuthRedirect />}
+        />
+        <Route
+          path='/update-task/:id'
+          element={isAuthenticated ? <UpdateTask /> : <AuthRedirect />}
         />
         <Route path='*' element={<NotFound />} />
       </Routes>

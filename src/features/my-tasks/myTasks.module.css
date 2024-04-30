@@ -1,0 +1,90 @@
+.myTasks {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.title {
+  margin-bottom: 0.5rem !important;
+  font-weight: bold !important;
+}
+
+.subtitle {
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+.taskListContainer {
+  width: 100%;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.taskCard {
+  display: flex;
+  flex-direction: column;
+  box-shadow: none !important;
+  border: 1px solid #ddd !important;
+  border-radius: 10px !important;
+  transition: transform 0.3s !important;
+  height: 100%; /* Make cards of equal height */
+}
+
+.taskCard:hover {
+  transform: scale(1.03) !important;
+}
+
+.taskCardTitle,
+.taskUser,
+.taskDueDate,
+.taskLocation {
+  margin-bottom: 1rem;
+}
+
+.taskUser,
+.taskDueDate,
+.taskLocation,
+.taskActions {
+  display: flex;
+  align-items: center;
+}
+
+.taskUser svg,
+.taskDueDate svg,
+.taskLocation svg {
+  margin-right: 0.5rem !important;
+}
+
+.taskButton {
+  flex-grow: 1 !important;
+  margin: 0 4px !important;
+  border-radius: 10px !important;
+  color: white !important;
+}
+
+.taskButton.completed {
+  background-color: #3f9fcc;
+}
+
+.taskButton.update {
+  background-color: #212121;
+}
+
+.taskButton.delete {
+  background-color: #cc282f;
+}
+
+.taskButton:hover {
+  background-color: #f2cc41;
+}
+
+@media (max-width: 600px) {
+  .taskActions {
+    flex-direction: column;
+  }
+  .taskButton {
+    width: 100%;
+    margin: 0.2rem 0 !important;
+  }
+}
