@@ -11,12 +11,18 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  IconButton,
+  Tooltip,
 } from '@mui/material';
 import {
   Person2,
   CalendarMonth,
   LocationOn,
   Public,
+  Check,
+  Edit,
+  Clear,
+  Ballot,
 } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
@@ -106,23 +112,38 @@ const MyTasks = () => {
                 </Box>
                 <TaskLocation task={task} />
                 <Box className={styles.taskActions}>
-                  <Button
-                    className={`${styles.taskButton} ${styles.completed}`}
-                  >
-                    Done
-                  </Button>
-                  <Button
-                    className={`${styles.taskButton} ${styles.update}`}
-                    onClick={() => handleUpdate(task)}
-                  >
-                    Update
-                  </Button>
-                  <Button
-                    className={`${styles.taskButton} ${styles.delete}`}
-                    onClick={() => handleOpen(task)}
-                  >
-                    Delete
-                  </Button>
+                  <Tooltip title='Mark Done'>
+                    <IconButton
+                      className={`${styles.taskButton} ${styles.completed}`}
+                    >
+                      <Check />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title='Update Task'>
+                    <IconButton
+                      className={`${styles.taskButton} ${styles.update}`}
+                      onClick={() => handleUpdate(task)}
+                    >
+                      <Edit />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title='View Offers'>
+                    <IconButton
+                      className={`${styles.taskButton} ${styles.offers}`}
+                      href={`/view-offers/${task._id}`}
+                    >
+                      <Ballot />
+                    </IconButton>
+                  </Tooltip>
+
+                  <Tooltip title='Mark task Inactive'>
+                    <IconButton
+                      className={`${styles.taskButton} ${styles.delete}`}
+                      onClick={() => handleOpen(task)}
+                    >
+                      <Clear />
+                    </IconButton>
+                  </Tooltip>
                 </Box>
               </CardContent>
             </Card>

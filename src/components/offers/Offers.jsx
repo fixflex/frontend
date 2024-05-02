@@ -12,7 +12,7 @@ import baseURL from '../../API/baseURL';
 
 const Offers = ({ offer }) => {
   const [taskerName, setTaskerName] = useState('');
-  const userId = '66337ff1814d44d04e138dcc';
+  const userId = '6633dea3b11171618bf7f1da';
 
   useEffect(() => {
     (async () => {

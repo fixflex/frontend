@@ -28,7 +28,6 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [taskDetail, setTaskDetail] = useState('');
   const [taskOffers, setTaskOffers] = useState([]);
-  const [taskerInfo, setTaskerInfo] = useState();
 
   useEffect(() => {
     if (selectedTask && selectedTask._id) {
