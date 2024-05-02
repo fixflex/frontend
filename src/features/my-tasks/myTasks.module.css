@@ -42,6 +42,10 @@
   margin-bottom: 1rem;
 }
 
+.taskCardTitle {
+  font-weight: bold;
+}
+
 .taskUser,
 .taskDueDate,
 .taskLocation,
@@ -64,7 +68,7 @@
 }
 
 .taskButton.completed {
-  background-color: #3f9fcc;
+  background-color: #188653;
 }
 
 .taskButton.update {
@@ -75,8 +79,12 @@
   background-color: #cc282f;
 }
 
+.taskButton.offers {
+  background-color: #3e9fcc;
+}
+
 .taskButton:hover {
-  background-color: #f2cc41;
+  background-color: #f2cc41 !important;
 }
 
 @media (max-width: 600px) {

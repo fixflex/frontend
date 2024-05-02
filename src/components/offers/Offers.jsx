@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -8,53 +8,69 @@ import {
   Box,
 } from '@mui/material';
 import styles from './offers.module.css';
+import baseURL from '../../API/baseURL';
 
-const offers = [
-  {
-    name: 'Alice W.',
-    status: 'New!',
-    availability: 'Tomorrow',
-    description: 'Experienced and detail-oriented professional',
-  },
-  {
-    name: 'John D.',
-    status: 'New!',
-    availability: 'Next week',
-    description: 'Highly motivated and eager to start',
-  },
-  {
-    name: 'Eleanor P.',
-    status: 'New!',
-    availability: 'On-site',
-    description: 'Skilled in on-site project management and coordination',
-  },
-];
+const Offers = ({ offer }) => {
+  const [taskerName, setTaskerName] = useState('');
+  const userId = '6633dea3b11171618bf7f1da';
 
-const Offers = () => {
+  useEffect(() => {
+    (async () => {
+      const response = await baseURL.get(`users/${userId}`);
+
+      console.log(response);
+      if (response.data) {
+        setTaskerName(
+          `${response.data?.data?.firstName} ${response.data?.data?.lastName}`
+        );
+      }
+    })();
+  }, []);
+
+  const formatDateAndTime = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    const formattedDate = date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+    const formattedTime = date
+      .toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      })
+      .toLowerCase();
+    return `${formattedDate} at ${formattedTime}`;
+  };
+
   return (
     <Box sx={{ marginTop: '1.5rem' }}>
       <Typography className={styles.title}>Offers</Typography>
-
-      {offers.map((offer, index) => (
-        <Card key={index} style={{ marginBottom: '1rem' }}>
-          <CardContent>
-            <Grid container spacing={2} alignItems='center'>
-              <Grid item>
-                <Avatar sx={{ backgroundColor: '#272727' }}>
-                  {offer.name[0]}
-                </Avatar>
-              </Grid>
-              <Grid item xs>
-                <Typography variant='h6'>{offer.name}</Typography>
-                <Typography color='textSecondary' gutterBottom>
-                  {offer.status}
-                </Typography>
-                <Typography variant='body2'>{offer.description}</Typography>
-              </Grid>
+      <Card style={{ marginBottom: '1rem' }}>
+        <CardContent>
+          <Grid container spacing={2} alignItems='center'>
+            <Grid item>
+              <Avatar sx={{ backgroundColor: '#272727' }}>
+                {taskerName[0]}
+              </Avatar>
             </Grid>
-          </CardContent>
-        </Card>
-      ))}
+            <Grid item xs>
+              <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
+                {taskerName}
+              </Typography>
+              <Typography
+                color='textSecondary'
+                gutterBottom
+                sx={{ fontSize: 'small', margin: '0.5rem 0' }}
+              >
+                {formatDateAndTime(offer.createdAt)}
+              </Typography>
+              <Typography variant='body3'>{offer.message}</Typography>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
     </Box>
   );
 };

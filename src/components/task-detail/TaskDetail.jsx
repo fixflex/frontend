@@ -8,6 +8,7 @@ import {
   Stack,
   Divider,
   Modal,
+  Card,
 } from '@mui/material';
 import {
   BlurCircular,
@@ -26,6 +27,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
   const isMobile = useMediaQuery('(max-width:600px)');
   const [modalOpen, setModalOpen] = useState(false);
   const [taskDetail, setTaskDetail] = useState('');
+  const [taskOffers, setTaskOffers] = useState([]);
 
   useEffect(() => {
     if (selectedTask && selectedTask._id) {
@@ -33,7 +35,10 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
         try {
           const response = await baseURL.get(`/tasks/${selectedTask._id}`);
           if (response.data.success) {
-            setTaskDetail(response.data.data.details);
+            console.log(response);
+            setTaskDetail(response.data?.data?.details);
+
+            setTaskOffers(response.data?.data?.offersDetails);
           }
         } catch (error) {
           console.error('Failed to fetch tasks:', error);
@@ -238,7 +243,23 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
         </Box>
       </Box>
       <Box>
-        <Offers />
+        {taskOffers.length ? (
+          taskOffers.map((offer) => <Offers key={offer._id} offer={offer} />)
+        ) : (
+          <Box sx={{ marginTop: '1.5rem' }}>
+            <Typography className={styles.title}>Offers</Typography>
+            <Card
+              style={{
+                marginBottom: '1rem',
+                padding: '1rem',
+                fontWeight: 'bold',
+                fontSize: '1rem',
+              }}
+            >
+              No Offers Available Yet !
+            </Card>
+          </Box>
+        )}
       </Box>
     </Paper>
   );
