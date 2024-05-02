@@ -176,15 +176,29 @@ const TaskerOnboarding = () => {
     setIsLoading(true);
 
     try {
-      await baseURL.post('/taskers/become-tasker', requestData);
-      dispatch(
-        setTaskerInfo({
-          specialtyId: selectedCategory.id,
-          isTasker: true,
-        })
-      );
+      const otpResponse = await baseURL.post('/users/verify', {
+        verificationCode: otp,
+      });
 
-      navigate('/browse');
+      console.log(otpResponse);
+
+      if (otpResponse.data.message === 'phone_verified') {
+        const taskerResponse = await baseURL.post(
+          '/taskers/become-tasker',
+          requestData
+        );
+
+        console.log(taskerResponse);
+        dispatch(
+          setTaskerInfo({
+            specialtyId: selectedCategory.id,
+            isTasker: true,
+          })
+        );
+        navigate('/browse');
+      } else {
+        setError('Verification failed. Please check your code and try again.');
+      }
     } catch (error) {
       console.error('Error sending request:', error);
       setError('Failed to submit. Please try again.');

@@ -18,9 +18,10 @@ const Logout = () => {
     localStorage.removeItem('userTasks');
     localStorage.removeItem('taskerInfo');
 
+    navigate('/');
+
     try {
       await baseURL.post('/auth/logout');
-      navigate('/');
       window.location.reload();
     } catch (error) {
       console.error('Logout failed:', error);
