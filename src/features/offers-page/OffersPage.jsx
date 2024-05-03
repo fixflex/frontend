@@ -144,7 +144,7 @@ const OffersPage = () => {
                   <Tooltip title='View Task'>
                     <IconButton
                       className={`${styles.offerButton} ${styles.offers}`}
-                      href={`/view-offers/${offer._id}`}
+                      href={`/browse#${offer.taskId}`}
                     >
                       <Ballot />
                     </IconButton>

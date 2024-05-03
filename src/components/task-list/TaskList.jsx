@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import { selectTask } from './taskSlice';
@@ -24,6 +24,19 @@ const TaskList = ({
   const formatDate = (dueDate) => {
     return dueDate.flexible ? 'Flexible' : dueDate.on;
   };
+
+  useEffect(() => {
+    const { hash } = window.location;
+    console.log(hash);
+    if (hash) {
+      const taskId = hash.slice(1);
+      const taskFromHash = tasks.find((t) => t._id === taskId);
+      dispatch(selectTask(taskFromHash));
+      if (isMobile) {
+        setIsModalOpen(true);
+      }
+    }
+  }, [dispatch, isMobile, setIsModalOpen, tasks]);
 
   // Filtering logic
   const filteredTasks = tasks.filter((task) => {
