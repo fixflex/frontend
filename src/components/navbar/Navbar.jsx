@@ -16,9 +16,11 @@ import styles from './navbar.module.css';
 import logo from '../../images/logo.png';
 import Logout from '../logout/Logout';
 import { Explore, Home, Person, PostAdd, Search } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
 
 const Navbar = ({ isLoggedIn }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const isTasker = useSelector((state) => state.taskerInfo?.isTasker);
 
   const isMobile = useMediaQuery('(max-width:1075px)');
 
@@ -69,10 +71,17 @@ const Navbar = ({ isLoggedIn }) => {
               </Button>
             </ListItem>
             <ListItem>
-              <Button className={styles.navButton} href='my-tasks'>
+              <Button className={styles.navButton} href='/my-tasks'>
                 Tasks
               </Button>
             </ListItem>
+            {isTasker && (
+              <ListItem>
+                <Button className={styles.navButton} href='/offers-page'>
+                  Offers
+                </Button>
+              </ListItem>
+            )}
           </List>
         </Grid>
         {isLoggedIn ? (
@@ -131,6 +140,13 @@ const Navbar = ({ isLoggedIn }) => {
               </Button>
             </ListItem>
           ))}
+          {isTasker && (
+            <ListItem>
+              <Button className={styles.navButton} href='/offers-page'>
+                Offers
+              </Button>
+            </ListItem>
+          )}
           {isLoggedIn ? (
             <Logout />
           ) : (

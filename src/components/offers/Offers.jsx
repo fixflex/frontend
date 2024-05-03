@@ -46,7 +46,6 @@ const Offers = ({ offer }) => {
 
   return (
     <Box sx={{ marginTop: '1.5rem' }}>
-      <Typography className={styles.title}>Offers</Typography>
       <Card style={{ marginBottom: '1rem' }}>
         <CardContent>
           <Grid container spacing={2} alignItems='center'>
