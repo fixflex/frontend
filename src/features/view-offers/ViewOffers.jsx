@@ -279,36 +279,27 @@ const ViewOffers = () => {
                     <Typography
                       variant='h6'
                       gutterBottom
-                      sx={{ color: '#767E84', fontSize: '0.9rem' }}
+                      sx={{
+                        color: '#767E84',
+                        fontSize: '0.9rem',
+                        textAlign: 'center',
+                      }}
                     >
                       TASK BUDGET
                     </Typography>
                     <Typography variant='h4' className={styles.budgetNumber}>
                       {`$ ${offer.price}`}
                     </Typography>
-                    <Box sx={{ display: 'flex' }}>
-                      <Button
-                        variant='contained'
-                        sx={{
-                          backgroundColor: '#1B252E',
-                          borderRadius: '10px',
-                          mt: 2,
-                          mr: 2,
-                        }}
-                      >
-                        Accept
-                      </Button>
-                      <Button
-                        variant='contained'
-                        sx={{
-                          mt: 2,
-                          backgroundColor: '#cc282f',
-                          borderRadius: '10px',
-                        }}
-                      >
-                        Decline
-                      </Button>
-                    </Box>
+                    <Button
+                      variant='contained'
+                      sx={{
+                        backgroundColor: '#1B252E',
+                        borderRadius: '10px',
+                        mt: 2,
+                      }}
+                    >
+                      Accept
+                    </Button>
                   </Box>
                 </CardContent>
               </Card>

@@ -1,0 +1,53 @@
+.chatContainer {
+  display: flex;
+  height: 100vh;
+}
+
+.chatList {
+  width: 300px;
+  overflow: auto;
+}
+
+.chatDetails {
+  flex: 1;
+  display: flex;
+  align-items: center; /* corrected */
+  justify-content: center; /* corrected */
+}
+
+.chatCard {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  background-color: #ffffff;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 10rem;
+  cursor: pointer;
+}
+
+.chatCard:hover {
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.chatCardTitle {
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.chatPaper {
+  padding: 20px;
+  width: 100%; /* corrected */
+  max-width: 600px; /* corrected */
+}
+
+.selectChatMessage {
+  text-align: center; /* corrected */
+  margin-top: 20px; /* corrected */
+}

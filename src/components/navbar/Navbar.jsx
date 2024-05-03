@@ -61,6 +61,11 @@ const Navbar = ({ isLoggedIn }) => {
               </Button>
             </ListItem>
             <ListItem>
+              <Button className={styles.navButton} href='/browse'>
+                Browse
+              </Button>
+            </ListItem>
+            <ListItem>
               <Button className={styles.navButton} href='/account'>
                 Profile
               </Button>
@@ -73,6 +78,11 @@ const Navbar = ({ isLoggedIn }) => {
             <ListItem>
               <Button className={styles.navButton} href='/my-tasks'>
                 Tasks
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button className={styles.navButton} href='/chat'>
+                Chat
               </Button>
             </ListItem>
             {isTasker && (

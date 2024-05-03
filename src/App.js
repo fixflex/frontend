@@ -24,6 +24,7 @@ import TaskerAccountUpdate from './features/update-tasker/TaskerAccountUpdate';
 import UpdateTask from './features/update-task/UpdateTask';
 import ViewOffers from './features/view-offers/ViewOffers';
 import OffersPage from './features/offers-page/OffersPage';
+import Chat from './features/chat/Chat';
 
 function App() {
   const dispatch = useDispatch();
@@ -126,6 +127,10 @@ function App() {
         <Route
           path='/offers-page'
           element={isAuthenticated ? <OffersPage /> : <AuthRedirect />}
+        />
+        <Route
+          path='/chat'
+          element={isAuthenticated ? <Chat /> : <AuthRedirect />}
         />
         <Route path='*' element={<NotFound />} />
       </Routes>
