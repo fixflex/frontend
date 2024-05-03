@@ -1,13 +1,15 @@
 const localStorageMiddleware = (store) => (next) => (action) => {
   const result = next(action);
 
-  // Persistence for userTasks
+  // Persistence for allTasks
   if (
-    action.type === 'userTasks/addTask' ||
-    action.type === 'userTasks/deleteTask'
+    action.type === 'allTasks/addAllTasks' ||
+    action.type === 'allTasks/addTask' ||
+    action.type === 'allTasks/deleteAllTasks' ||
+    action.type === 'allTasks/updateTask'
   ) {
-    const updatedTasks = store.getState().userTasks.tasks;
-    localStorage.setItem('userTasks', JSON.stringify(updatedTasks));
+    const updatedTasks = store.getState().allTasks.tasks;
+    localStorage.setItem('allTasks', JSON.stringify(updatedTasks));
   }
 
   // Persistence for taskerInfo

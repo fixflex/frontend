@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import InputAdornment from '@mui/material/InputAdornment';
 import baseURL from '../../API/baseURL';
+import { addAllTasks } from '../browse/allTasksSlice';
 
 const UpdateTask = () => {
   const { id: taskId } = useParams();
@@ -113,12 +114,29 @@ const UpdateTask = () => {
       updatedFields.budget = budget;
 
     try {
-      const response = await baseURL.patch(`/tasks/${taskId}`, updatedFields);
+      await baseURL.patch(`/tasks/${taskId}`, updatedFields);
 
-      console.log(response);
+      const allTasksRespomse = await baseURL.get('/tasks?limit=9999');
+      if (allTasksRespomse.data.success) {
+        let tasks = allTasksRespomse.data.data;
+
+        tasks = tasks.map((task) => ({
+          ...task,
+          createdAt: task.createdAt
+            ? new Date(task.createdAt).toISOString().slice(0, 10)
+            : new Date().toISOString().slice(0, 10),
+          dueDate: task.dueDate.on
+            ? { ...task.dueDate, on: task.dueDate.on.slice(0, 10) }
+            : task.dueDate,
+        }));
+
+        tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        dispatch(addAllTasks(tasks));
+      }
       setSuccessMessage('Task updated successfully!');
     } catch (error) {
-      console.log('Failed To update the task  :', error);
+      console.error('Failed To update the task  :', error);
       setErrorMessage(error.message);
     }
   };

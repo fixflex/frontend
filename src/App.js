@@ -37,8 +37,8 @@ function App() {
       console.log('user not logged in yet');
     }
 
-    if (!localStorage.getItem('userTasks')) {
-      localStorage.setItem('userTasks', JSON.stringify([]));
+    if (!localStorage.getItem('allTasks')) {
+      localStorage.setItem('allTasks', JSON.stringify([]));
     }
 
     (async () => {

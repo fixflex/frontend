@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, Button, TextField, Box } from '@mui/material';
 import styles from './userAccountUpdate.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import baseURL from '../../API/baseURL';
+import { userLoggedIn } from '../signup/authSlice';
 
 const UserAccountUpdate = () => {
   const [firstName, setFirstName] = useState('');
@@ -12,7 +13,7 @@ const UserAccountUpdate = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.auth?.user);
   const isTasker = useSelector((state) => state.taskerInfo.isTasker);
 
@@ -25,11 +26,10 @@ const UserAccountUpdate = () => {
   }, [userInfo]);
 
   const handleSubmit = async () => {
-    const patchData = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-    };
+    const patchData = {};
+    if (firstName !== userInfo.firstName) patchData.firstName = firstName;
+    if (lastName !== userInfo.lastName) patchData.lastName = lastName;
+    if (email !== userInfo.email) patchData.email = email;
 
     try {
       const response = await baseURL.patch('/users/me', patchData);
@@ -37,10 +37,8 @@ const UserAccountUpdate = () => {
       if (response.data.success) {
         setSuccessMessage('Contact information updated successfully!');
         setErrorMessage('');
-
-        setTimeout(() => {
-          navigate('/browse');
-        }, 1500);
+        localStorage.setItem('user', JSON.stringify(response.data.data));
+        dispatch(userLoggedIn(response.data.data));
       }
     } catch (error) {
       setErrorMessage(error.response?.data?.message || 'An error occurred');

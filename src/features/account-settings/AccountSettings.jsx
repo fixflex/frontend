@@ -40,7 +40,7 @@ const AccountSettings = () => {
         dispatch(userLoggedOut());
         localStorage.removeItem('user');
         localStorage.removeItem('accessToken');
-        localStorage.removeItem('userTasks');
+        localStorage.removeItem('allTasks');
         localStorage.removeItem('taskerInfo');
 
         window.location.reload();
@@ -55,7 +55,7 @@ const AccountSettings = () => {
         dispatch(userLoggedOut());
         localStorage.removeItem('user');
         localStorage.removeItem('accessToken');
-        localStorage.removeItem('userTasks');
+        localStorage.removeItem('allTasks');
         localStorage.removeItem('taskerInfo');
         window.location.reload();
       } catch (error) {
