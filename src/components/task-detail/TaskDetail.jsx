@@ -25,13 +25,21 @@ import { addAllOffers } from '../offers/offersSlice';
 
 const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
   const selectedTask = useSelector((state) => state.task.selectedTask);
+  const userId = useSelector((state) => state.auth.user._id);
   const isMobile = useMediaQuery('(max-width:600px)');
   const [modalOpen, setModalOpen] = useState(false);
   const [taskDetail, setTaskDetail] = useState('');
-  // const [taskOffers, setTaskOffers] = useState([]);
+  const [offerMade, setOfferMade] = useState(false);
   const taskOffers = useSelector((state) => state.offers.offers);
 
   const dispatch = useDispatch();
+
+  function handleSetAllOffers(arrayOfOffers) {
+    dispatch(addAllOffers(arrayOfOffers));
+    setOfferMade(
+      arrayOfOffers.some((offer) => offer?.taskerId?.userId?._id === userId)
+    );
+  }
 
   useEffect(() => {
     if (selectedTask && selectedTask._id) {
@@ -42,7 +50,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
             console.log(response.data?.data);
             setTaskDetail(response.data?.data?.details);
 
-            dispatch(addAllOffers(response.data?.data?.offersDetails));
+            handleSetAllOffers(response.data?.data?.offersDetails);
           }
         } catch (error) {
           console.error('Failed to fetch tasks:', error);
@@ -75,7 +83,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
           `/tasks/${selectedTask._id}`
         );
         if (allOffersResponse.data.success) {
-          dispatch(addAllOffers(allOffersResponse.data?.data?.offersDetails));
+          handleSetAllOffers(allOffersResponse.data?.data?.offersDetails);
         }
       }
     } catch (error) {
@@ -235,14 +243,23 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
           <Typography variant='h4' className={styles.budgetNumber}>
             ${selectedTask.budget}
           </Typography>
-          <Button
-            variant='contained'
-            sx={{ mt: 2 }}
-            className={styles.offerButton}
-            onClick={handleOpenModal}
-          >
-            Make an offer
-          </Button>
+          {offerMade ? (
+            <Typography
+              variant='h6'
+              sx={{ color: '#767E84', fontSize: '0.9rem' }}
+            >
+              Offer Pending
+            </Typography>
+          ) : (
+            <Button
+              variant='contained'
+              sx={{ mt: 2 }}
+              className={styles.offerButton}
+              onClick={handleOpenModal}
+            >
+              Make an offer
+            </Button>
+          )}
 
           <OfferModal
             open={modalOpen}
