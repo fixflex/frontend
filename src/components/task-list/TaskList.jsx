@@ -27,7 +27,6 @@ const TaskList = ({
 
   useEffect(() => {
     const { hash } = window.location;
-    console.log(hash);
     if (hash) {
       const taskId = hash.slice(1);
       const taskFromHash = tasks.find((t) => t._id === taskId);

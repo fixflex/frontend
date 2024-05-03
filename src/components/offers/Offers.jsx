@@ -12,19 +12,12 @@ import baseURL from '../../API/baseURL';
 
 const Offers = ({ offer }) => {
   const [taskerName, setTaskerName] = useState('');
-  const userId = '6633dea3b11171618bf7f1da';
 
   useEffect(() => {
-    (async () => {
-      const response = await baseURL.get(`users/${userId}`);
-
-      console.log(response);
-      if (response.data) {
-        setTaskerName(
-          `${response.data?.data?.firstName} ${response.data?.data?.lastName}`
-        );
-      }
-    })();
+    if (offer?.taskerId?.userId) {
+      const userData = offer.taskerId.userId;
+      setTaskerName(`${userData.firstName} ${userData.lastName}`);
+    }
   }, []);
 
   const formatDateAndTime = (dateTimeString) => {

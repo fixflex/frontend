@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Box,
   Typography,
@@ -21,13 +21,17 @@ import Offers from '../offers/Offers';
 import OfferModal from '../offer-modal/OfferModal';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import baseURL from '../../API/baseURL';
+import { addAllOffers } from '../offers/offersSlice';
 
 const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
   const selectedTask = useSelector((state) => state.task.selectedTask);
   const isMobile = useMediaQuery('(max-width:600px)');
   const [modalOpen, setModalOpen] = useState(false);
   const [taskDetail, setTaskDetail] = useState('');
-  const [taskOffers, setTaskOffers] = useState([]);
+  // const [taskOffers, setTaskOffers] = useState([]);
+  const taskOffers = useSelector((state) => state.offers.offers);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (selectedTask && selectedTask._id) {
@@ -35,10 +39,10 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
         try {
           const response = await baseURL.get(`/tasks/${selectedTask._id}`);
           if (response.data.success) {
-            console.log(response);
+            console.log(response.data?.data);
             setTaskDetail(response.data?.data?.details);
 
-            setTaskOffers(response.data?.data?.offersDetails);
+            dispatch(addAllOffers(response.data?.data?.offersDetails));
           }
         } catch (error) {
           console.error('Failed to fetch tasks:', error);
@@ -67,7 +71,12 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
       });
 
       if (response) {
-        console.log(response.data);
+        const allOffersResponse = await baseURL.get(
+          `/tasks/${selectedTask._id}`
+        );
+        if (allOffersResponse.data.success) {
+          dispatch(addAllOffers(allOffersResponse.data?.data?.offersDetails));
+        }
       }
     } catch (error) {
       console.log('error making an offer : ', error);
