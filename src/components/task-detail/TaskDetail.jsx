@@ -243,11 +243,14 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
         </Box>
       </Box>
       <Box>
+        <Typography className={styles.title} mt={1}>
+          Offers
+        </Typography>
+
         {taskOffers.length ? (
           taskOffers.map((offer) => <Offers key={offer._id} offer={offer} />)
         ) : (
           <Box sx={{ marginTop: '1.5rem' }}>
-            <Typography className={styles.title}>Offers</Typography>
             <Card
               style={{
                 marginBottom: '1rem',

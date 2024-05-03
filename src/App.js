@@ -23,6 +23,7 @@ import ChangePassword from './features/change-password/ChangePassword';
 import TaskerAccountUpdate from './features/update-tasker/TaskerAccountUpdate';
 import UpdateTask from './features/update-task/UpdateTask';
 import ViewOffers from './features/view-offers/ViewOffers';
+import OffersPage from './features/offers-page/OffersPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -121,6 +122,10 @@ function App() {
         <Route
           path='/view-offers/:id'
           element={isAuthenticated ? <ViewOffers /> : <AuthRedirect />}
+        />
+        <Route
+          path='/offers-page'
+          element={isAuthenticated ? <OffersPage /> : <AuthRedirect />}
         />
         <Route path='*' element={<NotFound />} />
       </Routes>

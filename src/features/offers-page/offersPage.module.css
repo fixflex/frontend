@@ -1,0 +1,95 @@
+.myOffers {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.title {
+  margin-bottom: 0.5rem !important;
+  font-weight: bold !important;
+}
+
+.subtitle {
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+.offerListContainer {
+  width: 100%;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.offerCard {
+  display: flex;
+  flex-direction: column;
+  box-shadow: none !important;
+  border: 1px solid #ddd !important;
+  border-radius: 10px !important;
+  transition: transform 0.3s !important;
+  height: 100%; /* Make cards of equal height */
+}
+
+.offerCard:hover {
+  transform: scale(1.03) !important;
+}
+
+.offerCardTitle,
+.offerUser,
+.offerDueDate {
+  margin-bottom: 1rem;
+}
+
+.offerCardTitle {
+  font-weight: bold;
+}
+
+.offerUser,
+.offerDueDate,
+.offerActions {
+  display: flex;
+  align-items: center;
+}
+
+.offerUser svg,
+.offerDueDate svg {
+  margin-right: 0.5rem !important;
+}
+
+.offerButton {
+  flex-grow: 1 !important;
+  margin: 0 4px !important;
+  border-radius: 10px !important;
+  color: white !important;
+}
+
+.offerButton.completed {
+  background-color: #188653;
+}
+
+.offerButton.update {
+  background-color: #212121;
+}
+
+.offerButton.delete {
+  background-color: #cc282f;
+}
+
+.offerButton.offers {
+  background-color: #3e9fcc;
+}
+
+.offerButton:hover {
+  background-color: #f2cc41 !important;
+}
+
+@media (max-width: 600px) {
+  .offerActions {
+    flex-direction: column;
+  }
+  .offerButton {
+    width: 100%;
+    margin: 0.2rem 0 !important;
+  }
+}
