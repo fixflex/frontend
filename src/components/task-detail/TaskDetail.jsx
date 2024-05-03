@@ -57,6 +57,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
         }
       })();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTask]);
 
   const handleOpenModal = () => {

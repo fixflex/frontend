@@ -7,8 +7,6 @@ import {
   Grid,
   Box,
 } from '@mui/material';
-import styles from './offers.module.css';
-import baseURL from '../../API/baseURL';
 
 const Offers = ({ offer }) => {
   const [taskerName, setTaskerName] = useState('');
@@ -18,7 +16,7 @@ const Offers = ({ offer }) => {
       const userData = offer.taskerId.userId;
       setTaskerName(`${userData.firstName} ${userData.lastName}`);
     }
-  }, []);
+  }, [offer.taskerId.userId]);
 
   const formatDateAndTime = (dateTimeString) => {
     const date = new Date(dateTimeString);

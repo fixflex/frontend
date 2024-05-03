@@ -19,20 +19,18 @@ import styles from './offersPage.module.css';
 import {
   Ballot,
   CalendarMonth,
-  Check,
   Clear,
   Edit,
   HourglassBottom,
   HourglassFull,
   Money,
-  Person2,
 } from '@mui/icons-material';
 
 const OffersPage = () => {
   const [offers, setOffers] = useState([]);
   const [taskerID, setTaskerID] = useState('');
   const [open, setOpen] = useState(false);
-  const [selectedOffer, setSelectedOffer] = useState(null);
+  const [setSelectedOffer] = useState(null);
 
   const formatDateAndTime = (dateTimeString) => {
     const date = new Date(dateTimeString);

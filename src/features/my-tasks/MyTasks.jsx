@@ -24,7 +24,7 @@ import {
   Clear,
   Ballot,
 } from '@mui/icons-material';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 import styles from './myTasks.module.css';
 import baseURL from '../../API/baseURL';
@@ -42,7 +42,6 @@ const TaskLocation = ({ task }) => (
 const MyTasks = () => {
   const [open, setOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const tasks = useSelector((state) => state.allTasks.tasks);
   const myId = useSelector((state) => state.auth.user._id);
