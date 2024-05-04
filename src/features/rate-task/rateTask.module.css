@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.myTasks {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f9f3ef;
+  padding: 5% 10%;
+  border-radius: 25px;
+  align-items: center;
+  margin: 4rem auto;
+  width: 70%;
+}
+
+.title,
+.subtitle,
+.cardContainer,
+.infoSection,
+.budgetBox {
+  transition: all 0.3s ease-in-out;
+}
+
+.title {
+  font-size: 2rem;
+  color: #333;
+  font-family: Anton, sans-serif !important;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.cardContainer {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 2rem;
+}
+
+.budgetBox {
+  background-color: #f3f3f7;
+  padding: 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 25px;
+  max-height: 9rem;
+}
+
+.budgetNumber {
+  font-family: Anton, sans-serif !important;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+}
+
+.taskButton {
+  flex-grow: 1 !important;
+  margin: 0 4px !important;
+  border-radius: 10px !important;
+  color: white !important;
+}
+
+.taskButton.offers {
+  background-color: #3e9fcc;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .myTasks {
+    flex-direction: column !important;
+    width: 90%;
+    padding: 5%;
+  }
+
+  .cardContainer {
+    margin: 1rem auto;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .budgetBox {
+    padding: 1rem 2rem;
+  }
+
+  .budgetNumber {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle,
+  .infoLabel,
+  .infoContent {
+    font-size: 0.8rem;
+  }
+
+  .budgetNumber {
+    font-size: 1.75rem;
+  }
+
+  .budgetBox {
+    padding: 1rem;
+    max-height: 7rem;
+  }
+
+  .cardContainer {
+    margin: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardContainer {
+    flex-direction: column !important;
+  }
+  .myTasks {
+    padding: 10px;
+    margin: 2rem auto !important;
+  }
+
+  .title,
+  .subtitle {
+    text-align: center !important;
+  }
+
+  .budgetNumber {
+    font-size: 1.5rem !important;
+  }
+
+  .budgetBox {
+    margin-top: 1rem !important;
+  }
+}

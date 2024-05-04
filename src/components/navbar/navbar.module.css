@@ -7,7 +7,7 @@
     rgba(27, 37, 46, 1) 35%,
     rgba(64, 163, 209, 1) 100%
   );
-  padding: 2em 12em 1em;
+  padding: 2rem;
   display: flex !important;
   justify-content: space-evenly !important;
 }
