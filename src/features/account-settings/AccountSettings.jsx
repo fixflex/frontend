@@ -31,40 +31,24 @@ const AccountSettings = () => {
   };
 
   const handleDeleteAccount = async () => {
-    // Add code to delete account here
-    if (isTasker) {
-      try {
-        const response = await baseURL.delete('/taskers/me');
-        console.log(response);
-        navigate('/');
-        dispatch(userLoggedOut());
-        localStorage.removeItem('user');
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('allTasks');
-        localStorage.removeItem('taskerInfo');
-
-        window.location.reload();
-      } catch (error) {
-        console.error('Delete Tasker failed:', error);
-      }
-    } else if (!isTasker) {
-      try {
-        const response = await baseURL.delete('/users/me');
-        console.log(response);
-        navigate('/');
-        dispatch(userLoggedOut());
-        localStorage.removeItem('user');
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('allTasks');
-        localStorage.removeItem('taskerInfo');
-        window.location.reload();
-      } catch (error) {
-        console.error('Delete Tasker failed:', error);
-      }
+    try {
+      const response = await baseURL.patch('/users/me', {
+        active: false,
+      });
+      console.log(response);
+      navigate('/');
+      dispatch(userLoggedOut());
+      localStorage.removeItem('user');
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('allTasks');
+      localStorage.removeItem('taskerInfo');
+      window.location.reload();
+    } catch (error) {
+      console.error('Delete Tasker failed:', error);
     }
-
-    handleClose();
   };
+
+  handleClose();
 
   return (
     <Container
@@ -195,7 +179,7 @@ const AccountSettings = () => {
               }}
               onClick={handleOpen}
             >
-              Delete Account
+              Deactivate Account
             </Button>
           </ListItem>
         </List>
@@ -226,7 +210,7 @@ const AccountSettings = () => {
               component='h2'
               sx={{ fontWeight: 'bold' }}
             >
-              Are you sure you'd like to delete your account?
+              Are you sure you'd like to deactivate your account?
             </Typography>
             <Box mt={2}>
               <Button
