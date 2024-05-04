@@ -67,9 +67,9 @@ const MyTasks = () => {
   const handleDelete = async () => {
     if (selectedTask) {
       try {
-        const response = await baseURL.patch(`/tasks/${selectedTask._id}`, {
-          status: 'CANCELLED',
-        });
+        const response = await baseURL.patch(
+          `/tasks/${selectedTask._id}/cancel`
+        );
         console.log(response);
         if (response.status === 200) {
           dispatch(deleteTask(selectedTask._id));
