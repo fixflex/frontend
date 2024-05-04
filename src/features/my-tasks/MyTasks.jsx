@@ -135,16 +135,17 @@ const MyTasks = () => {
                 </Box>
                 <TaskLocation task={task} />
                 {task.status === 'COMPLETED' ? (
-                  <Box className={styles.taskActions}>
-                    <Tooltip title='Task Was Completed Successfully!'>
-                      <IconButton
-                        className={`${styles.taskButton} ${styles.completed}`}
-                        disabled
-                      >
-                        <Check />
-                      </IconButton>
-                    </Tooltip>
-                  </Box>
+                  <Typography
+                    sx={{
+                      textAlign: 'center',
+                      backgroundColor: '#188653',
+                      color: 'white',
+                      padding: '0.5rem',
+                      borderRadius: '10px',
+                    }}
+                  >
+                    Task Completed Successfully!
+                  </Typography>
                 ) : (
                   <Box className={styles.taskActions}>
                     <Tooltip title='Mark Done'>
