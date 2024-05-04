@@ -18,6 +18,11 @@ export const allTasksSlice = createSlice({
       state.tasks.push(action.payload);
       localStorage.setItem('allTasks', JSON.stringify(state.tasks));
     },
+    deleteTask: (state, action) => {
+      const taskId = action.payload;
+      state.tasks = state.tasks.filter((task) => task._id !== taskId);
+      localStorage.setItem('allTasks', JSON.stringify(state.tasks));
+    },
     deleteAllTasks: (state) => {
       state.tasks = [];
       localStorage.setItem('allTasks', JSON.stringify(state.tasks));
@@ -35,7 +40,7 @@ export const allTasksSlice = createSlice({
   },
 });
 
-export const { updateTask, addTask, addAllTasks, deleteAllTasks } =
+export const { updateTask, addTask, addAllTasks, deleteAllTasks, deleteTask } =
   allTasksSlice.actions;
 
 export default allTasksSlice.reducer;

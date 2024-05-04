@@ -24,11 +24,12 @@ import {
   Clear,
   Ballot,
 } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 import styles from './myTasks.module.css';
 import baseURL from '../../API/baseURL';
 import { useNavigate } from 'react-router-dom';
+import { deleteTask } from '../browse/allTasksSlice';
 
 const TaskLocation = ({ task }) => (
   <Box className={styles.taskLocation}>
@@ -46,7 +47,11 @@ const MyTasks = () => {
   const tasks = useSelector((state) => state.allTasks.tasks);
   const myId = useSelector((state) => state.auth.user._id);
 
-  const filteredTasks = tasks.filter((task) => task.userId._id === myId);
+  const dispatch = useDispatch();
+
+  const filteredTasks = tasks.filter(
+    (task) => task.userId._id === myId && task.status !== 'CANCELLED'
+  );
   const formatDate = (dueDate) =>
     dueDate.flexible ? 'Flexible' : dayjs(dueDate.on).format('MMM D, YYYY');
 
@@ -62,10 +67,12 @@ const MyTasks = () => {
   const handleDelete = async () => {
     if (selectedTask) {
       try {
-        const response = await baseURL.delete(`/tasks/${selectedTask._id}`);
+        const response = await baseURL.patch(`/tasks/${selectedTask._id}`, {
+          status: 'CANCELLED',
+        });
         console.log(response);
         if (response.status === 200) {
-          // dispatch(deleteTask(selectedTask._id));
+          dispatch(deleteTask(selectedTask._id));
           handleClose();
         }
       } catch (error) {
