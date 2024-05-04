@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import baseURL from '../../API/baseURL';
 import {
   AttachMoney,
@@ -25,6 +25,8 @@ const ViewOffers = () => {
   const { id } = useParams();
   const [taskInfo, setTaskInfo] = useState('');
   const [offers, setOffers] = useState([]);
+
+  const navigate = useNavigate();
 
   const formatDateAndTime = (dateTimeString) => {
     const date = new Date(dateTimeString);
@@ -41,6 +43,22 @@ const ViewOffers = () => {
       })
       .toLowerCase();
     return `${formattedDate} at ${formattedTime}`;
+  };
+  const handleAcceptOffer = async (offer) => {
+    const offerId = offer._id;
+    const taserId = offer.taskerId?.userId?._id;
+    if (!offerId || !taserId) return;
+    try {
+      await baseURL.patch(`/offers/${offerId}/accept`);
+      const response = await baseURL.post(`/chats`, { tasker: taserId });
+      console.log(response);
+      if (response?.data?.data) {
+        const chatId = response?.data?.data?._id;
+        navigate(`/chat#${chatId}`);
+      }
+    } catch (error) {
+      console.error('Error Message:', error);
+    }
   };
 
   useEffect(() => {
@@ -297,6 +315,7 @@ const ViewOffers = () => {
                         borderRadius: '10px',
                         mt: 2,
                       }}
+                      onClick={() => handleAcceptOffer(offer)}
                     >
                       Accept
                     </Button>
