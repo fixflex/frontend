@@ -25,6 +25,7 @@ import UpdateTask from './features/update-task/UpdateTask';
 import ViewOffers from './features/view-offers/ViewOffers';
 import OffersPage from './features/offers-page/OffersPage';
 import Chat from './features/chat/Chat';
+import RateTask from './features/rate-task/RateTask';
 
 function App() {
   const dispatch = useDispatch();
@@ -131,6 +132,10 @@ function App() {
         <Route
           path='/chat'
           element={isAuthenticated ? <Chat /> : <AuthRedirect />}
+        />
+        <Route
+          path='/rate-task/:id'
+          element={isAuthenticated ? <RateTask /> : <AuthRedirect />}
         />
         <Route path='*' element={<NotFound />} />
       </Routes>

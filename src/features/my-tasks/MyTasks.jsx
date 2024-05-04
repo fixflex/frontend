@@ -86,6 +86,11 @@ const MyTasks = () => {
     navigate(`/update-task/${task._id}`); // Navigate using the selected task's ID
   };
 
+  const handleComplete = (task) => {
+    setSelectedTask(task); // Set the selected task
+    navigate(`/rate-task/${task._id}`);
+  };
+
   return (
     <Box className={styles.myTasks}>
       <Typography variant='h4' className={styles.title}>
@@ -119,6 +124,7 @@ const MyTasks = () => {
                   <Tooltip title='Mark Done'>
                     <IconButton
                       className={`${styles.taskButton} ${styles.completed}`}
+                      onClick={() => handleComplete(task)}
                     >
                       <Check />
                     </IconButton>
