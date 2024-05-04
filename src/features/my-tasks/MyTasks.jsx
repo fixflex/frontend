@@ -29,7 +29,7 @@ import dayjs from 'dayjs';
 import styles from './myTasks.module.css';
 import baseURL from '../../API/baseURL';
 import { useNavigate } from 'react-router-dom';
-import { deleteTask } from '../browse/allTasksSlice';
+import { deleteTask, updateTask } from '../browse/allTasksSlice';
 
 const TaskLocation = ({ task }) => (
   <Box className={styles.taskLocation}>
@@ -82,13 +82,27 @@ const MyTasks = () => {
   };
 
   const handleUpdate = (task) => {
-    setSelectedTask(task); // Set the selected task
-    navigate(`/update-task/${task._id}`); // Navigate using the selected task's ID
+    setSelectedTask(task);
+    navigate(`/update-task/${task._id}`);
   };
 
-  const handleComplete = (task) => {
-    setSelectedTask(task); // Set the selected task
-    navigate(`/rate-task/${task._id}`);
+  const handleComplete = async (task) => {
+    setSelectedTask(task);
+    try {
+      const markCompleted = await baseURL.patch(`/tasks/${task._id}/complete`);
+
+      if (markCompleted.status === 200) {
+        dispatch(
+          updateTask({
+            status: 'COMPLETED',
+          })
+        );
+
+        navigate(`/rate-task/${task._id}`);
+      }
+    } catch (error) {
+      console.error('There was an error marking your task completed : ', error);
+    }
   };
 
   return (
@@ -120,41 +134,54 @@ const MyTasks = () => {
                   </Typography>
                 </Box>
                 <TaskLocation task={task} />
-                <Box className={styles.taskActions}>
-                  <Tooltip title='Mark Done'>
-                    <IconButton
-                      className={`${styles.taskButton} ${styles.completed}`}
-                      onClick={() => handleComplete(task)}
-                    >
-                      <Check />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title='Update Task'>
-                    <IconButton
-                      className={`${styles.taskButton} ${styles.update}`}
-                      onClick={() => handleUpdate(task)}
-                    >
-                      <Edit />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title='View Offers'>
-                    <IconButton
-                      className={`${styles.taskButton} ${styles.offers}`}
-                      href={`/view-offers/${task._id}`}
-                    >
-                      <Ballot />
-                    </IconButton>
-                  </Tooltip>
+                {task.status === 'COMPLETED' ? (
+                  <Box className={styles.taskActions}>
+                    <Tooltip title='Task Was Completed Successfully!'>
+                      <IconButton
+                        className={`${styles.taskButton} ${styles.completed}`}
+                        disabled
+                      >
+                        <Check />
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                ) : (
+                  <Box className={styles.taskActions}>
+                    <Tooltip title='Mark Done'>
+                      <IconButton
+                        className={`${styles.taskButton} ${styles.completed}`}
+                        onClick={() => handleComplete(task)}
+                      >
+                        <Check />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title='Update Task'>
+                      <IconButton
+                        className={`${styles.taskButton} ${styles.update}`}
+                        onClick={() => handleUpdate(task)}
+                      >
+                        <Edit />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title='View Offers'>
+                      <IconButton
+                        className={`${styles.taskButton} ${styles.offers}`}
+                        href={`/view-offers/${task._id}`}
+                      >
+                        <Ballot />
+                      </IconButton>
+                    </Tooltip>
 
-                  <Tooltip title='Mark task Inactive'>
-                    <IconButton
-                      className={`${styles.taskButton} ${styles.delete}`}
-                      onClick={() => handleOpen(task)}
-                    >
-                      <Clear />
-                    </IconButton>
-                  </Tooltip>
-                </Box>
+                    <Tooltip title='Mark task Inactive'>
+                      <IconButton
+                        className={`${styles.taskButton} ${styles.delete}`}
+                        onClick={() => handleOpen(task)}
+                      >
+                        <Clear />
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                )}
               </CardContent>
             </Card>
           </Grid>

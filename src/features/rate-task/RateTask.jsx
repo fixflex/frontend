@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import baseURL from '../../API/baseURL';
 import {
   AttachMoney,
@@ -34,6 +34,8 @@ const RateTask = () => {
   const handleRatingChange = (event, newValue) => {
     setTaskerRating(newValue);
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -78,7 +80,15 @@ const RateTask = () => {
   };
 
   const handleSubmitReview = async () => {
-    console.log(taskerRating);
+    try {
+      await baseURL.post(`/tasks/${task._id}/reviews`, {
+        review: 'this is a review filler',
+        rating: taskerRating,
+      });
+      navigate('/my-tasks');
+    } catch (error) {
+      console.error('there was an error rating your tasker ', error);
+    }
   };
 
   return (
