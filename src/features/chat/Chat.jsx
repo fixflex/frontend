@@ -1,27 +1,60 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { io } from 'socket.io-client';
 import { Avatar, Box, TextField, Button, Typography } from '@mui/material';
 import styles from './chat.module.css';
 import baseURL from '../../API/baseURL';
 import { useSelector } from 'react-redux';
+
+const socket = io('wss://fixflex.onrender.com', {
+  extraHeaders: {
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+  },
+});
 
 const Chat = () => {
   const user = useSelector((state) => state.auth.user);
   const [allChats, setAllChats] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [message, setMessage] = useState('');
+  const messageListRef = useRef(null);
+  const selectedChatRef = useRef(selectedChat);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await baseURL.get('/chats');
-        if (response?.data?.results) {
-          formatChat(response.data.data);
-        }
-      } catch (error) {
-        console.error('Error fetching chats:', error);
-      }
-    })();
+    selectedChatRef.current = selectedChat;
+  }, [selectedChat]);
+
+  useEffect(() => {
+    socket.on('connect', () => {
+      socket.emit('joinMyRoom');
+      getAllChats();
+    });
+
+    socket.on('message', (value) => {
+      receiveMessage(value);
+    });
+
+    return () => {
+      socket.off('connect');
+      socket.off('message');
+    };
   }, []);
+
+  useEffect(() => {
+    if (messageListRef.current) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
+  }, [selectedChat?.messages]);
+
+  const getAllChats = async () => {
+    try {
+      const response = await baseURL.get('/chats');
+      if (response?.data?.results) {
+        formatChat(response.data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching chats:', error);
+    }
+  };
 
   const formatChat = async (chats) => {
     const transformedChats = await Promise.all(
@@ -56,11 +89,10 @@ const Chat = () => {
   };
 
   const handleSelectChat = async (chat) => {
-    console.log(chat);
     if (!chat) return;
     try {
       const response = await baseURL.get(`/messages/chat/${chat.chatId}`);
-      console.log(response);
+      socket.emit('joinChatRoom', chat.chatId);
       if (response?.data) {
         const messageData = response.data.data.map((msg) => ({
           ...msg,
@@ -104,6 +136,26 @@ const Chat = () => {
     }
   };
 
+  const receiveMessage = (messageData) => {
+    const currentChat = selectedChatRef.current;
+
+    if (messageData.sender === user._id || !currentChat) return;
+
+    if (messageData.chatId !== currentChat.chatId) return;
+
+    const newMessage = {
+      ...messageData,
+      sender:
+        messageData.sender === user._id
+          ? `${user.firstName} ${user.lastName}`
+          : currentChat.recipient,
+    };
+    setSelectedChat({
+      ...currentChat,
+      messages: [...currentChat.messages, newMessage],
+    });
+  };
+
   const getInitials = (recipient) =>
     recipient
       .split(' ')
@@ -142,7 +194,7 @@ const Chat = () => {
         </Box>
         {selectedChat ? (
           <>
-            <Box className={styles.messageList}>
+            <Box className={styles.messageList} ref={messageListRef}>
               {selectedChat.messages.map((msg, index) => (
                 <Box
                   key={index}
