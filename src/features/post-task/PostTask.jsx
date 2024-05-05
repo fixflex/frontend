@@ -22,7 +22,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Laptop, LocationOn, Place } from '@mui/icons-material';
 import { egyptGovernorates } from '../../utils/gov';
 import baseURL from '../../API/baseURL';
-import { addTask } from './taskSlice';
+import { addTask } from '../browse/allTasksSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
