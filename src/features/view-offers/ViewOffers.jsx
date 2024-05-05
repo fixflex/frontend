@@ -53,8 +53,7 @@ const ViewOffers = () => {
       const response = await baseURL.post(`/chats`, { tasker: taserId });
       console.log(response);
       if (response?.data?.data) {
-        const chatId = response?.data?.data?._id;
-        navigate(`/chat#${chatId}`);
+        navigate(`/chat`);
       }
     } catch (error) {
       console.error('Error Message:', error);
