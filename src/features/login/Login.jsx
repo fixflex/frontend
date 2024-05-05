@@ -80,7 +80,7 @@ const Login = () => {
         );
       }
 
-      navigate('/browse');
+      navigate('/discover');
     } catch (error) {
       if (error.response) {
         setLoginError(

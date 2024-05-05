@@ -89,7 +89,7 @@ const Signup = () => {
     if (userType === 'tasker') {
       navigate('/tasker-onboarding');
     } else if (userType === 'user') {
-      navigate('/browse');
+      navigate('/discover');
     }
   };
 
