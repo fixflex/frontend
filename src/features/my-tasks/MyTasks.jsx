@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -29,7 +29,7 @@ import dayjs from 'dayjs';
 import styles from './myTasks.module.css';
 import baseURL from '../../API/baseURL';
 import { useNavigate } from 'react-router-dom';
-import { deleteTask, updateTask } from '../browse/allTasksSlice';
+import { addAllTasks, deleteTask, updateTask } from '../browse/allTasksSlice';
 
 const TaskLocation = ({ task }) => (
   <Box className={styles.taskLocation}>
@@ -44,12 +44,43 @@ const MyTasks = () => {
   const [open, setOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const navigate = useNavigate();
-  const tasks = useSelector((state) => state.allTasks.tasks);
+  const [allTasks, setAllTasks] = useState([]);
+
   const myId = useSelector((state) => state.auth.user._id);
 
   const dispatch = useDispatch();
 
-  const filteredTasks = tasks.filter(
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await baseURL.get('/tasks?limit=9999');
+        if (response.data.success) {
+          let tasks = response.data.data;
+
+          tasks = tasks.map((task) => ({
+            ...task,
+            createdAt: task.createdAt
+              ? new Date(task.createdAt).toISOString().slice(0, 10)
+              : new Date().toISOString().slice(0, 10),
+            dueDate: task.dueDate.on
+              ? { ...task.dueDate, on: task.dueDate.on.slice(0, 10) }
+              : task.dueDate,
+          }));
+
+          tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+          dispatch(addAllTasks(tasks));
+          setAllTasks(tasks);
+        } else {
+          throw new Error(response.data.message || 'Failed to fetch tasks');
+        }
+      } catch (error) {
+        console.error('Failed to fetch tasks:', error);
+      }
+    })();
+  }, [dispatch]);
+
+  const filteredTasks = allTasks.filter(
     (task) => task.userId._id === myId && task.status !== 'CANCELLED'
   );
   const formatDate = (dueDate) =>
