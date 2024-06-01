@@ -47,10 +47,12 @@ function App() {
       try {
         const response = (await baseURL.get('/categories')).data.data;
 
-        const filteredCategories = response.map((category) => ({
-          name: category.name.en,
-          id: category._id,
-        }));
+        const filteredCategories = response
+          .map((category) => ({
+            name: category.name.en === 'More' ? 'Other' : category.name.en,
+            id: category._id,
+          }))
+          .sort((a, b) => a.name.localeCompare(b.name));
 
         dispatch(setCategories(filteredCategories));
       } catch (error) {
@@ -78,7 +80,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route
-          path='/discover'
+          path='/assistant'
           element={isAuthenticated ? <Discover /> : <AuthRedirect />}
         />
         <Route

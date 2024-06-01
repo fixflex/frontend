@@ -48,8 +48,6 @@ const AccountSettings = () => {
     }
   };
 
-  handleClose();
-
   return (
     <Container
       sx={{

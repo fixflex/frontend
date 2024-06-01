@@ -15,8 +15,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import styles from './navbar.module.css';
 import logo from '../../images/logo.png';
 import Logout from '../logout/Logout';
-import { Explore, Home, Person, PostAdd, Search } from '@mui/icons-material';
+import { Home, Person, PostAdd, Search, SmartToy } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
+import Offers from '../offers/Offers';
 
 const Navbar = ({ isLoggedIn }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -56,8 +57,8 @@ const Navbar = ({ isLoggedIn }) => {
         <Grid item>
           <List className={styles.navList}>
             <ListItem>
-              <Button className={styles.navButton} href='/discover'>
-                Discover
+              <Button className={styles.navButton} href='/assistant'>
+                Assistant
               </Button>
             </ListItem>
             <ListItem>
@@ -71,7 +72,7 @@ const Navbar = ({ isLoggedIn }) => {
               </Button>
             </ListItem>
             <ListItem>
-              <Button className={styles.navButton} href='/browse'>
+              <Button className={styles.navButton} href='/post-task'>
                 Post
               </Button>
             </ListItem>
@@ -134,11 +135,14 @@ const Navbar = ({ isLoggedIn }) => {
       <Drawer anchor='right' open={drawerOpen} onClose={toggleDrawer(false)}>
         <List className={styles.drawerList}>
           {[
-            { text: 'Discover', icon: <Explore />, link: '/browse' },
-            { text: 'Browse', icon: <Search />, link: '/discover' },
+            { text: 'Assistant', icon: <SmartToy />, link: '/assistant' },
+            { text: 'Browse', icon: <Search />, link: '/browse' },
             { text: 'Post', icon: <PostAdd />, link: '/post-task' },
             { text: 'Profile', icon: <Person />, link: '/account' },
             { text: 'Home', icon: <Home />, link: '/' },
+            ...(isTasker
+              ? [{ text: 'Offers', icon: <Offers />, link: '/offers-page' }]
+              : []),
           ].map((item) => (
             <ListItem button key={item.text}>
               <Button

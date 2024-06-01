@@ -101,10 +101,18 @@ const Profile = () => {
             stuff. Let's post a task or make an offer!
           </Typography>
           <Box sx={{ display: 'flex', margin: '1rem 0' }}>
-            <Button variant='text' className={styles.notificationsButton}>
+            <Button
+              variant='text'
+              className={styles.notificationsButton}
+              href='/post-task'
+            >
               Post a task
             </Button>
-            <Button variant='text' className={styles.notificationsButton}>
+            <Button
+              variant='text'
+              className={styles.notificationsButton}
+              href='/browse'
+            >
               Browse tasks
             </Button>
           </Box>

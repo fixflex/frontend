@@ -43,7 +43,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (loggedInUser) {
-      navigate('/discover');
+      navigate('/browse');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -89,7 +89,7 @@ const Signup = () => {
     if (userType === 'tasker') {
       navigate('/tasker-onboarding');
     } else if (userType === 'user') {
-      navigate('/discover');
+      navigate('/browse');
     }
   };
 

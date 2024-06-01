@@ -43,7 +43,7 @@ const Login = () => {
 
   useEffect(() => {
     if (loggedInUser) {
-      navigate('/discover');
+      navigate('/browse');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -80,7 +80,7 @@ const Login = () => {
         );
       }
 
-      navigate('/discover');
+      navigate('/browse');
     } catch (error) {
       if (error.response) {
         setLoginError(

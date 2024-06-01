@@ -23,7 +23,7 @@ import { Laptop, LocationOn, Place } from '@mui/icons-material';
 import { egyptGovernorates } from '../../utils/gov';
 import baseURL from '../../API/baseURL';
 import { addTask } from '../browse/allTasksSlice';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 function TabPanel(props) {
@@ -64,16 +64,34 @@ export default function PostTask() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { taskTitle: encodedTaskTitle } = useParams();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
   useEffect(() => {
-    if (encodedTaskTitle) {
-      setTaskTitle(decodeURIComponent(encodedTaskTitle));
+    if (searchParams.get('title')) {
+      setTaskTitle(searchParams.get('title'));
+    }
+    if (searchParams.get('category')) {
+      const categoryItem = categories.find(
+        (c) => c.name === searchParams.get('category')
+      );
+      console.log('categoryItem', categoryItem);
+      setCategory(categoryItem?.id);
+    }
+    if (searchParams.get('location')) {
+      setLocationType(searchParams.get('location'));
     }
     if (locationType === 'in-person') {
       getUserLocation();
     }
-  }, [locationType, encodedTaskTitle]);
+    if (searchParams.get('details')) {
+      setTaskDetails(searchParams.get('details'));
+    }
+    if (searchParams.get('budget')) {
+      setBudget(Number(searchParams.get('budget')));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locationType, categories]);
 
   const handleLocationChange = (event) => {
     setLocationType(event.target.value);
