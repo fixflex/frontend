@@ -14,6 +14,7 @@ import {
   InputAdornment,
   Select,
   MenuItem,
+  CircularProgress,
 } from '@mui/material';
 import styles from './postTask.module.css';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -23,8 +24,9 @@ import { Laptop, LocationOn, Place } from '@mui/icons-material';
 import { egyptGovernorates } from '../../utils/gov';
 import baseURL from '../../API/baseURL';
 import { addTask } from '../browse/allTasksSlice';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import ImageUploader from '../../components/image-uploader/ImageUploader';
 
 function TabPanel(props) {
   const { children, value, title, index, ...other } = props;
@@ -41,7 +43,7 @@ function TabPanel(props) {
       </Typography>
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component='div'>{children}</Typography>
         </Box>
       )}
     </div>
@@ -59,6 +61,9 @@ export default function PostTask() {
   const [budget, setBudget] = useState(null);
   const [category, setCategory] = useState('');
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const categories = useSelector((state) => state.categories.categoriesList);
 
@@ -179,6 +184,7 @@ export default function PostTask() {
   };
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     let dueDate;
     if (isFlexibleDate) {
       dueDate = {
@@ -219,10 +225,31 @@ export default function PostTask() {
     try {
       const response = await baseURL.post('/tasks', userData);
       console.log('Task created successfully:', response.data);
-      navigate('/my-tasks');
       dispatch(addTask(response.data.data));
+      if (selectedImage) {
+        await uploadImage(response.data?.data?._id, selectedImage);
+        setIsLoading(false);
+      }
+      navigate('/my-tasks');
     } catch (error) {
       console.error('Error posting task:', error);
+    }
+  };
+
+  const uploadImage = async (taskId, file) => {
+    const formData = new FormData();
+    formData.append('image', file);
+    // You can append more files if needed using formData.append('image', file);
+
+    try {
+      const response = await baseURL.patch(`tasks/${taskId}/images`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('Image uploaded successfully:', response.data);
+    } catch (error) {
+      console.error('Error uploading image:', error);
     }
   };
 
@@ -364,7 +391,8 @@ export default function PostTask() {
               <FormControlLabel
                 value='in-person'
                 label={
-                  <div
+                  <Box
+                    component='div'
                     className={`${styles.optionCard} ${
                       locationType === 'in-person' ? styles.selected : ''
                     }`}
@@ -372,7 +400,7 @@ export default function PostTask() {
                     <LocationOn />
                     <Typography variant='body1'>In-person</Typography>
                     <Typography>I need the Flexer physically there</Typography>
-                  </div>
+                  </Box>
                 }
                 control={<Radio className={styles.hiddenRadio} />}
                 className={styles.formControlLabel}
@@ -380,7 +408,8 @@ export default function PostTask() {
               <FormControlLabel
                 value='online'
                 label={
-                  <div
+                  <Box
+                    component='div'
                     className={`${styles.optionCard} ${
                       locationType === 'online' ? styles.selected : ''
                     }`}
@@ -388,7 +417,7 @@ export default function PostTask() {
                     <Laptop />
                     <Typography variant='body1'>Online</Typography>
                     <Typography>The Flexer can do my task from home</Typography>
-                  </div>
+                  </Box>
                 }
                 control={<Radio className={styles.hiddenRadio} />}
                 className={styles.formControlLabel}
@@ -442,6 +471,16 @@ export default function PostTask() {
             value={taskDetails}
             onChange={(e) => setTaskDetails(e.target.value)}
           />
+
+          <Typography
+            variant='h6'
+            className={styles.tabTitle}
+            sx={{ margin: '1rem 0' }}
+          >
+            Would you like to provide a picture?
+          </Typography>
+
+          <ImageUploader onImageSelect={setSelectedImage} />
         </TabPanel>
         <TabPanel value={value} index={3} title='Set your budget'>
           <Typography variant='h6' className={styles.tabTitle}>
@@ -495,6 +534,7 @@ export default function PostTask() {
           >
             {value === totalSteps - 1 ? 'Finish' : 'Next'}
           </Button>
+          {isLoading && `Posting Task ..`}
         </Box>
       </Box>
     </Box>

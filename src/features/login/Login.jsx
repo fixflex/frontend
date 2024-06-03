@@ -60,14 +60,10 @@ const Login = () => {
         password,
       });
 
-      console.log(response);
-
       const accessToken = response.data.accessToken;
       if (accessToken) {
         localStorage.setItem('accessToken', accessToken);
       }
-      localStorage.setItem('user', JSON.stringify(response.data.data));
-      dispatch(userLoggedIn(response.data.data));
 
       const isTasker = await baseURL.get('/taskers/me');
 
@@ -79,6 +75,27 @@ const Login = () => {
           })
         );
       }
+
+      const profilePic = await baseURL.get('/users/me');
+
+      console.log(profilePic);
+
+      dispatch(
+        userLoggedIn({
+          ...response.data?.data,
+          profilePicture: profilePic.data?.data?.profilePicture,
+        })
+      );
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          ...response.data?.data,
+          profilePicture: profilePic.data?.data?.profilePicture,
+        })
+      );
+
+      console.log('login response', response);
+      console.log('profilePic response', profilePic);
 
       navigate('/browse');
     } catch (error) {
