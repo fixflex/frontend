@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
 import {
   Container,
@@ -26,7 +27,17 @@ const Profile = () => {
           {' '}
           <Card className={styles.profileCard}>
             <CardContent className={styles.profileCardInfo}>
-              <div className={styles.profilePicture} />
+              {user.profilePicture?.url ? (
+                <img
+                  src={user.profilePicture?.url}
+                  className={styles.profilePicture}
+                />
+              ) : (
+                <img
+                  src='https://images.unsplash.com/photo-1617289755070-3590b660a06e'
+                  className={styles.profilePicture}
+                />
+              )}
               <Typography gutterBottom variant='h5' component='div'>
                 {user.firstName + ' ' + user.lastName}
               </Typography>

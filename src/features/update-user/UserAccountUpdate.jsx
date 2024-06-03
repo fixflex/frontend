@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Button, TextField, Box } from '@mui/material';
 import styles from './userAccountUpdate.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import baseURL from '../../API/baseURL';
 import { userLoggedIn } from '../signup/authSlice';
+import ImageUploader from '../../components/image-uploader/ImageUploader';
 
 const UserAccountUpdate = () => {
   const [firstName, setFirstName] = useState('');
@@ -12,7 +12,7 @@ const UserAccountUpdate = () => {
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const navigate = useNavigate();
+  const [profileImage, setProfileImage] = useState(null);
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.auth?.user);
   const isTasker = useSelector((state) => state.taskerInfo.isTasker);
@@ -31,6 +31,23 @@ const UserAccountUpdate = () => {
     if (lastName !== userInfo.lastName) patchData.lastName = lastName;
     if (email !== userInfo.email) patchData.email = email;
 
+    if (profileImage) {
+      const formData = new FormData();
+      formData.append('image', profileImage);
+
+      try {
+        await baseURL.patch('/users/me/profile-picture', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+      } catch (error) {
+        setErrorMessage(error.response?.data?.message || 'An error occurred');
+        setSuccessMessage('');
+        return;
+      }
+    }
+
     try {
       const response = await baseURL.patch('/users/me', patchData);
 
@@ -44,6 +61,10 @@ const UserAccountUpdate = () => {
       setErrorMessage(error.response?.data?.message || 'An error occurred');
       setSuccessMessage('');
     }
+  };
+
+  const handleImageSelect = (file) => {
+    setProfileImage(file);
   };
 
   return (
@@ -92,6 +113,23 @@ const UserAccountUpdate = () => {
           className={styles.textField}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <Typography
+          variant='h4'
+          sx={{
+            fontWeight: 'bold',
+            margin: '1rem 0',
+            textAlign: 'center',
+            fontSize: '1.5rem',
+          }}
+        >
+          Upload Profile Picture
+        </Typography>
+        <div className={styles.hideButton}>
+          <ImageUploader
+            onImageSelect={handleImageSelect}
+            uploadUrl='/users/me/profile-picture'
+          />
+        </div>
         {errorMessage && (
           <Typography sx={{ color: 'red', textAlign: 'center' }}>
             {errorMessage}

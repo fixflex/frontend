@@ -13,6 +13,10 @@
   );
 }
 
+.hideButton button {
+  display: none !important;
+}
+
 .typography {
   margin-bottom: 20px;
 }
@@ -49,6 +53,12 @@
 
 .textField {
   width: 100%;
+}
+
+.imageUploaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media screen and (max-width: 768px) {
