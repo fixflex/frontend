@@ -14,7 +14,6 @@ import {
   InputAdornment,
   Select,
   MenuItem,
-  CircularProgress,
 } from '@mui/material';
 import styles from './postTask.module.css';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -63,7 +62,6 @@ export default function PostTask() {
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
   const [selectedImage, setSelectedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
 
   const categories = useSelector((state) => state.categories.categoriesList);
 

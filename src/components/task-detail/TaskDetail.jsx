@@ -41,6 +41,27 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
     );
   }
 
+  const getTimeDifference = (date) => {
+    const now = new Date();
+    const past = new Date(date);
+    const diffInMs = now - past;
+
+    const diffInSeconds = Math.floor(diffInMs / 1000);
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
+
+    if (diffInDays > 0) {
+      return `about ${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+    } else if (diffInHours > 0) {
+      return `about ${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+    } else if (diffInMinutes > 0) {
+      return `about ${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
+    } else {
+      return `about ${diffInSeconds} second${diffInSeconds > 1 ? 's' : ''} ago`;
+    }
+  };
+
   useEffect(() => {
     if (selectedTask && selectedTask._id) {
       (async () => {
@@ -167,7 +188,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
                   marginRight: '1rem',
                 }}
               >
-                about 3 hours ago
+                {getTimeDifference(selectedTask.createdAt)}
               </Typography>
             </Box>
             <Box
@@ -191,7 +212,13 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
                   >
                     Location
                   </Typography>
-                  <Typography>{selectedTask.city}</Typography>
+                  <Typography>
+                    {selectedTask.location?.online
+                      ? 'online'
+                      : selectedTask.city
+                      ? selectedTask.city
+                      : 'in-person'}
+                  </Typography>
                 </Stack>
               </Box>
             </Box>
@@ -220,7 +247,11 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
                   >
                     Date
                   </Typography>
-                  <Typography>{selectedTask.dueDate.on}</Typography>
+                  <Typography>
+                    {selectedTask.dueDate?.on
+                      ? selectedTask.dueDate.on
+                      : 'Flexible'}
+                  </Typography>
                 </Stack>
               </Box>
             </Box>
