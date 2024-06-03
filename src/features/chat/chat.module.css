@@ -1,39 +1,45 @@
 .chatContainer {
   display: flex;
   height: 100vh;
-  padding: 1rem 8rem;
-  background-color: #f3f3f7;
+  padding: 1rem;
+  background-color: #f5f7fa;
 }
 
 .chatList {
   width: 300px;
   overflow: auto;
+  background: linear-gradient(
+    30deg,
+    rgba(64, 163, 209, 1) 35%,
+    rgba(27, 37, 46, 1) 100%
+  );
+  padding: 1rem;
+  border-radius: 8px;
+  margin-right: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .chatListItem {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   margin-bottom: 1rem;
   background-color: transparent;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
 }
 
 .chatListItem:hover {
-  background-color: #e6e6e6;
+  background-color: #e5bb32d4;
+  transform: translateY(-2px);
 }
 
 .chatName {
   font-size: 1rem;
-  color: #333;
   font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.chatLastMessage {
-  font-size: 0.875rem;
-  color: #666;
 }
 
 .chatDetails {
@@ -56,25 +62,34 @@
 .messageList {
   flex-grow: 1;
   overflow-y: auto;
-  padding: 0 1rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
 }
 
 .message {
+  display: flex;
+  align-items: center;
   padding: 0.8rem;
   margin: 8px 0;
   border-radius: 20px;
   max-width: 70%;
-  align-self: flex-start;
-  background-color: #ffffff;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-  color: #333;
 }
 
 .messageSenderYou {
   align-self: flex-end;
   background-color: #e0f7fa;
+}
+
+.messageSenderOther {
+  align-self: flex-start;
+  background-color: #f3f3f7;
+}
+
+.messageText {
+  margin-left: 8px;
+  font-size: 0.875rem;
 }
 
 .messageInput {
@@ -84,4 +99,47 @@
   background-color: #fff;
   align-items: center;
   box-shadow: 0px -1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.messageInputField {
+  flex-grow: 1;
+  border-radius: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-right: 8px;
+}
+
+.sendButton {
+  background-color: #1b252e;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.sendButton:hover {
+  background-color: #333;
+}
+
+.selectChatMessage {
+  text-align: center;
+  margin-top: 20px;
+  color: #aaa;
+}
+
+.chatAvatar {
+  background-color: #1b252e;
+  color: white;
+  margin-right: 8px;
+}
+
+.messageAvatar {
+  background-color: #1b252e;
+  color: white;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 }

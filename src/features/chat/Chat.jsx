@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { Avatar, Box, TextField, Button, Typography } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
 import styles from './chat.module.css';
 import baseURL from '../../API/baseURL';
 import { useSelector } from 'react-redux';
@@ -165,13 +166,19 @@ const Chat = () => {
   return (
     <Box className={styles.chatContainer}>
       <Box className={styles.chatList}>
+        <Typography
+          sx={{ color: 'white', fontWeight: 'bold', fontSize: '1.5rem' }}
+        >
+          Chats
+        </Typography>
+        <hr />
         {allChats.map((chat) => (
           <Box
             key={chat.chatId}
             className={styles.chatListItem}
             onClick={() => handleSelectChat(chat)}
           >
-            <Avatar sx={{ bgcolor: '#1B252E', color: 'white', mr: 2 }}>
+            <Avatar className={styles.chatAvatar}>
               {getInitials(chat.recipient)}
             </Avatar>
             <Box sx={{ flexGrow: 1 }}>
@@ -201,7 +208,7 @@ const Chat = () => {
                   className={`${styles.message} ${
                     msg.sender === `${user.firstName} ${user.lastName}`
                       ? styles.messageSenderYou
-                      : ''
+                      : styles.messageSenderOther
                   }`}
                 >
                   <Typography className={styles.messageText}>
@@ -210,39 +217,21 @@ const Chat = () => {
                 </Box>
               ))}
             </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                padding: '8px',
-                backgroundColor: '#F0F2F5',
-                borderRadius: '16px',
-                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-              }}
-            >
+            <Box className={styles.messageInput}>
               <TextField
                 fullWidth
                 variant='outlined'
                 placeholder='Type a message...'
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                sx={{
-                  fieldset: { border: 'none' },
-                  backgroundColor: 'white',
-                  borderRadius: '16px',
-                  marginRight: '8px',
-                }}
+                className={styles.messageInputField}
               />
               <Button
                 variant='contained'
                 color='primary'
                 onClick={sendMessage}
-                sx={{
-                  borderRadius: '16px',
-                  textTransform: 'none',
-                  boxShadow: 'none',
-                  backgroundColor: '#1B252E',
-                }}
+                className={styles.sendButton}
+                endIcon={<SendIcon />}
               >
                 Send
               </Button>
