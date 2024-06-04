@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   Button,
   CssBaseline,
@@ -19,7 +19,6 @@ import {
 import { KeyboardArrowRight } from '@mui/icons-material';
 import styles from './signup.module.css';
 import { useNavigate } from 'react-router-dom';
-import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { userLoggedIn } from '../../features/signup/authSlice';
 import baseURL from '../../API/baseURL';
 
@@ -216,31 +215,6 @@ const Signup = () => {
                   Already have an account? Sign in
                 </Link>
               </Grid>
-            </Grid>
-            <Grid
-              container
-              direction='row'
-              alignItems='center'
-              justifyContent='center'
-              style={{ margin: '20px 0' }}
-            >
-              <Grid item xs={5}>
-                <hr className={styles.line} />
-              </Grid>
-              <Grid item>
-                <Typography variant='body2' style={{ margin: '0 10px' }}>
-                  OR
-                </Typography>
-              </Grid>
-              <Grid item xs={5}>
-                <hr className={styles.line} />
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              style={{ display: 'flex', justifyContent: 'center' }}
-            >
-              <GoogleAuth />
             </Grid>
           </Box>
         </Box>
