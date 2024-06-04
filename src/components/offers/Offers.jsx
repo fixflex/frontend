@@ -16,7 +16,7 @@ const Offers = ({ offer }) => {
       const userData = offer.taskerId.userId;
       setTaskerName(`${userData.firstName} ${userData.lastName}`);
     }
-  }, [offer.taskerId.userId]);
+  }, []);
 
   const formatDateAndTime = (dateTimeString) => {
     const date = new Date(dateTimeString);
@@ -34,6 +34,9 @@ const Offers = ({ offer }) => {
       .toLowerCase();
     return `${formattedDate} at ${formattedTime}`;
   };
+  if (!offer) {
+    return;
+  }
 
   return (
     <Box sx={{ marginTop: '1.5rem' }}>
