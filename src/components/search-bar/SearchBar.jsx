@@ -28,7 +28,8 @@ const SearchBar = () => {
     setInputValue(event.target.value);
   };
 
-  const handlePrompt = async () => {
+  const handlePrompt = async (e) => {
+    e.preventDefault();
     setLoading(true);
     setError(false);
 
@@ -71,7 +72,11 @@ const SearchBar = () => {
             </Typography>
           </Box>
         </Toolbar>
-        <Paper component='form' className={styles.searchContainer}>
+        <Paper
+          component='form'
+          className={styles.searchContainer}
+          onSubmit={handlePrompt}
+        >
           <InputBase
             className={styles.inputBase}
             placeholder='In a few words, what do you need done?'
@@ -80,9 +85,9 @@ const SearchBar = () => {
             onChange={handleInputChange}
           />
           <Button
+            type='submit'
             variant='contained'
             className={styles.button}
-            onClick={handlePrompt}
             disabled={loading}
           >
             {loading ? (

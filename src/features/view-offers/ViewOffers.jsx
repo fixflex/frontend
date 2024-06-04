@@ -46,18 +46,9 @@ const ViewOffers = () => {
   };
   const handleAcceptOffer = async (offer) => {
     const offerId = offer._id;
-    const taserId = offer.taskerId?.userId?._id;
-    if (!offerId || !taserId) return;
-    try {
-      await baseURL.patch(`/offers/${offerId}/accept`);
-      const response = await baseURL.post(`/chats`, { tasker: taserId });
-      console.log(response);
-      if (response?.data?.data) {
-        navigate(`/chat`);
-      }
-    } catch (error) {
-      console.error('Error Message:', error);
-    }
+    const taskerId = offer.taskerId?.userId?._id;
+    if (!offerId || !taskerId) return;
+    navigate(`/payment?offer=${offerId}&tasker=${taskerId}&task=${id}`);
   };
 
   useEffect(() => {

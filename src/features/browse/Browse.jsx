@@ -9,6 +9,7 @@ import TaskDetails from '../../components/task-detail/TaskDetail';
 import baseURL from '../../API/baseURL';
 import { useDispatch } from 'react-redux';
 import { addAllTasks } from './allTasksSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Browse = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

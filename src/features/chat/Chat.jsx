@@ -6,7 +6,7 @@ import styles from './chat.module.css';
 import baseURL from '../../API/baseURL';
 import { useSelector } from 'react-redux';
 
-const socket = io('wss://fixflex.onrender.com', {
+const socket = io('wss://server-fixflex.onrender.com', {
   extraHeaders: {
     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
   },
@@ -27,6 +27,7 @@ const Chat = () => {
   useEffect(() => {
     socket.on('connect', () => {
       socket.emit('joinMyRoom');
+      console.log('hello');
       getAllChats();
     });
 
@@ -49,6 +50,7 @@ const Chat = () => {
   const getAllChats = async () => {
     try {
       const response = await baseURL.get('/chats');
+      console.log(response);
       if (response?.data?.results) {
         formatChat(response.data.data);
       }
