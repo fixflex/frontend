@@ -56,36 +56,42 @@ const Navbar = ({ isLoggedIn }) => {
         </Grid>
         <Grid item>
           <List className={styles.navList}>
-            <ListItem>
-              <Button className={styles.navButton} href='/assistant'>
-                Assistant
-              </Button>
-            </ListItem>
-            <ListItem>
-              <Button className={styles.navButton} href='/browse'>
-                Browse
-              </Button>
-            </ListItem>
-            <ListItem>
-              <Button className={styles.navButton} href='/account'>
-                Profile
-              </Button>
-            </ListItem>
-            <ListItem>
-              <Button className={styles.navButton} href='/post-task'>
-                Post
-              </Button>
-            </ListItem>
-            <ListItem>
-              <Button className={styles.navButton} href='/my-tasks'>
-                Tasks
-              </Button>
-            </ListItem>
-            <ListItem>
-              <Button className={styles.navButton} href='/chat'>
-                Chat
-              </Button>
-            </ListItem>
+            {isLoggedIn && (
+              <>
+                <ListItem>
+                  <Button className={styles.navButton} href='/assistant'>
+                    Assistant
+                  </Button>
+                </ListItem>
+                <ListItem>
+                  <Button className={styles.navButton} href='/browse'>
+                    Browse
+                  </Button>
+                </ListItem>
+                <ListItem>
+                  <Button className={styles.navButton} href='/account'>
+                    Profile
+                  </Button>
+                </ListItem>
+                <ListItem>
+                  <Button className={styles.navButton} href='/post-task'>
+                    Post
+                  </Button>
+                </ListItem>
+                <ListItem>
+                  <Button className={styles.navButton} href='/my-tasks'>
+                    Tasks
+                  </Button>
+                </ListItem>
+
+                <ListItem>
+                  <Button className={styles.navButton} href='/chat'>
+                    Chat
+                  </Button>
+                </ListItem>
+              </>
+            )}
+
             {isTasker && (
               <ListItem>
                 <Button className={styles.navButton} href='/offers-page'>

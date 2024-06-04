@@ -4,10 +4,7 @@ import {
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
-  Grid,
   Box,
   Typography,
   Container,
@@ -17,7 +14,6 @@ import {
 import { KeyboardArrowRight } from '@mui/icons-material';
 import { userLoggedIn } from '../../features/signup/authSlice';
 import styles from './login.module.css';
-import GoogleAuth from '../../components/googleAuth/GoogleAuth';
 import { useNavigate } from 'react-router-dom';
 import baseURL from '../../API/baseURL';
 import { setTaskerInfo } from '../tasker-onboarding/taskerInfoSlice';
@@ -45,6 +41,18 @@ const Login = () => {
     if (loggedInUser) {
       navigate('/browse');
     }
+
+    // (async () => {
+    //   try {
+    //     const response = await baseURL.post('/auth/forgot-password', {
+    //       email: 'menna.aa@yahoo.com',
+    //     });
+    //     console.log(response);
+    //   } catch (error) {
+    //     console.error('Failed to reset password:', error);
+    //   }
+    // })();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -161,18 +169,7 @@ const Login = () => {
               autoComplete='current-password'
               className={styles.textField}
             />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-              className={styles.checkboxLabel}
-            />
-            <Grid container justifyContent='space-between'>
-              <Grid item>
-                <Link href='#' variant='body2' className={styles.link}>
-                  Lost your password?
-                </Link>
-              </Grid>
-            </Grid>
+
             {loginError && (
               <Typography color='error' align='center'>
                 {loginError}
@@ -187,31 +184,6 @@ const Login = () => {
             >
               Log In
             </Button>
-            <Grid
-              container
-              direction='row'
-              alignItems='center'
-              justifyContent='center'
-              style={{ margin: '10px 0' }}
-            >
-              <Grid item xs={5}>
-                <hr className={styles.line} />
-              </Grid>
-              <Grid item>
-                <Typography variant='body2' style={{ margin: '0 10px' }}>
-                  OR
-                </Typography>
-              </Grid>
-              <Grid item xs={5}>
-                <hr className={styles.line} />
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              style={{ display: 'flex', justifyContent: 'center' }}
-            >
-              <GoogleAuth />
-            </Grid>
           </Box>
         </Box>
       </Container>

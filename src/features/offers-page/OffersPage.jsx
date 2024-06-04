@@ -20,7 +20,6 @@ import {
   Ballot,
   CalendarMonth,
   Clear,
-  Edit,
   HourglassBottom,
   HourglassFull,
   Money,
@@ -60,10 +59,6 @@ const OffersPage = () => {
 
   const handleDelete = async () => {
     console.log('delete offer');
-  };
-
-  const handleUpdate = (offer) => {
-    console.log('update offer');
   };
 
   useEffect(() => {
