@@ -306,6 +306,25 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
             >
               Offer Pending
             </Typography>
+          ) : selectedTask.userId._id === userId ? (
+            <Typography
+              variant='h6'
+              sx={{
+                color: '#767E84',
+                fontSize: '0.9rem',
+                mt: 2,
+                textAlign: 'center',
+              }}
+            >
+              Your task is ready for offers
+            </Typography>
+          ) : selectedTask.status === 'ASSIGNED' ? (
+            <Typography
+              variant='h6'
+              sx={{ color: '#767E84', fontSize: '0.9rem', mt: 2 }}
+            >
+              Task Assigned
+            </Typography>
           ) : (
             <Button
               variant='contained'

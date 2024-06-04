@@ -116,7 +116,15 @@ const ViewOffers = () => {
                 color='text.secondary'
               >
                 {taskInfo.details}
+                {/* {taskInfo.images[0]?.url && (
+                  <img
+                    alt='task-pic'
+                    style={{ width: '10vw', height: '18vh' }}
+                    src={taskInfo.images[0]?.url}
+                  />
+                )} */}
               </Typography>
+
               <Box
                 display='flex'
                 alignItems='flex-start'
