@@ -29,6 +29,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
   const isMobile = useMediaQuery('(max-width:600px)');
   const [modalOpen, setModalOpen] = useState(false);
   const [taskDetail, setTaskDetail] = useState('');
+  const [taskPic, setTaskPic] = useState('');
   const [offerMade, setOfferMade] = useState(false);
   const taskOffers = useSelector((state) => state.offers.offers);
 
@@ -41,6 +42,27 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
     );
   }
 
+  const getTimeDifference = (date) => {
+    const now = new Date();
+    const past = new Date(date);
+    const diffInMs = now - past;
+
+    const diffInSeconds = Math.floor(diffInMs / 1000);
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
+
+    if (diffInDays > 0) {
+      return `about ${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+    } else if (diffInHours > 0) {
+      return `about ${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+    } else if (diffInMinutes > 0) {
+      return `about ${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
+    } else {
+      return `about ${diffInSeconds} second${diffInSeconds > 1 ? 's' : ''} ago`;
+    }
+  };
+
   useEffect(() => {
     if (selectedTask && selectedTask._id) {
       (async () => {
@@ -49,6 +71,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
           if (response.data.success) {
             console.log(response.data?.data);
             setTaskDetail(response.data?.data?.details);
+            setTaskPic(response.data?.data?.images[0]?.url);
 
             handleSetAllOffers(response.data?.data?.offersDetails);
           }
@@ -167,7 +190,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
                   marginRight: '1rem',
                 }}
               >
-                about 3 hours ago
+                {getTimeDifference(selectedTask.createdAt)}
               </Typography>
             </Box>
             <Box
@@ -191,7 +214,13 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
                   >
                     Location
                   </Typography>
-                  <Typography>{selectedTask.city}</Typography>
+                  <Typography>
+                    {selectedTask.location?.online
+                      ? 'online'
+                      : selectedTask.city
+                      ? selectedTask.city
+                      : 'in-person'}
+                  </Typography>
                 </Stack>
               </Box>
             </Box>
@@ -220,7 +249,11 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
                   >
                     Date
                   </Typography>
-                  <Typography>{selectedTask.dueDate.on}</Typography>
+                  <Typography>
+                    {selectedTask.dueDate?.on
+                      ? selectedTask.dueDate.on
+                      : 'Flexible'}
+                  </Typography>
                 </Stack>
               </Box>
             </Box>
@@ -229,9 +262,31 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
           <Divider sx={{ my: 2 }} textAlign='left'>
             Details
           </Divider>
-          <Typography variant='body1'>
-            {taskDetail ? taskDetail : ''}
-          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <Typography
+              variant='body1'
+              sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}
+            >
+              {taskDetail ? taskDetail : ''}
+            </Typography>
+            {taskPic && (
+              <img
+                src={taskPic}
+                alt='task-pic'
+                style={{
+                  maxWidth: '15vw',
+                  width: '50%',
+                  height: '50%',
+                  margin: '1.5rem 0',
+                }}
+              />
+            )}
+          </Box>
         </Box>
         <Box className={styles.budgetBox}>
           <Typography
@@ -250,6 +305,25 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
               sx={{ color: '#767E84', fontSize: '0.9rem' }}
             >
               Offer Pending
+            </Typography>
+          ) : selectedTask.userId._id === userId ? (
+            <Typography
+              variant='h6'
+              sx={{
+                color: '#767E84',
+                fontSize: '0.9rem',
+                mt: 2,
+                textAlign: 'center',
+              }}
+            >
+              Your task is ready for offers
+            </Typography>
+          ) : selectedTask.status === 'ASSIGNED' ? (
+            <Typography
+              variant='h6'
+              sx={{ color: '#767E84', fontSize: '0.9rem', mt: 2 }}
+            >
+              Task Assigned
             </Typography>
           ) : (
             <Button

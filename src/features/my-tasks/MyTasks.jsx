@@ -29,7 +29,7 @@ import dayjs from 'dayjs';
 import styles from './myTasks.module.css';
 import baseURL from '../../API/baseURL';
 import { useNavigate } from 'react-router-dom';
-import { addAllTasks, deleteTask, updateTask } from '../browse/allTasksSlice';
+import { addAllTasks, updateTask } from '../browse/allTasksSlice';
 
 const TaskLocation = ({ task }) => (
   <Box className={styles.taskLocation}>
@@ -103,7 +103,6 @@ const MyTasks = () => {
         );
         console.log(response);
         if (response.status === 200) {
-          dispatch(deleteTask(selectedTask._id));
           handleClose();
         }
       } catch (error) {
@@ -177,6 +176,18 @@ const MyTasks = () => {
                   >
                     Task Completed Successfully!
                   </Typography>
+                ) : task.status === 'CANCELLED' ? (
+                  <Typography
+                    sx={{
+                      textAlign: 'center',
+                      backgroundColor: 'grey',
+                      color: 'white',
+                      padding: '0.5rem',
+                      borderRadius: '10px',
+                    }}
+                  >
+                    Task Cancelled
+                  </Typography>
                 ) : (
                   <Box className={styles.taskActions}>
                     <Tooltip title='Mark Done'>
@@ -223,7 +234,7 @@ const MyTasks = () => {
         <DialogTitle sx={{ fontWeight: 'bold' }}>{'Are you sure?'}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            This Action will delete this task and all its offers
+            This Action will Mark this task and all its offers inactive
           </DialogContentText>
         </DialogContent>
         <DialogActions>

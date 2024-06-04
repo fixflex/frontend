@@ -131,14 +131,6 @@ const OffersPage = () => {
                   </Typography>
                 </Box>
                 <Box className={styles.offerActions}>
-                  <Tooltip title='Update Offer'>
-                    <IconButton
-                      className={`${styles.offerButton} ${styles.update}`}
-                      onClick={() => handleUpdate(offer)}
-                    >
-                      <Edit />
-                    </IconButton>
-                  </Tooltip>
                   <Tooltip title='View Task'>
                     <IconButton
                       className={`${styles.offerButton} ${styles.offers}`}
