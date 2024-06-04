@@ -8,8 +8,9 @@
 
 .budgetBox {
   background-color: #f3f3f7;
-  max-height: 9rem;
-  padding: 1.5rem 3rem;
+  max-height: 11rem !important;
+  min-width: 9rem !important;
+  padding: 1rem 3rem !important;
   display: flex;
   flex-direction: column;
   align-items: center;

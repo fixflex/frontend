@@ -29,6 +29,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
   const isMobile = useMediaQuery('(max-width:600px)');
   const [modalOpen, setModalOpen] = useState(false);
   const [taskDetail, setTaskDetail] = useState('');
+  const [taskPic, setTaskPic] = useState('');
   const [offerMade, setOfferMade] = useState(false);
   const taskOffers = useSelector((state) => state.offers.offers);
 
@@ -70,6 +71,7 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
           if (response.data.success) {
             console.log(response.data?.data);
             setTaskDetail(response.data?.data?.details);
+            setTaskPic(response.data?.data?.images[0]?.url);
 
             handleSetAllOffers(response.data?.data?.offersDetails);
           }
@@ -260,9 +262,31 @@ const TaskDetails = ({ isModalOpen, setIsModalOpen }) => {
           <Divider sx={{ my: 2 }} textAlign='left'>
             Details
           </Divider>
-          <Typography variant='body1'>
-            {taskDetail ? taskDetail : ''}
-          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <Typography
+              variant='body1'
+              sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}
+            >
+              {taskDetail ? taskDetail : ''}
+            </Typography>
+            {taskPic && (
+              <img
+                src={taskPic}
+                alt='task-pic'
+                style={{
+                  maxWidth: '15vw',
+                  width: '50%',
+                  height: '50%',
+                  margin: '1.5rem 0',
+                }}
+              />
+            )}
+          </Box>
         </Box>
         <Box className={styles.budgetBox}>
           <Typography
