@@ -227,117 +227,129 @@ const ViewOffers = () => {
           </Card>
         </Box>
       </Box>
-      <Divider
-        orientation='horizontal'
-        sx={{
-          width: '100%',
-          backgroundColor: '#1B252E',
-          fontSize: '14px',
-          fontWeight: '900',
-          marginBottom: '1rem ',
-        }}
-      />
-      <Box>
-        <Typography className={styles.title} sx={{ fontSize: '2rem' }}>
-          Offers
-        </Typography>
-        {offers.length ? (
-          offers.map((offer) => (
-            <Box sx={{ marginTop: '1.5rem' }} key={offer._id}>
-              <Card style={{ marginBottom: '1rem' }}>
-                <CardContent
-                  sx={{ display: 'flex' }}
-                  className={styles.cardContainer}
-                >
-                  <Grid container spacing={2} alignItems='center'>
-                    <Grid item>
-                      <Avatar sx={{ backgroundColor: '#272727' }}>
-                        {offer.taskerId?.userId?.firstName[0]}
-                      </Avatar>
-                    </Grid>
-                    <Grid item xs>
-                      <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
-                        {`${offer.taskerId?.userId?.firstName} ${offer.taskerId?.userId?.lastName}`}
-                      </Typography>
 
-                      <Typography
-                        variant='h6'
-                        sx={{
-                          fontWeight: 'bold',
-                          color: '#FF7F00',
-                          display: 'flex',
-                          alignItems: 'center',
-                        }}
-                      >
-                        {offer.taskerId?.ratingAverage} <Star />
+      {taskInfo.status !== 'ASSIGNED' && (
+        <>
+          <Divider
+            orientation='horizontal'
+            sx={{
+              width: '100%',
+              backgroundColor: '#1B252E',
+              fontSize: '14px',
+              fontWeight: '900',
+              marginBottom: '1rem ',
+            }}
+          />
+          <Box>
+            <Typography className={styles.title} sx={{ fontSize: '2rem' }}>
+              Offers
+            </Typography>
+            {offers.length ? (
+              offers.map((offer) => (
+                <Box sx={{ marginTop: '1.5rem' }} key={offer._id}>
+                  <Card style={{ marginBottom: '1rem' }}>
+                    <CardContent
+                      sx={{ display: 'flex' }}
+                      className={styles.cardContainer}
+                    >
+                      <Grid container spacing={2} alignItems='center'>
+                        <Grid item>
+                          <Avatar sx={{ backgroundColor: '#272727' }}>
+                            {offer.taskerId?.userId?.firstName[0]}
+                          </Avatar>
+                        </Grid>
+                        <Grid item xs>
+                          <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
+                            {`${offer.taskerId?.userId?.firstName} ${offer.taskerId?.userId?.lastName}`}
+                          </Typography>
+
+                          <Typography
+                            variant='h6'
+                            sx={{
+                              fontWeight: 'bold',
+                              color: '#FF7F00',
+                              display: 'flex',
+                              alignItems: 'center',
+                            }}
+                          >
+                            {offer.taskerId?.ratingAverage} <Star />
+                            <Typography
+                              sx={{ color: '#1B252E', fontSize: '0.8rem' }}
+                            >
+                              {' '}
+                              {`(${offer.taskerId?.ratingQuantity} reviews) `}
+                            </Typography>
+                          </Typography>
+
+                          <Typography
+                            color='textSecondary'
+                            gutterBottom
+                            sx={{ fontSize: 'small', margin: '0.5rem 0' }}
+                          >
+                            {formatDateAndTime(offer.createdAt)}
+                          </Typography>
+
+                          <Typography
+                            variant='body3'
+                            sx={{ fontWeight: '600' }}
+                          >
+                            {offer.message}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                      <Box className={styles.budgetBox}>
                         <Typography
-                          sx={{ color: '#1B252E', fontSize: '0.8rem' }}
+                          variant='h6'
+                          gutterBottom
+                          sx={{
+                            color: '#767E84',
+                            fontSize: '0.9rem',
+                            textAlign: 'center',
+                          }}
                         >
-                          {' '}
-                          {`(${offer.taskerId?.ratingQuantity} reviews) `}
+                          TASK BUDGET
                         </Typography>
-                      </Typography>
+                        <Typography
+                          variant='h4'
+                          className={styles.budgetNumber}
+                        >
+                          {`$ ${offer.price}`}
+                        </Typography>
 
-                      <Typography
-                        color='textSecondary'
-                        gutterBottom
-                        sx={{ fontSize: 'small', margin: '0.5rem 0' }}
-                      >
-                        {formatDateAndTime(offer.createdAt)}
-                      </Typography>
-
-                      <Typography variant='body3' sx={{ fontWeight: '600' }}>
-                        {offer.message}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Box className={styles.budgetBox}>
-                    <Typography
-                      variant='h6'
-                      gutterBottom
-                      sx={{
-                        color: '#767E84',
-                        fontSize: '0.9rem',
-                        textAlign: 'center',
-                      }}
-                    >
-                      TASK BUDGET
-                    </Typography>
-                    <Typography variant='h4' className={styles.budgetNumber}>
-                      {`$ ${offer.price}`}
-                    </Typography>
-                    <Button
-                      variant='contained'
-                      sx={{
-                        backgroundColor: '#1B252E',
-                        borderRadius: '10px',
-                        mt: 2,
-                      }}
-                      onClick={() => handleAcceptOffer(offer)}
-                    >
-                      Accept
-                    </Button>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Box>
-          ))
-        ) : (
-          <Box sx={{ marginTop: '1.5rem' }}>
-            <Typography className={styles.title}>Offers</Typography>
-            <Card
-              style={{
-                marginBottom: '1rem',
-                padding: '1rem',
-                fontWeight: 'bold',
-                fontSize: '1rem',
-              }}
-            >
-              No Offers Available Yet !
-            </Card>
+                        <Button
+                          variant='contained'
+                          sx={{
+                            backgroundColor: '#1B252E',
+                            borderRadius: '10px',
+                            mt: 2,
+                          }}
+                          onClick={() => handleAcceptOffer(offer)}
+                        >
+                          Accept
+                        </Button>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Box>
+              ))
+            ) : (
+              <Box sx={{ marginTop: '1.5rem' }}>
+                <Typography className={styles.title}>Offers</Typography>
+                <Card
+                  style={{
+                    marginBottom: '1rem',
+                    padding: '1rem',
+                    fontWeight: 'bold',
+                    fontSize: '1rem',
+                  }}
+                >
+                  No Offers Available Yet !
+                </Card>
+              </Box>
+            )}
           </Box>
-        )}
-      </Box>
+        </>
+      )}
     </Container>
   );
 };
