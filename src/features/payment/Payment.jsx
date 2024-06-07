@@ -40,15 +40,15 @@ const Payment = () => {
           phoneNumber: user.phoneNumber,
           paymentMethod: 'card',
         });
-
+        console.log(response?.data?.data);
         await baseURL.post(`/chats`, { tasker: taskerId });
         window.location = response?.data?.data;
-        // window.open(response?.data?.data, '_blank');
+        return;
       }
+      console.log('directly working cash');
       const response = await baseURL.post(`/chats`, { tasker: taskerId });
-      console.log(response);
       if (response?.data?.data) {
-        navigate(`/chat`);
+        window.location = 'http://localhost:3000/chat';
       }
     } catch (error) {
       console.error('Error Message:', error);

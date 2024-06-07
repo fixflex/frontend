@@ -6,7 +6,8 @@ import styles from './chat.module.css';
 import baseURL from '../../API/baseURL';
 import { useSelector } from 'react-redux';
 
-const socket = io('wss://server.fixflex.tech', {
+// wss://server.fixflex.tech
+const socket = io('ws://localhost:8080', {
   extraHeaders: {
     Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
   },
@@ -34,11 +35,12 @@ const Chat = () => {
   useEffect(() => {
     socket.on('connect', () => {
       socket.emit('joinMyRoom');
-      console.log('hello');
+      console.log('connected to web socket');
       getAllChats();
     });
 
     socket.on('message', (value) => {
+      console.log('got a new message');
       receiveMessage(value);
     });
 
@@ -146,9 +148,9 @@ const Chat = () => {
     }
   };
 
-  const receiveMessage = (messageData) => {
+  const receiveMessage = (data) => {
+    const messageData = JSON.parse(data);
     const currentChat = selectedChatRef.current;
-
     if (messageData.sender === user._id || !currentChat) return;
 
     if (messageData.chatId !== currentChat.chatId) return;
@@ -160,6 +162,7 @@ const Chat = () => {
           ? `${user.firstName} ${user.lastName}`
           : currentChat.recipient,
     };
+
     setSelectedChat({
       ...currentChat,
       messages: [...currentChat.messages, newMessage],
