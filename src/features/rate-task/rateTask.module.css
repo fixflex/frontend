@@ -1,141 +1,182 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
-.myTasks {
+.rateTaskContainer {
   display: flex;
-  justify-content: space-between;
-  background-color: #f9f3ef;
-  padding: 5% 10%;
-  border-radius: 25px;
+  justify-content: center;
   align-items: center;
-  margin: 4rem auto;
-  width: 70%;
+  margin-top: 4rem;
 }
 
-.title,
-.subtitle,
-.cardContainer,
-.infoSection,
-.budgetBox {
-  transition: all 0.3s ease-in-out;
+.rateTaskBox {
+  background-color: #f9f3ef;
+  padding: 5%;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 700px;
 }
 
-.title {
+.rateTaskTitle {
   font-size: 2rem;
   color: #333;
   font-family: Anton, sans-serif !important;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-.subtitle {
+.rateTaskSubtitle {
   font-size: 1rem;
   color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-.cardContainer {
+.rateTaskCard {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  margin: 2rem;
+  padding: 2rem;
 }
 
-.budgetBox {
-  background-color: #f3f3f7;
-  padding: 1.5rem 3rem;
+.rateTaskStatus {
+  font-size: 14px;
+  font-weight: bold;
+  color: #757575;
+  margin-bottom: 0.5rem;
+}
+
+.rateTaskTitleText {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.rateTaskDetails {
+  margin-bottom: 1rem;
+  color: #757575;
+  font-size: 0.9rem;
+}
+
+.rateTaskInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.rateTaskLabel {
+  font-size: 0.8rem;
+  color: #757575;
+}
+
+.rateTaskValue {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.rateTaskDivider {
+  width: 100%;
+  background-color: #1b252e;
+  margin-bottom: 1rem;
+}
+
+.rateTaskFooter {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+}
+
+.rateTaskRating {
+  display: flex;
   align-items: center;
-  border-radius: 25px;
-  max-height: 9rem;
+  justify-content: center;
 }
 
-.budgetNumber {
-  font-family: Anton, sans-serif !important;
-  font-size: 2.5rem;
-  letter-spacing: 2px;
+.rateTaskStarIcon {
+  color: #faaf00;
 }
 
-.taskButton {
-  flex-grow: 1 !important;
-  margin: 0 4px !important;
-  border-radius: 10px !important;
-  color: white !important;
+.rateTaskRatingBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
-.taskButton.offers {
+.rateTaskButton {
   background-color: #3e9fcc;
+  color: white;
+  margin-left: 0.5rem;
+}
+
+.taskerImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 1rem;
 }
 
 /* Media Queries */
 @media (max-width: 1024px) {
-  .myTasks {
-    flex-direction: column !important;
-    width: 90%;
+  .rateTaskBox {
     padding: 5%;
   }
 
-  .cardContainer {
-    margin: 1rem auto;
-  }
-
-  .title {
+  .rateTaskTitle {
     font-size: 1.8rem;
   }
 
-  .subtitle {
+  .rateTaskSubtitle {
     font-size: 0.9rem;
   }
 
-  .budgetBox {
-    padding: 1rem 2rem;
-  }
-
-  .budgetNumber {
-    font-size: 2rem;
+  .rateTaskCard {
+    padding: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .title {
+  .rateTaskBox {
+    padding: 5%;
+  }
+
+  .rateTaskTitle {
     font-size: 1.5rem;
   }
 
-  .subtitle,
-  .infoLabel,
-  .infoContent {
+  .rateTaskSubtitle {
     font-size: 0.8rem;
   }
 
-  .budgetNumber {
-    font-size: 1.75rem;
+  .rateTaskCard {
+    padding: 1.2rem;
   }
 
-  .budgetBox {
-    padding: 1rem;
-    max-height: 7rem;
-  }
-
-  .cardContainer {
-    margin: 0.5rem;
+  .taskerImage {
+    width: 40px;
+    height: 40px;
   }
 }
 
 @media (max-width: 480px) {
-  .cardContainer {
-    flex-direction: column !important;
-  }
-  .myTasks {
-    padding: 10px;
-    margin: 2rem auto !important;
+  .rateTaskBox {
+    padding: 5%;
   }
 
-  .title,
-  .subtitle {
-    text-align: center !important;
+  .rateTaskTitle {
+    font-size: 1.2rem;
   }
 
-  .budgetNumber {
-    font-size: 1.5rem !important;
+  .rateTaskSubtitle {
+    font-size: 0.7rem;
   }
 
-  .budgetBox {
-    margin-top: 1rem !important;
+  .rateTaskCard {
+    padding: 1rem;
+  }
+
+  .taskerImage {
+    width: 30px;
+    height: 30px;
   }
 }

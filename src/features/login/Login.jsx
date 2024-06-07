@@ -73,15 +73,19 @@ const Login = () => {
         localStorage.setItem('accessToken', accessToken);
       }
 
-      const isTasker = await baseURL.get('/taskers/me');
+      try {
+        const isTasker = await baseURL.get('/taskers/me');
 
-      if (isTasker?.data?.success) {
-        dispatch(
-          setTaskerInfo({
-            specialtyId: isTasker?.data?.data?.categories[0],
-            isTasker: true,
-          })
-        );
+        if (isTasker?.data?.success) {
+          dispatch(
+            setTaskerInfo({
+              specialtyId: isTasker?.data?.data?.categories[0],
+              isTasker: true,
+            })
+          );
+        }
+      } catch (e) {
+        console.error(e);
       }
 
       const profilePic = await baseURL.get('/users/me');

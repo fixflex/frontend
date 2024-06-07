@@ -41,8 +41,9 @@ const Payment = () => {
           paymentMethod: 'card',
         });
 
-        console.log('url ? : ', response);
-        window.open(response?.data?.data, '_blank');
+        await baseURL.post(`/chats`, { tasker: taskerId });
+        window.location = response?.data?.data;
+        // window.open(response?.data?.data, '_blank');
       }
       const response = await baseURL.post(`/chats`, { tasker: taskerId });
       console.log(response);
