@@ -20,6 +20,7 @@ import { GpsFixed } from '@mui/icons-material';
 import styles from './taskerOnboarding.module.css';
 import { setTaskerInfo } from './taskerInfoSlice';
 import { useNavigate } from 'react-router-dom';
+import liveURL from '../../API/liveURL';
 
 const TaskerOnboarding = () => {
   const [selectedCategory, setSelectedCategory] = useState({
@@ -102,7 +103,7 @@ const TaskerOnboarding = () => {
 
   const getVerificationCode = async () => {
     try {
-      const response = await baseURL.get(`/users/send-verification-code`);
+      const response = await liveURL.get(`/users/send-verification-code`);
       if (response.data.success) {
         console.log(response);
       }

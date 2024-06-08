@@ -87,7 +87,7 @@ const AccountSettings = () => {
                 Here's how you can become a tasker at just some few steps!
               </Typography>
               <Button
-                href='#'
+                href='/tasker-onboarding'
                 variant='contained'
                 sx={{
                   color: 'white',

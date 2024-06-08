@@ -94,7 +94,7 @@ export default function PostTask() {
       setBudget(Number(searchParams.get('budget')));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [locationType, categories]);
+  }, [categories]);
 
   const handleLocationChange = (event) => {
     setLocationType(event.target.value);

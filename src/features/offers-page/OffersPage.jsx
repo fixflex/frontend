@@ -29,7 +29,7 @@ const OffersPage = () => {
   const [offers, setOffers] = useState([]);
   const [taskerID, setTaskerID] = useState('');
   const [open, setOpen] = useState(false);
-  const [setSelectedOffer] = useState(null);
+  const [selectedOffer, setSelectedOffer] = useState(null);
 
   const formatDateAndTime = (dateTimeString) => {
     const date = new Date(dateTimeString);
@@ -58,7 +58,16 @@ const OffersPage = () => {
   };
 
   const handleDelete = async () => {
-    console.log('delete offer');
+    if (selectedOffer) {
+      try {
+        await baseURL.delete(`/offers/${selectedOffer._id}`);
+
+        setOffers(offers.filter((offer) => offer._id !== selectedOffer._id));
+        setOpen(false);
+      } catch (error) {
+        console.error('There was an error deleting the offer:', error);
+      }
+    }
   };
 
   useEffect(() => {

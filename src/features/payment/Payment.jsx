@@ -40,12 +40,10 @@ const Payment = () => {
           phoneNumber: user.phoneNumber,
           paymentMethod: 'card',
         });
-        console.log(response?.data?.data);
         await baseURL.post(`/chats`, { tasker: taskerId });
         window.location = response?.data?.data;
         return;
       }
-      console.log('directly working cash');
       const response = await baseURL.post(`/chats`, { tasker: taskerId });
       if (response?.data?.data) {
         window.location = 'http://localhost:3000/chat';

@@ -101,6 +101,7 @@ const MyTasks = () => {
         const response = await baseURL.patch(
           `/tasks/${selectedTask._id}/cancel`
         );
+        setAllTasks(allTasks.filter((task) => task._id !== selectedTask._id));
         console.log(response);
         if (response.status === 200) {
           handleClose();
