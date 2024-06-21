@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { io } from 'socket.io-client';
-import { Avatar, Box, TextField, Button, Typography } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-import styles from './chat.module.css';
-import baseURL from '../../API/baseURL';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState, useRef } from "react";
+import { io } from "socket.io-client";
+import { Avatar, Box, TextField, Button, Typography } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import styles from "./chat.module.css";
+import baseURL from "../../API/baseURL";
+import { useSelector } from "react-redux";
 
 // wss://server.fixflex.tech
-const socket = io('ws://localhost:8080', {
+const socket = io("ws://server.fixflex.tech/", {
   extraHeaders: {
-    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   },
 });
 
@@ -17,12 +17,12 @@ const Chat = () => {
   const user = useSelector((state) => state.auth.user);
   const [allChats, setAllChats] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const messageListRef = useRef(null);
   const selectedChatRef = useRef(selectedChat);
 
   useEffect(() => {
-    if (window.location.host !== 'localhost:3000') {
+    if (window.location.host !== "localhost:3000") {
       const localUrl = `http://localhost:3000${window.location.pathname}${window.location.search}`;
       window.location = localUrl;
     }
@@ -33,20 +33,20 @@ const Chat = () => {
   }, [selectedChat]);
 
   useEffect(() => {
-    socket.on('connect', () => {
-      socket.emit('joinMyRoom');
-      console.log('connected to web socket');
+    socket.on("connect", () => {
+      socket.emit("joinMyRoom");
+      console.log("connected to web socket");
       getAllChats();
     });
 
-    socket.on('message', (value) => {
-      console.log('got a new message');
+    socket.on("message", (value) => {
+      console.log("got a new message");
       receiveMessage(value);
     });
 
     return () => {
-      socket.off('connect');
-      socket.off('message');
+      socket.off("connect");
+      socket.off("message");
     };
   }, []);
 
@@ -58,13 +58,13 @@ const Chat = () => {
 
   const getAllChats = async () => {
     try {
-      const response = await baseURL.get('/chats');
+      const response = await baseURL.get("/chats");
       console.log(response);
       if (response?.data?.results) {
         formatChat(response.data.data);
       }
     } catch (error) {
-      console.error('Error fetching chats:', error);
+      console.error("Error fetching chats:", error);
     }
   };
 
@@ -85,7 +85,7 @@ const Chat = () => {
             messages: [],
           };
         } catch (error) {
-          console.error('Error formatting chat:', error);
+          console.error("Error formatting chat:", error);
         }
       })
     );
@@ -104,7 +104,7 @@ const Chat = () => {
     if (!chat) return;
     try {
       const response = await baseURL.get(`/messages/chat/${chat.chatId}`);
-      socket.emit('joinChatRoom', chat.chatId);
+      socket.emit("joinChatRoom", chat.chatId);
       if (response?.data) {
         const messageData = response.data.data.map((msg) => ({
           ...msg,
@@ -116,15 +116,15 @@ const Chat = () => {
         setSelectedChat({ ...chat, messages: messageData });
       }
     } catch (error) {
-      console.error('Error fetching chat messages:', error);
+      console.error("Error fetching chat messages:", error);
     }
   };
 
   const sendMessage = async () => {
     if (message && selectedChat) {
-      setMessage('');
+      setMessage("");
       try {
-        const response = await baseURL.post('/messages', {
+        const response = await baseURL.post("/messages", {
           chatId: selectedChat.chatId,
           message,
         });
@@ -143,7 +143,7 @@ const Chat = () => {
           }));
         }
       } catch (error) {
-        console.error('Error sending message:', error);
+        console.error("Error sending message:", error);
       }
     }
   };
@@ -171,15 +171,15 @@ const Chat = () => {
 
   const getInitials = (recipient) =>
     recipient
-      .split(' ')
+      .split(" ")
       .map((n) => n[0])
-      .join('');
+      .join("");
 
   return (
     <Box className={styles.chatContainer}>
       <Box className={styles.chatList}>
         <Typography
-          sx={{ color: 'white', fontWeight: 'bold', fontSize: '1.5rem' }}
+          sx={{ color: "white", fontWeight: "bold", fontSize: "1.5rem" }}
         >
           Chats
         </Typography>
@@ -194,7 +194,7 @@ const Chat = () => {
               {getInitials(chat.recipient)}
             </Avatar>
             <Box sx={{ flexGrow: 1 }}>
-              <Typography variant='h6' className={styles.chatName}>
+              <Typography variant="h6" className={styles.chatName}>
                 {chat.recipient}
               </Typography>
             </Box>
@@ -204,10 +204,10 @@ const Chat = () => {
       <Box className={styles.chatDetails}>
         <Box className={styles.chatHeader}>
           <Avatar
-            src='https://cdn-icons-png.freepik.com/512/147/147142.png'
+            src="https://cdn-icons-png.freepik.com/512/147/147142.png"
             sx={{ width: 40, height: 40, mr: 2 }}
           />
-          <Typography variant='h6'>
+          <Typography variant="h6">
             {selectedChat && selectedChat.recipient}
           </Typography>
         </Box>
@@ -232,15 +232,15 @@ const Chat = () => {
             <Box className={styles.messageInput}>
               <TextField
                 fullWidth
-                variant='outlined'
-                placeholder='Type a message...'
+                variant="outlined"
+                placeholder="Type a message..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 className={styles.messageInputField}
               />
               <Button
-                variant='contained'
-                color='primary'
+                variant="contained"
+                color="primary"
                 onClick={sendMessage}
                 className={styles.sendButton}
                 endIcon={<SendIcon />}
@@ -250,7 +250,7 @@ const Chat = () => {
             </Box>
           </>
         ) : (
-          <Typography variant='body1' className={styles.selectChatMessage}>
+          <Typography variant="body1" className={styles.selectChatMessage}>
             Select a chat to view messages.
           </Typography>
         )}
