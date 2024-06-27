@@ -6,8 +6,7 @@ import styles from "./chat.module.css";
 import baseURL from "../../API/baseURL";
 import { useSelector } from "react-redux";
 
-// wss://server.fixflex.tech
-const socket = io("ws://server.fixflex.tech/", {
+const socket = io('wss://server.fixflex.tech', {
   extraHeaders: {
     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   },
