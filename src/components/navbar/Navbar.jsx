@@ -59,44 +59,44 @@ const Navbar = ({ isLoggedIn }) => {
             {isLoggedIn && (
               <>
                 <ListItem>
-                  <Button className={styles.navButton} href='/assistant'>
+                  <Link to='/assistant' className={styles.navButton}>
                     Assistant
-                  </Button>
+                  </Link>
                 </ListItem>
                 <ListItem>
-                  <Button className={styles.navButton} href='/browse'>
+                  <Link to='/browse' className={styles.navButton}>
                     Browse
-                  </Button>
+                  </Link>
                 </ListItem>
                 <ListItem>
-                  <Button className={styles.navButton} href='/account'>
+                  <Link to='/account' className={styles.navButton}>
                     Profile
-                  </Button>
+                  </Link>
                 </ListItem>
                 <ListItem>
-                  <Button className={styles.navButton} href='/post-task'>
+                  <Link to='/post-task' className={styles.navButton}>
                     Post
-                  </Button>
+                  </Link>
                 </ListItem>
                 <ListItem>
-                  <Button className={styles.navButton} href='/my-tasks'>
+                  <Link to='/my-tasks' className={styles.navButton}>
                     Tasks
-                  </Button>
+                  </Link>
                 </ListItem>
 
                 <ListItem>
-                  <Button className={styles.navButton} href='/chat'>
+                  <Link to='/chat' className={styles.navButton}>
                     Chat
-                  </Button>
+                  </Link>
                 </ListItem>
               </>
             )}
 
             {isTasker && (
               <ListItem>
-                <Button className={styles.navButton} href='/offers-page'>
+                <Link to='/offers-page' className={styles.navButton}>
                   Offers
-                </Button>
+                </Link>
               </ListItem>
             )}
           </List>
@@ -105,20 +105,18 @@ const Navbar = ({ isLoggedIn }) => {
           <Logout />
         ) : (
           <Grid item className={styles.rightNav}>
-            <Button
-              variant='contained'
-              className={styles.rightNavButtons}
-              href='/signup'
+            <Link
+              to='/signup'
+              className={`${styles.rightNavButtons} ${styles.navButton}`}
             >
               Join
-            </Button>
-            <Button
-              variant='contained'
-              className={styles.rightNavButtons}
-              href='/login'
+            </Link>
+            <Link
+              to='/login'
+              className={`${styles.rightNavButtons} ${styles.navButton}`}
             >
               Login
-            </Button>
+            </Link>
           </Grid>
         )}
       </Grid>
@@ -151,40 +149,28 @@ const Navbar = ({ isLoggedIn }) => {
               : []),
           ].map((item) => (
             <ListItem button key={item.text}>
-              <Button
-                startIcon={item.icon}
-                className={styles.drawerText}
-                href={item.link}
-              >
+              <Link to={item.link} className={styles.drawerText}>
+                {item.icon}
                 {item.text}
-              </Button>
+              </Link>
             </ListItem>
           ))}
-          {isTasker && (
-            <ListItem>
-              <Button className={styles.navButton} href='/offers-page'>
-                Offers
-              </Button>
-            </ListItem>
-          )}
           {isLoggedIn ? (
             <Logout />
           ) : (
             <Grid item className={styles.rightNav}>
-              <Button
-                variant='contained'
-                className={styles.rightNavButtons}
-                href='/signup'
+              <Link
+                to='/signup'
+                className={`${styles.rightNavButtons} ${styles.navButton}`}
               >
                 Join
-              </Button>
-              <Button
-                variant='contained'
-                className={styles.rightNavButtons}
-                href='/login'
+              </Link>
+              <Link
+                to='/login'
+                className={`${styles.rightNavButtons} ${styles.navButton}`}
               >
                 Login
-              </Button>
+              </Link>
             </Grid>
           )}
         </List>
