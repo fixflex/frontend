@@ -21,12 +21,12 @@ const Chat = () => {
   const messageListRef = useRef(null);
   const selectedChatRef = useRef(selectedChat);
 
-  useEffect(() => {
-    if (window.location.host !== "localhost:3000") {
-      const localUrl = `http://localhost:3000${window.location.pathname}${window.location.search}`;
-      window.location = localUrl;
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window.location.host !== "localhost:3000") {
+  //     const localUrl = `http://localhost:3000${window.location.pathname}${window.location.search}`;
+  //     window.location = localUrl;
+  //   }
+  // }, []);
 
   useEffect(() => {
     selectedChatRef.current = selectedChat;
