@@ -7,7 +7,7 @@ import baseURL from "../../API/baseURL";
 import { useSelector } from "react-redux";
 
 // wss://server.fixflex.tech
-const socket = io("ws://server.fixflex.tech/", {
+const socket = io("wss://server.fixflex.tech/", {
   extraHeaders: {
     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
   },
@@ -23,7 +23,7 @@ const Chat = () => {
 
   // useEffect(() => {
   //   if (window.location.host !== "localhost:3000") {
-  //     const localUrl = `http://localhost:3000${window.location.pathname}${window.location.search}`;
+  //     const localUrl = `https://fixflex.tech${window.location.pathname}${window.location.search}`;
   //     window.location = localUrl;
   //   }
   // }, []);
